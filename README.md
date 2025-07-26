@@ -91,5 +91,5 @@ Pour toute suggestion ou contribution, merci de contacter l’équipe XyberShiel
 
 ---
 
-> Ce projet a pour vocation de **renforcer la cybersécurité en Afrique** en offrant un outil local, éducatif et utile aux internautes.
+> Ce projet a pour vocation de **renforcer la cybersécurité dans le monde** en offrant un outil local, éducatif et utile aux internautes.
 
