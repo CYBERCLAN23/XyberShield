@@ -99,7 +99,7 @@ function showNotification(message, type, targetId) {
 
           }else{
                  passwordinput.type = "password";
-           
+            eyeIcon.className = 'fa fa-eye-slash';
             
           }
           }
