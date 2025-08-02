@@ -1,65 +1,4 @@
- /* Futuristic shake animation for error inputs */
-        .input-error {
-            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
-            border: 2px solid #ff1744 !important;
-            box-shadow: 0 0 12px 2px #ff1744, 0 0 40px 8px #00ff55;
-        }
-        @keyframes shake {
-            10%, 90% { transform: translateX(-2px); }
-            20%, 80% { transform: translateX(4px); }
-            30%, 50%, 70% { transform: translateX(-8px); }
-            40%, 60% { transform: translateX(8px); }
-        }
-
-        /* Input icon styles */
-        .input-group {
-            position: relative;
-            width: 100%;
-        }
-        .input-group input {
-            padding-left: 36px !important;
-        }
-        .input-group .input-icon {
-            position: absolute;
-            left: 10px;
-            top: 30%;
-            color: #023106;
-            transform: translateY(-50%) scale(1.12);
-            width: 22px;
-            height: 22px;
-            pointer-events: none;
-            z-index: 2;
-            background: none;
-            box-shadow: none;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        /* Animated input alert styles */
-        .input-alert {
-            width: 100%;
-            min-height: 24px;
-            color: #dc3545;
-            font-family: 'VT323', monospace;
-            font-size: 1.1em;
-            padding: 2px 8px;
-            margin-top: -18px;
-            margin-bottom: 10px;
-            border-radius: 6px;
-            background: rgba(255, 17, 0, 0.12);
-            box-shadow: 0 0 10px 2px #be3535;
-            opacity: 0;
-            transform: translateY(-10px);
-            transition: opacity 0.4s, transform 0.4s;
-            pointer-events: none;
-        }
-        .input-alert.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
+       
         *{
             box-sizing: border-box;
             margin: 0;
@@ -173,7 +112,68 @@
             outline: none;
             transition: all 0.3s ease;
         }
+         /* Futuristic shake animation for error inputs */
+        .input-error {
+            animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+            border: 2px solid #ff1744 !important;
+            box-shadow: 0 0 12px 2px #ff1744, 0 0 40px 8px #00ff55;
+        }
+        @keyframes shake {
+            10%, 90% { transform: translateX(-2px); }
+            20%, 80% { transform: translateX(4px); }
+            30%, 50%, 70% { transform: translateX(-8px); }
+            40%, 60% { transform: translateX(8px); }
+        }
+
+        /* Input icon styles */
+        .input-group {
+            position: relative;
+            width: 100%;
+        }
+        .input-group input {
+            padding-left: 36px !important;
+        }
+        .input-group .input-icon {
+            position: absolute;
+            left: 10px;
+            top: 30%;
+            color: #023106;
+            transform: translateY(-50%) scale(1.12);
+            width: 22px;
+            height: 22px;
+            pointer-events: none;
+            z-index: 2;
+            background: none;
+            box-shadow: none;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         
+        /* Animated input alert styles */
+        .input-alert {
+            width: 100%;
+            min-height: 24px;
+            color: #dc3545;
+            font-family: 'VT323', monospace;
+            font-size: 1.1em;
+            padding: 2px 8px;
+            margin-top: -18px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            background: rgba(255, 17, 0, 0.12);
+            box-shadow: 0 0 10px 2px #be3535;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.4s, transform 0.4s;
+            pointer-events: none;
+        }
+
+        .input-alert.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
         input:hover{
             font-weight: bold;
             font-size: large;
