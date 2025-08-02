@@ -73,6 +73,7 @@ body {
   overflow: hidden;
   color: #f2f2f2;
   font-size: clamp(12px, 2vw, 18px);
+  overflow-x: hidden;
 }
 .login {
   display: flex;
@@ -458,6 +459,14 @@ text-align: center;
     font-size: 1em;
   }
 }
+.login {
+  display: flex;
+  flex-direction: row; /* desktop */
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
 
 @media (max-width: 600px) {
   body {
@@ -516,6 +525,51 @@ text-align: center;
     font-size: clamp(10px, 4vw, 14px);
   }
 }
+@media (max-width: 768px) {
+  .login {
+    flex-direction: column;
+  }
+
+  .left-panel,
+  .right-panel {
+    width: 100%;
+    height: 50vh; /* Adjust as needed */
+  }
+
+  .form {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  input, button {
+    font-size: 1rem;
+  }
+}
+
+.left-panel, .right-panel {
+  width: 50%; /* desktop */
+}
+
+/* mobile version */
+@media (max-width: 768px) {
+  .left-panel, .right-panel {
+    width: 100%;
+  }
+}
+h2 {
+  font-size: 2rem;
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 1.4rem;
+  }
+}
+
 
 img, video {
   max-width: 50%;
