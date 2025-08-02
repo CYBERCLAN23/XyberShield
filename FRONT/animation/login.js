@@ -96,10 +96,11 @@ function showNotification(message, type, targetId) {
           const eye = document.querySelector(".see");
           if(passwordinput.type === "password"){
             passwordinput.type = "text";
+                     iconsd.className = 'fa fa-eye-slash';
 
           }else{
                  passwordinput.type = "password";
-            eyeIcon.className = 'fa fa-eye-slash';
+            iconsd.className = 'fa fa-eye';
             
           }
           }
