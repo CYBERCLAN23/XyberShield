@@ -1,4 +1,4 @@
-  /* Futuristic shake animation for error inputs */
+ /* Futuristic shake animation for error inputs */
         .input-error {
             animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
             border: 2px solid #ff1744 !important;
@@ -76,36 +76,39 @@
             overflow-x: hidden;
         }
         
-        .login-container {
+        .login {
             display: flex;
+            flex-wrap: wrap;
             width: 100%;
             min-height: 100vh;
-            flex-wrap: wrap;
+            gap: 0;
+            font-size: clamp(13px, 2vw, 20px);
         }
         
         .left-panel {
             flex: 1;
-            min-height: 40vh;
             min-width: 300px;
+            min-height: 50vh;
             position: relative;
-            background-image: url('https://img.freepik.com/photos-gratuite/arriere-plan-du-pirate-matrice_23-2150082007.jpg?t=st=1754164858~exp=1754168458~hmac=67422d94b695a5c588bbcbb88c34efcef08dd25b4c61f95dcfa408862e4eeb6c&w=826');
-            background-size: cover;            
-            background-position: center;       
-            background-repeat: no-repeat;      
+            background-image: url('https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding: 20px;
+            text-align: center;
         }
         
         .left-panel h1{
-            margin-top: 30px;
+            margin-top: 0;
             text-align: center;
             width: 0;
             white-space: nowrap;
             overflow: hidden;
             animation: blink 4s forwards, logo 8s forwards 0.2s;
-            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-size: clamp(1.8rem, 5vw, 3rem);
         }
          
         .slogant{
@@ -113,23 +116,26 @@
             white-space: nowrap;
             overflow: hidden;
             animation: blink 4s forwards, slogan 10s forwards 3s;
-            font-size: clamp(0.9rem, 2.5vw, 1.2rem);
-            margin-top: 10px;
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            margin: 10px 0;
         }
         
         .welcome{
             margin-top: 30px;
             margin-left: 0;
-            text-align: center;
             font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 0 10px;
         }
         
         .right-panel {
             flex: 1;
-            min-height: 60vh;
             min-width: 300px;
+            min-height: 50vh;
             background: linear-gradient(120deg, #0f250f, #000000);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             padding: 30px;      
@@ -140,7 +146,7 @@
             transform: skewY(-5deg);
             width: 100%;
             max-width: 500px;
-            min-width: 200px;
+            min-width: 280px;
             background: rgba(0, 255, 85, 0.28);
             backdrop-filter: blur(30px);
             border:1px solid rgba(0, 255, 85, 0.28);
@@ -164,6 +170,8 @@
             box-shadow: 0 0 20px 2px #35be5e;
             color:  rgba(2, 255, 99, 0.767);
             text-indent: 10px;
+            outline: none;
+            transition: all 0.3s ease;
         }
         
         input:hover{
@@ -176,8 +184,7 @@
             box-shadow: 0 0 20px 2px rgba(255, 17, 0, 0.28);
             color:  rgba(2, 255, 99, 0.767);
             text-indent: 10px;
-            transform: scale(1.1);
-            transition: 0.3s;
+            transform: scale(1.05);
         }
         
         label{
@@ -217,7 +224,6 @@
             border:0.5px solid rgba(255, 17, 0, 0.28);
             border-radius: 5px;
             box-shadow: 0 0 10px 1px #be3535;
-            transition: 0.3s;
         }
         
         .see{
@@ -255,6 +261,8 @@
             background-size: 24px 24px;
             background-position: 16px center;
             margin-top: 20px;
+            border: none;
+            font-family: 'Share Tech Mono', sans-serif;
         }
         
         #valide:hover{
@@ -274,7 +282,6 @@
         
         .reg{
             cursor: pointer;
-            margin-top: 30px;
             word-spacing: 1px;
             color: rgba(2, 255, 99, 0.767);
             font-weight: bold;
@@ -290,6 +297,13 @@
             margin: 30px auto 0;
             display: block;
             font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .reg:hover {
+            background: rgba(255, 17, 0, 0.28);
+            transform: scale(1.05);
         }
         
         .notification {
@@ -309,21 +323,22 @@
             z-index: 9999;
             text-align: center;
             display: none;
+            animation: fadeInOut 3s forwards;
         }
         
         .success {
-            background-color: #28a745;
+            background: rgba(0,255,85,0.95);
         }
         
         .error {
-            background-color: #dc3545;
+            background: rgba(255, 17, 0, 0.95);
         }
         
         @keyframes fadeInOut {
-            0% { opacity: 0; transform: translateY(-20px); }
-            10% { opacity: 1; transform: translateY(0); }
-            90% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(-20px); }
+            0% { opacity: 0; transform: translate(-50%, -20px); }
+            10% { opacity: 1; transform: translate(-50%, 0); }
+            90% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -20px); }
         }
         
         @keyframes tilt {
@@ -395,9 +410,48 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
+        /* Registration form styling */
+        #register-fields {
+            display: none;
+            width: 100%;
+            max-width: 500px;
+            min-width: 280px;
+            margin-top: 20px;
+        }
+        
+        #back-login {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            max-width: 400px;
+            font-size: clamp(1em, 2vw, 1.2em);
+            font-weight: bold;
+            word-spacing: 1px;
+            color: #00ff55;
+            background: rgba(1, 49, 17, 0.28);
+            backdrop-filter: blur(30px);
+            border: 1px solid #00ff55;
+            border-radius: 10px;
+            box-shadow: 0 0 20px 2px #35be5e;
+            padding: 12px 24px;
+            transition: background 0.3s, box-shadow 0.3s, color 0.3s, transform 0.2s;
+            cursor: pointer;
+            overflow: hidden;
+            margin-bottom: 20px;
+            font-family: 'Share Tech Mono', sans-serif;
+            border: none;
+        }
+        
+        #back-login:hover {
+            background: rgba(255, 17, 0, 0.28);
+            transform: scale(1.05);
+        }
+        
         /* Responsive adjustments */
         @media (max-width: 900px) {
-            .login-container {
+            .login {
                 flex-direction: column;
             }
             
@@ -462,10 +516,6 @@
             input {
                 height: 40px;
                 font-size: 0.9rem;
-            }
-            
-            label {
-                font-size: 1.1rem;
             }
             
             .reg {
