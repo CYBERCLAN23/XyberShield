@@ -91,7 +91,7 @@ function showNotification(message, type, targetId) {
     }
         // Show password
         function togglePassword() { 
-          const eyeIcon = document.getElementById("iconsd");
+          const eyeIcon = document.getElementById("eye-icon");
           const passwordinput = document.getElementById("password");
           const eye = document.querySelector(".see");
           if(passwordinput.type === "password"){
