@@ -113,15 +113,14 @@ function register() {
     
     showNotification("Enregistrement réussi 🎉", false);
 }
-
-// =========================
-// PASSWORD VISIBILITY TOGGLE
-// =========================
+//====================
+//password toggle
+//===================
 function togglePassword() {
     const eyeIcon = document.getElementById("eye-icon");
     const passwordInput = document.getElementById("password");
-      const regpasswordInput = document.getElementById("reg-password");
-      const confpasswordInput = document.getElementById("confirm-password");
+      const regpassword = document.getElementById("reg-password");
+
     
     if(passwordInput.type === "password"){
         passwordInput.type = "text";
@@ -130,21 +129,15 @@ function togglePassword() {
         passwordInput.type = "password";
         eyeIcon.className = 'fa fa-eye';
     }  
-    if(passwordInput.type === "password"){
-        repasswordInput.type = "text";
+    if(regpassword.type === "password"){
+        regpassword.type = "text";
         eyeIcon.className = 'fa fa-eye-slash';
     } else {
-        repasswordInput.type = "password";
+        regpassword.type = "password";
         eyeIcon.className = 'fa fa-eye';
     }
       
-    if(passwordInput.type === "password"){
-        confpasswordInput.type = "text";
-        eyeIcon.className = 'fa fa-eye-slash';
-    } else {
-        confpasswordInput.type = "password";
-        eyeIcon.className = 'fa fa-eye';
-    }
+
 
 }
 // =========================
