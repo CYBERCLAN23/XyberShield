@@ -1,3 +1,4 @@
+
 // =========================
 // NOTIFICATION HANDLING
 // =========================
@@ -12,17 +13,18 @@ function showNotification(message, isError = false) {
 }
 
 // =========================
-// VALIDATION HELPERS
+// VALIDATION HELPERS - CORRIGÉ ICI
 // =========================
+function isValidPassword(password) {
+    return password.length >= 8 && 
+           /[a-z]/.test(password) && 
+           /[A-Z]/.test(password) && 
+           /\d/.test(password);
+}
+
 function isValidEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
-}
-
-function isValidPassword(password) {
-    // At least 8 chars, 1 uppercase, 1 lowercase, 1 digit
-    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
-    return regex.test(password);
 }
 
 // =========================
@@ -106,6 +108,7 @@ function register() {
         return;
     }
     
+    // UTILISATION DE LA FONCTION CORRIGÉE ICI
     if (!isValidPassword(password)) {
         showNotification("Mot de passe invalide. Doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre.", true);
         return;
@@ -113,9 +116,10 @@ function register() {
     
     showNotification("Enregistrement réussi 🎉", false);
 }
-//====================
-//password toggle
-//===================
+
+// =========================
+// PASSWORD VISIBILITY TOGGLE
+// =========================
 function togglePassword() {
     const eyeIcon = document.getElementById("eye-icon");
     const passwordInput = document.getElementById("password");
@@ -137,9 +141,8 @@ function togglePassword() {
         eyeIcon.className = 'fa fa-eye';
     }
       
-
-
 }
+
 // =========================
 // FORM SWITCHING
 // =========================
@@ -160,7 +163,6 @@ function switchForm() {
         registerForm.classList.add("show");
         btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
         
-        // Ajout d'une animation pour le changement d'image
         leftPanel.style.opacity = "0";
         setTimeout(() => {
             container.classList.add("switch");
@@ -173,7 +175,6 @@ function switchForm() {
         loginForm.classList.add("show");
         btn.innerHTML = '<i class="fas fa-user-plus"></i> Register';
         
-        // Animation pour le retour à l'image d'origine
         leftPanel.style.opacity = "0";
         setTimeout(() => {
             container.classList.remove("switch");
@@ -188,10 +189,8 @@ function showLogin() {
     const loginForm = document.getElementById("login-form");
     const registerForm = document.getElementById("register-form");
     const btn = document.getElementById("register-btn");
-
     const leftPanel = document.querySelector(".left-panel");
 
-    // Animation pour le retour à l'image d'origine
     leftPanel.style.opacity = "0";
     setTimeout(() => {
         container.classList.remove("switch");
@@ -202,8 +201,6 @@ function showLogin() {
         loginForm.classList.remove("hide");
         loginForm.classList.add("show");
         btn.innerHTML = '<i class="fas fa-user-plus"></i> Register';
-       
         isLogin = true;
     }, 300);
-
 }
