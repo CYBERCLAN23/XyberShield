@@ -4,106 +4,127 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>XYBER Shield - Cybersecurity Solutions</title>
-    <!-- Font Awesome for icons -->
+
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Main CSS -->
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style/log.css">
-    <!-- Favicon -->
-   <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="favicon.svg" />
-<link rel="shortcut icon" href="favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-<meta name="apple-mobile-web-app-title" content="XyberShield" />
-<link rel="manifest" href="site.webmanifest" />
+
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- Lordicon -->
+    <script src="https://cdn.lordicon.com/lordicon.js"></script>
 </head>
 <body>
-    <!-- =========================
-         NOTIFICATIONS
-         ========================= -->
-    <div id="welcome-notification" class="notification" style="top:0;left:50%;transform:translateX(-50%);display:none;"></div>
-    
-    <!-- =========================
-         LOGIN/REGISTER FORM
-         ========================= -->
-    <form action="home.html">
-        <div class="login">
-            <!-- LEFT PANEL: Branding and Welcome -->
-            <div class="left-panel">
-                <h1>XyberShield</h1>
-                <p class="slogant">Signalez. Protégez. Prévenez.</p>
-                <p class="welcome">
-                    Bienvenue sur XyberShield. Connectez-vous pour signaler un incident, consulter nos ressources de cybersécurité et contribuer à un internet plus sûr.
-                </p>
-                <button class="reg" id="register-btn" type="button" onclick="showRegister()" style="display:inline-block;">Register</button>
-            </div>
-            <!-- RIGHT PANEL: Login Form -->
-            <div class="right-panel">
-                <div id="notification" class="notification"></div>
-                <div class="head">LOGIN</div>
-                <div class="log-form">
-                    <!-- Email Input -->
-                    <div class="email input-group">
-                        <span class="input-icon">
-                            <i class="fas fa-envelope"></i>
-                        </span>
-                        <input type="email" name="email" id="email" placeholder="Email" required>
-                        <div id="email-alert" class="input-alert"></div>
-                    </div>
-                    <!-- Password Input -->
-                    <div class="password input-group">
-                        <span class="input-icon">
-                            <i class="fas fa-lock"></i>
-                        </span>
-                        <input type="password" name="password" id="password" placeholder="Password" required />
-                        <div id="password-alert" class="input-alert"></div>
-                        <span class="see" id="see" onclick="togglePassword()"><i id="eye-icon"></i></span>
-                    </div>
-                    <!-- Submit Button -->
-                    <div class="SUBMITE">
-                        <button id="valide" type="button" onclick="login()"><i class="fas fa-terminal"></i> GO ON</button>
-                    </div>
-                </div>
-            </div>
+
+<div id="welcome-notification" class="notification"></div>
+
+<div id="container" class="login">
+    <div class="login-wrapper">
+
+        <!-- LEFT PANEL -->
+        <div class="left-panel">
+            <h1>XyberShield</h1>
+            <p class="slogant">Signalez. Protégez. Prévenez.</p>
+            <p class="welcome">
+                Bienvenue sur XyberShield. Connectez-vous pour signaler un incident, consulter nos ressources de cybersécurité et contribuer à un internet plus sûr.
+            </p>
+            <button class="reg" id="register-btn" type="button" onclick="switchForm()">
+                <i class="fas fa-user-plus"></i> Register
+            </button>
         </div>
 
-        <!-- =========================
-             REGISTER FORM (Hidden by Default)
-             ========================= -->
-        <div id="register-fields" style="display:none;">
-            <!-- Back to Login Button -->
-            <div class="SUBMITE" style="margin-bottom: 20px; text-align: center;">
-                <button id="back-login" type="button" onclick="showLogin()" style="margin-bottom: 10px; position: relative; z-index: 10;">
-                    <i class="fas fa-arrow-left"></i> Login
+        <!-- RIGHT PANEL -->
+        <div class="right-panel">
+
+            <!-- LOGIN FORM -->
+            <div id="login-form" class="log-form show">
+                <div class="head"><i class="fas fa-sign-in-alt"></i> LOGIN</div>
+
+                <div class="email input-group">
+                    <lord-icon src="https://cdn.lordicon.com/kthelypq.json"
+                               trigger="loop-on-hover"
+                               colors="primary:#00ff66,secondary:#00ff88"
+                               style="width:25px;height:25px"></lord-icon>
+                    <input type="email" id="email" placeholder="Email" required>
+                    <div id="email-alert" class="input-alert"></div>
+                </div>
+
+                <div class="password input-group">
+                    <lord-icon src="https://cdn.lordicon.com/lbjtvqiv.json"
+                               trigger="loop-on-hover"
+                               colors="primary:#fff,secondary:#00ff88"
+                               style="width:25px;height:25px"></lord-icon>
+                    <input type="password" id="password" placeholder="Password" required>
+                    <div id="password-alert" class="input-alert"></div>
+                    <span class="see" onclick="togglePassword()"><i id="eye-icon" class="fa fa-eye"></i></span>
+                </div>
+
+                <button id="valide" type="button" onclick="login()">
+                    <i class="fas fa-terminal"></i> GO ON
                 </button>
             </div>
-            <!-- Registration Inputs -->
-            <div class="name input-group">
-                <input type="text" name="name" id="name" placeholder="Name" required>
+
+            <!-- REGISTER FORM -->
+            <div id="register-form" class="log-form hide">
+                <div class="head"><i class="fas fa-user-plus"></i> REGISTER</div>
+
+                <div class="name input-group">
+                    <lord-icon src="https://cdn.lordicon.com/nocovwne.json"
+                               trigger="loop-on-hover"
+                               colors="primary:#00ff66,secondary:#00ff88"
+                               style="width:25px;height:25px"></lord-icon>
+                    <input type="text" id="name" placeholder="Name" required>
+                </div>
+
+                <div class="pseudo input-group">
+                    <lord-icon src="https://cdn.lordicon.com/zfkjdfvj.json"
+                               trigger="loop-on-hover"
+                               colors="primary:#00ff66,secondary:#00ff88"
+                               style="width:25px;height:25px"></lord-icon>
+                    <input type="text" id="pseudo" placeholder="Pseudo" required>
+                </div>
+
+                <div class="email input-group">
+                    <lord-icon src="https://cdn.lordicon.com/kthelypq.json"
+                               trigger="loop-on-hover"
+                               colors="primary:#00ff66,secondary:#00ff88"
+                               style="width:25px;height:25px"></lord-icon>
+                    <input type="email" id="reg-email" placeholder="Email" required>
+                </div>
+
+                <div class="password input-group">
+                    <lord-icon src="https://cdn.lordicon.com/lbjtvqiv.json"
+                               trigger="loop-on-hover"
+                               colors="primary:#fff,secondary:#00ff88"
+                               style="width:25px;height:25px"></lord-icon>
+                    <input type="password" id="reg-password" placeholder="Password" required>
+                </div>
+
+                <div class="password input-group">
+                    <lord-icon src="https://cdn.lordicon.com/lbjtvqiv.json"
+                               trigger="loop-on-hover"
+                               colors="primary:#fff,secondary:#00ff88"
+                               style="width:25px;height:25px"></lord-icon>
+                    <input type="password" id="confirm-password" placeholder="Confirm Password" required>
+                </div>
+
+                <button id="valide" type="button" onclick="register()">
+                    <i class="fas fa-user-friends"></i> Register
+                </button>
+
+                <button id="back-login" type="button" onclick="showLogin()">
+                    <i class="fas fa-arrow-left"></i> Back to Login
+                </button>
             </div>
-            <div class="pseudo input-group">
-                <input type="text" name="pseudo" id="pseudo" placeholder="Pseudo" required>
-            </div>
-            <div class="email input-group">
-                <input type="email" name="reg-email" id="reg-email" placeholder="Email" required>
-            </div>
-            <div class="password input-group">
-                <input type="password" name="reg-password" id="reg-password" placeholder="Password" required>
-            </div>
-            <div class="password input-group">
-                <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
-            </div>
-            <div class="SUBMITE">
-                <button id="valide" type="button" onclick="login()"><i class="fas fa-terminal"></i> GO ON</button>
-            </div>
+
         </div>
-    </form>
-    <!-- Duplicate notification for redundancy (can be removed if not needed) -->
-    <div id="welcome-notification" class="notification" style="top:0;left:50%;transform:translateX(-50%);display:none;"></div>
-    <!-- =========================
-         SCRIPTS
-         ========================= -->
-    <script src="animation/login.js"></script>
+    </div>
+</div>
+
+<!-- JS -->
+<script src="animation/login.js"></script>
 </body>
 </html>
