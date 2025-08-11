@@ -57,7 +57,7 @@
 
         /* Nouvelle image pour le mode register */
         .switch .left-panel {
-            background-image: url('background/fond-de-hacker-de-matrice(1).jpg');
+            background-image: url('https://raw.githubusercontent.com/CYBERCLAN23/XyberShield/main/FRONT/background/fond-de-hacker-de-matrice(1).jpg');
         }
         .left-panel h1 {
             margin-top: 0;
