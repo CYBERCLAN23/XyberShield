@@ -120,15 +120,33 @@ function register() {
 function togglePassword() {
     const eyeIcon = document.getElementById("eye-icon");
     const passwordInput = document.getElementById("password");
+      const regpasswordInput = document.getElementById("reg-password");
+      const confpasswordInput = document.getElementById("confirm-password");
+    
     if(passwordInput.type === "password"){
         passwordInput.type = "text";
         eyeIcon.className = 'fa fa-eye-slash';
     } else {
         passwordInput.type = "password";
         eyeIcon.className = 'fa fa-eye';
+    }  
+    if(passwordInput.type === "password"){
+        repasswordInput.type = "text";
+        eyeIcon.className = 'fa fa-eye-slash';
+    } else {
+        repasswordInput.type = "password";
+        eyeIcon.className = 'fa fa-eye';
     }
-}
+      
+    if(passwordInput.type === "password"){
+        confpasswordInput.type = "text";
+        eyeIcon.className = 'fa fa-eye-slash';
+    } else {
+        confpasswordInput.type = "password";
+        eyeIcon.className = 'fa fa-eye';
+    }
 
+}
 // =========================
 // FORM SWITCHING
 // =========================
