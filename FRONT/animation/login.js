@@ -1,14 +1,14 @@
 // =========================
 // NOTIFICATION HANDLING
 // =========================
-function showNotification(message, type, targetId) {
-    const notif = document.getElementById(targetId);
+function showNotification(message, isError = false) {
+    const notif = document.getElementById("welcome-notification");
     notif.textContent = message;
-    notif.className = `notification ${type}`;
+    notif.className = "notification " + (isError ? "error" : "success");
     notif.style.display = "block";
     setTimeout(() => {
         notif.style.display = "none";
-    }, 4000);
+    }, 6000);
 }
 
 // =========================
@@ -18,6 +18,7 @@ function isValidEmail(email) {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
 }
+
 function isValidPassword(password) {
     // At least 8 chars, 1 uppercase, 1 lowercase, 1 digit
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/;
@@ -30,11 +31,13 @@ function isValidPassword(password) {
 function login() {
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
+    
     // Hide previous alerts
     document.getElementById("email-alert").classList.remove("show");
     document.getElementById("password-alert").classList.remove("show");
     document.getElementById("email-alert").textContent = "";
     document.getElementById("password-alert").textContent = "";
+    
     let hasError = false;
 
     // Email validation
@@ -64,6 +67,7 @@ function login() {
         if (!/[A-Z]/.test(password)) pwdErrors.push("Une majuscule");
         if (!/[a-z]/.test(password)) pwdErrors.push("Une minuscule");
         if (!/\d/.test(password)) pwdErrors.push("Un chiffre");
+        
         if (pwdErrors.length > 0) {
             document.getElementById("password-alert").textContent = "Mot de passe invalide: " + pwdErrors.join(", ") + " ❌";
             document.getElementById("password-alert").classList.add("show");
@@ -76,43 +80,119 @@ function login() {
 
     // Show notification
     if (hasError) {
-        showNotification("Erreur dans le formulaire. Corrigez les champs en rouge.", "error", "notification");
+        showNotification("Erreur dans le formulaire. Corrigez les champs en rouge.", true);
     } else {
-        showNotification("Connexion réussie ✅", "success", "notification");
-        // Show welcome notification 
-        const welcome = document.getElementById("welcome-notification");
-        welcome.textContent = "Bienvenue sur XyberShield! Vous êtes connecté.";
-        welcome.className = "notification success";
-        welcome.style.display = "block";
-        setTimeout(() => {
-            welcome.style.display = "none";
-        }, 4000);
+        showNotification("Connexion réussie ✅", false);
     }
 }
 
 // =========================
-// REGISTER LOGIC (SIMPLE DEMO)
+// REGISTER LOGIC
 // =========================
 function register() {
-    const username = document.getElementById("username").value;
-    if (username.length > 0) {
-        showNotification("Enregistrement réussi 🎉", "success", "notification");
-    } else {
-        showNotification("Veuillez saisir un nom d'utilisateur ⚠️", "error", "notification");
+    const name = document.getElementById("name").value;
+    const pseudo = document.getElementById("pseudo").value;
+    const email = document.getElementById("reg-email").value;
+    const password = document.getElementById("reg-password").value;
+    const confirmPassword = document.getElementById("confirm-password").value;
+    
+    if (!name || !pseudo || !email || !password || !confirmPassword) {
+        showNotification("Veuillez remplir tous les champs ⚠️", true);
+        return;
     }
+    
+    if (password !== confirmPassword) {
+        showNotification("Les mots de passe ne correspondent pas ⚠️", true);
+        return;
+    }
+    
+    if (!isValidPassword(password)) {
+        showNotification("Mot de passe invalide. Doit contenir au moins 8 caractères, une majuscule, une minuscule et un chiffre.", true);
+        return;
+    }
+    
+    showNotification("Enregistrement réussi 🎉", false);
 }
 
 // =========================
 // PASSWORD VISIBILITY TOGGLE
 // =========================
-function togglePassword() { 
+function togglePassword() {
     const eyeIcon = document.getElementById("eye-icon");
-    const passwordinput = document.getElementById("password");
-    if(passwordinput.type === "password"){
-        passwordinput.type = "text";
+    const passwordInput = document.getElementById("password");
+    if(passwordInput.type === "password"){
+        passwordInput.type = "text";
         eyeIcon.className = 'fa fa-eye-slash';
     } else {
-        passwordinput.type = "password";
+        passwordInput.type = "password";
         eyeIcon.className = 'fa fa-eye';
     }
+}
+
+// =========================
+// FORM SWITCHING
+// =========================
+let isLogin = true;
+
+function switchForm() {
+    const container = document.getElementById("container");
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+    const btn = document.getElementById("register-btn");
+    const leftPanel = document.querySelector(".left-panel");
+
+    if (isLogin) {
+        container.classList.add("switch");
+        loginForm.classList.remove("show");
+        loginForm.classList.add("hide");
+        registerForm.classList.remove("hide");
+        registerForm.classList.add("show");
+        btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Login';
+        
+        // Ajout d'une animation pour le changement d'image
+        leftPanel.style.opacity = "0";
+        setTimeout(() => {
+            container.classList.add("switch");
+            leftPanel.style.opacity = "1";
+        }, 300);
+    } else {
+        registerForm.classList.remove("show");
+        registerForm.classList.add("hide");
+        loginForm.classList.remove("hide");
+        loginForm.classList.add("show");
+        btn.innerHTML = '<i class="fas fa-user-plus"></i> Register';
+        
+        // Animation pour le retour à l'image d'origine
+        leftPanel.style.opacity = "0";
+        setTimeout(() => {
+            container.classList.remove("switch");
+            leftPanel.style.opacity = "1";
+        }, 300);
+    }
+    isLogin = !isLogin;
+}
+
+function showLogin() {
+    const container = document.getElementById("container");
+    const loginForm = document.getElementById("login-form");
+    const registerForm = document.getElementById("register-form");
+    const btn = document.getElementById("register-btn");
+
+    const leftPanel = document.querySelector(".left-panel");
+
+    // Animation pour le retour à l'image d'origine
+    leftPanel.style.opacity = "0";
+    setTimeout(() => {
+        container.classList.remove("switch");
+        leftPanel.style.opacity = "1";
+        
+        registerForm.classList.remove("show");
+        registerForm.classList.add("hide");
+        loginForm.classList.remove("hide");
+        loginForm.classList.add("show");
+        btn.innerHTML = '<i class="fas fa-user-plus"></i> Register';
+       
+        isLogin = true;
+    }, 300);
+
 }
