@@ -42,7 +42,7 @@
             min-width: 300px;
             min-height: 100vh;
             position: relative;
-            background-image: url('https://img.freepik.com/photos-gratuite/arriere-plan-du-pirate-matrice_23-2150082007.jpg?t=st=1754164858~exp=1754168458~hmac=67422d94b695a5c588bbcbb88c34efcef08dd25b4c61f95dcfa408862e4eeb6c&w=826');
+            background-image: url('background/fond-de-hacker-de-matrice.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -57,7 +57,7 @@
 
         /* Nouvelle image pour le mode register */
         .switch .left-panel {
-            background-image: url('https://sdmntprsouthcentralus.oaiusercontent.com/files/00000000-9d40-61f7-ae18-1566cb7364b6/raw?se=2025-08-11T22%3A12%3A33Z&sp=r&sv=2024-08-04&sr=b&scid=36852386-e943-5020-a12d-d641a322226a&skoid=04233560-0ad7-493e-8bf0-1347c317d021&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-08-11T19%3A06%3A43Z&ske=2025-08-12T19%3A06%3A43Z&sks=b&skv=2024-08-04&sig=gT6kuBEJyR3EYDmT%2BZeeCDdFhYcuplv0ZAnN8nzbXgI%3D');
+            background-image: url('background/fond-de-hacker-de-matrice(1).jpg');
         }
         .left-panel h1 {
             margin-top: 0;
