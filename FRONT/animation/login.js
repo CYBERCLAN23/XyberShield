@@ -205,21 +205,3 @@ function showLogin() {
     }, 300);
 }
 
-// Exemple login
-fetch('https://ton-projet.vercel.app/api/auth/login', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  credentials: 'include',  // pour cookies httpOnly
-  body: JSON.stringify({ email: 'user@test.com', password: '123456' })
-})
-.then(res => res.json())
-.then(data => {
-  localStorage.setItem('accessToken', data.accessToken);
-});
-
-fetch('https://ton-projet.vercel.app/api/auth/me', {
-  headers: {
-    'Authorization': 'Bearer ' + localStorage.getItem('accessToken')
-  },
-  credentials: 'include'
-})
