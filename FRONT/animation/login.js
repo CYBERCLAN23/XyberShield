@@ -205,3 +205,7 @@ function showLogin() {
     }, 300);
 }
 
+const client = new Appwrite.Client()
+    .setEndpoint("https://cloud.appwrite.io/v1") // Appwrite Cloud endpoint
+    .setProject("685d48560024dd023de3"); // Your project ID from Appwrite Cloud
+
