@@ -1,5 +1,834 @@
 <!DOCTYPE html>
-<html>
-    <title>YO</title>
-    <P>YO BRO</P>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XyberShield - Sécurité et Évolution</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="XyberShield protège vos comptes et données contre les cyberattaques. Signalez les incidents et apprenez les bonnes pratiques de sécurité.">
+    <meta name="keywords" content="cybersécurité, protection, phishing, piratage, sécurité en ligne">
+    <meta name="author" content="XyberShield Team">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="style/style.css">
+
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="images/logos/logo.png" type="image/png">
+    
+    
+</head>
+
+<body onload="loadUserProfile()">
+    <!-- Background Overlay -->
+    <div class="overlay"></div>
+    
+    <!-- Matrix Background -->
+    <canvas id="matrix-bg"></canvas>
+    
+    <!-- Main Content -->
+    <div class="content">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="home.html">
+                    <img src="images/logos/logo.png" alt="Logo XyberShield" style="height: 40px; width: auto; margin-right: 10px;">
+                    XyberShield
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <button class="close-menu d-lg-none" onclick="closeNavMenu()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link" href="report.html">Signaler</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#education">Éducation</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                        
+                        <!-- User Dropdown -->
+                        <li class="nav-item dropdown ms-lg-3">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="user-avatar me-2" id="navUserAvatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span id="navUserName">Utilisateur</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="userDropdown">
+                                <!-- User Profile Header -->
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="user-avatar me-3" style="width: 48px; height: 48px;" id="dropdownUserAvatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0" id="dropdownUserName">Utilisateur</h6>
+                                        <small class="text-muted" id="dropdownUserEmail">email@example.com</small>
+                                    </div>
+                                </div>
+                                
+                                <!-- User Info -->
+                                <div class="dropdown-divider"></div>
+                                <div class="mb-2">
+                                    <small class="text-uppercase text-muted fw-bold d-block mb-1">Nom complet</small>
+                                    <div class="text-white" id="dropdownFullName">-</div>
+                                </div>
+                                <div class="mb-2">
+                                    <small class="text-uppercase text-muted fw-bold d-block mb-1">Nom d'utilisateur</small>
+                                    <div class="text-white" id="dropdownUsername">-</div>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="text-uppercase text-muted fw-bold d-block mb-1">Membre depuis</small>
+                                    <div class="text-white" id="dropdownMemberSince">-</div>
+                                </div>
+                                
+                                <!-- Actions -->
+                                <div class="dropdown-divider"></div>
+                                <div class="d-grid gap-2">
+                                    <a href="#" class="btn btn-outline-danger btn-sm" id="dropdownLogout">
+                                        <i class="fas fa-sign-out-alt me-1"></i> Se déconnecter
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Welcome Banner Section -->
+        <section class="banner ">
+            <div class="banner-image"></div>
+            <div class="banner-content">
+                <h1>Avez Vous été Victime D'une Injustice Digital ? </h1>
+                <p>Null craintes, Faites nous confiance, Nous nous occupons de Tout</p>
+                <p>XyberShield est Conçu pour vous donner une assurance dans le Monde Digital</p>      
+            </div>
+            <div class="scroll-indicator hidden-down">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <div class="in hidden-down">
+            <br>
+            <h4 class="intro">Croyez Moi, mais vous n'êtes pas la seule victime</h4>
+        </div> 
+<!-- How it works -->
+    <section class="section">
+        <div class="container">
+            <div class="section-title hidden-up">
+                <h2>Reprenez le contrôle en 3 étapes simples</h2>
+                 <p>Notre processus guidé vous aide à récupérer votre compte rapidement et efficacement</p>
+
+            </div>
+            <div class="steps">
+                <div class="step-card hidden-down">
+                    <div class="step-icon hidden-up">1</div>
+                    <h3>Racontez-nous votre situation</h3>
+                    <p>Répondez à quelques questions simples pour nous indiquer quel compte a été compromis.</p>
+                </div>
+                <div class="step-card hidden-up">
+                    <div class="step-icon hidden-up">2</div>
+                    <h3>Suivez notre guide personnalisé</h3>
+                    <p>Obtenez immédiatement un guide pas-à-pas adapté à votre situation .</p>
+                </div>
+                <div class="step-card hidden-down">
+                    <div class="step-icon hidden-up">3</div>
+                    <h3>Sécurisez tous vos comptes</h3>
+                    <p>Recevez des conseils de nos experts pour vérifier l'étendue de la compromission et protéger vos autres comptes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+       <!-- Platforms -->
+    <section class="section platforms">
+        <div class="container">
+            <div class="section-title">
+                <h2>Nous vous aidons à récupérer vos comptes</h2>
+                <p>Des procédures spécifiques pour chaque plateforme</p>
+            </div>
+            <div class="platform-grid">
+                <div class="platform-item hidden-up">
+                    <div class="platform-icon"><i class="fab fa-facebook"></i></div>
+                    <span>Facebook</span>
+                </div>
+                <div class="platform-item hidden-down">
+                    <div class="platform-icon"><i class="fab fa-instagram"></i></div>
+                    <span>Instagram</span>
+                </div>
+                <div class="platform-item hidden-up">
+                    <div class="platform-icon"><i class="fab fa-google"></i></div>
+                    <span>Gmail</span>
+                </div>
+                <div class="platform-item hidden-down">
+                    <div class="platform-icon"><i class="fab fa-twitter"></i></div>
+                    <span>Twitter</span>
+                </div>
+                <div class="platform-item hidden-up">
+                    <div class="platform-icon"><i class="fab fa-youtube"></i></div>
+                    <span>YouTube</span>
+                </div>
+                <div class="platform-item hidden-down">
+                    <div class="platform-icon"><i class="fab fa-paypal"></i></div>
+                    <span>PayPal</span>
+                </div>
+                  <div class="platform-item hidden-up">
+                    <div class="platform-icon"><i class="fab fa-whatsapp"></i></div>
+                    <span>Whatsapp</span>
+                </div>
+                  
+            </div>
+        </div>
+    </section>
+
+        <!-- Éducation (Preview) -->
+        <section id="education" class="education-section py-5 text-white text-center">
+            <div class="container hidden-down">
+                <h2 class="text-neon mb-4">Nos Offre</h2>
+                <p class="mb-5">Ameliore votre vie digital grace a nos offre suivante   </p>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card  text-white shadow-lg border-neon">
+                            <div class="card-body hidden-down">
+                                <h5 class="card-title">Education</h5>
+                                <p class="card-text">Découvrez comment éviter les attaques  sur les réseaux sociaux et apprenez a vous deffendre contre les hacker et les cyber menace .</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card  text-white shadow-lg border-neon">
+                            <div class="card-body hidden-down">
+                                <h5 class="card-title">Signaler</h5>
+                                <p class="card-text">La double authentification protège vos comptes même si votre mot de passe est volé.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card text-white shadow-lg border-neon">
+                            <div class="card-body hidden-down">
+                                <h5 class="card-title">Actualités Cybersécurité</h5>
+                                <p class="card-text">Utilisez des mots de passe longs et uniques pour chaque compte.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Actualités -->
+        <section class="news py-5 text-white text-center">
+            <div class="container hidden-up">
+                <h2 class="text-neon mb-4">Actualités Cybersécurité</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card bg-dark text-white shadow-lg border-neon">
+                            <div class="card-body hidden-up">
+                                <h5 class="card-title">Phishing : nouvelle vague en Afrique</h5>
+                                <p class="card-text">Découvrez comment éviter les attaques ciblées sur les réseaux sociaux.</p>
+                                <a href="#" class="btn btn-neon">Lire plus</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-dark text-white shadow-lg border-neon">
+                            <div class="card-body hidden-up">
+                                <h5 class="card-title">Sécurisez votre WhatsApp</h5>
+                                <p class="card-text">Activez la double authentification dès aujourd'hui.</p>
+                                <a href="#" class="btn btn-neon">Lire plus</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card bg-dark text-white shadow-lg border-neon">
+                            <div class="card-body hidden-up">
+                                <h5 class="card-title">Mots de passe sécurisés</h5>
+                                <p class="card-text">Utilisez des générateurs et ne réutilisez jamais le même mot de passe.</p>
+                                <a href="#" class="btn btn-neon">Lire plus</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+     
+
+        <!-- Témoignages -->
+        <section class="testimonials py-5 text-white text-center">
+            <div class="container hidden-up">
+                <h2 class="text-neon mb-4">Ce que disent nos utilisateurs</h2>
+                <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="images/téléchargement.jpeg" class="rounded-circle mb-3" alt="User 1" style="width:80px;height:80px;">
+                                <p class="mb-2">"Grâce à XyberShield, j'ai pu récupérer mon compte Facebook piraté en moins de 48h !"</p>
+                                <h6 class="text-neon">— Gregoire L.</h6>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="images/téléchargement (2).jpeg" class="rounded-circle mb-3" alt="User 2" style="width:80px;height:80px;">
+                                <p class="mb-2">"La plateforme m'a alerté sur un mail frauduleux. Service rapide et efficace !"</p>
+                                <h6 class="text-neon">— Sandra M.</h6>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="d-flex flex-column align-items-center">
+                                <img src="images/téléchargement (1).jpeg" class="rounded-circle mb-3" alt="User 3" style="width:80px;height:80px;">
+                                <p class="mb-2">"Enfin une solution locale contre le phishing ! Bravo à l'équipe XyberShield."</p>
+                                <h6 class="text-neon">— Cedrik D.</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon"></span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon"></span>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <br>
+        <div class="alert alert-warning text-center mb-0 hidden-up" role="alert" style="background-color:#0A192F; color:#39FF14; border-top:2px solid #39FF14;">
+            Person utilisant les services XyberShield
+        </div>
+        
+        <!-- Statistiques -->
+        <section class="stats-vue py-5 text-white text-center">
+            <div class="container hidden-up">
+                <h2 class="text-neon mb-4">Statistiques</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <h3 class="display-5 text-neon">250+</h3>
+                        <p>Signalements traités</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="display-5 text-neon">95%</h3>
+                        <p>Comptes récupérés</p>
+                    </div>
+                    <div class="col-md-4">
+                        <h3 class="display-5 text-neon">1000+</h3>
+                        <p>Utilisateurs éduqués</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="faq py-5 text-white text-center hidden-up">
+            <div class="container hidden-up">
+                <h2 class="text-neon mb-4">FAQ</h2>
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item bg-dark border-neon mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" style="background:#0A192F; color:#39FF14;">
+                                Que faire si mon compte Facebook est piraté ?
+                            </button>
+                        </h2>
+                        <div id="faq1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Changez immédiatement votre mot de passe et activez la double authentification. Signalez l'incident ici.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item bg-dark border-neon mb-3">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" style="background:#012253; color:#39FF14;">
+                                Combien de temps pour un retour après signalement ?
+                            </button>
+                        </h2>
+                        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                <p>En moyenne 24 à 48 heures pour une première réponse de notre équipe.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Nos Partenaires -->
+        <section class="partners py-5 text-center text-white">
+            <div class="container hidden-down">
+                <h2 class="text-neon mb-4">Nos Partenaires</h2>
+                <p class="mb-5">XyberShield collabore avec des institutions de confiance pour assurer votre sécurité en ligne.</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="partner-card hidden-down">
+                            <img src="images/téléchargement (4).jpeg" alt="Minpostel" class="img-fluid">
+                            <p class="mt-2">Ministère des Postes et Télécommunications</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="partner-card hidden-up">
+                            <img src="images/téléchargement (3).jpeg" alt="Interpol" class="img-fluid">
+                            <p class="mt-2">Interpol</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="partner-card hidden-down">
+                            <img src="images/téléchargement (5).jpeg" alt="Gendarmerie Cameroun" class="img-fluid">
+                            <p class="mt-2">Gendarmerie Camerounaise</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Engagements Section -->
+        <section id="engagements" class="commitments-section">
+            <div class="container hidden-up">
+                <h2 class="section-title">Nos Engagements</h2>
+                <div class="commitments-grid">
+                    <div class="commitment-card hidden-down">
+                        <i class="icon fas fa-shield-alt"></i>
+                        <h3>Protection Totale</h3>
+                        <p>Nous assurons la confidentialité et la sécurité de vos informations numériques.</p>
+                    </div>
+                    <div class="commitment-card hidden-up">
+                        <i class="icon fas fa-bolt"></i>
+                        <h3>Réactivité</h3>
+                        <p>Une équipe disponible 24h/24 pour répondre rapidement à vos signalements.</p>
+                    </div>
+                    <div class="commitment-card hidden-down">
+                        <i class="icon fas fa-users"></i>
+                        <h3>Engagement Humain</h3>
+                        <p>Un accompagnement personnalisé pour chaque utilisateur victime de cybercrime.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Notre Équipe -->
+        <section class="card-section">
+            <h2 class="text-neon">Notre Équipe</h2>
+            <div class="cards-container">
+                <!-- Membre 1 -->
+                <div class="card-variant-3" tabindex="0" aria-label="Team Member Card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/team/team-cedrik.jpg" alt="Cedrik Yepmo" class="card-img">
+                            <div class="text-container">
+                                <h3 class="card-title">Cedrik Yepmo</h3>
+                                <div class="card-tap-hint">Appuyez pour plus d'infos</div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="card-title">Cedrik Yepmo</h3>
+                            <p class="member-role">Fondateur & Responsable Sécurité</p>
+                            <div class="card-desc">
+                                Expert en cybersécurité avec plus de 5 ans d'expérience dans le hacking éthique et la protection des systèmes d'information.
+                            </div>
+                            <div class="social-links">
+                                <a href="#" class="social-btn" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-btn" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-btn" aria-label="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-btn" aria-label="Contact via WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Membre 2 -->
+                <div class="card-variant-3" tabindex="0" aria-label="Team Member Card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/team/team-gregoire.jpeg" alt="Onana Gregoire" class="card-img">
+                            <div class="text-container">
+                                <h3 class="card-title">Onana Gregoire</h3>
+                                <div class="card-tap-hint">Appuyez pour plus d'infos</div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="card-title">Onana Gregoire</h3>
+                            <p class="member-role">Pentester & Expert Médias Sociaux</p>
+                            <div class="card-desc">
+                                Expert en cybersécurité avec une spécialisation dans le pentesting et la gestion des médias sociaux. Passionné par l'éthique du hacking et la protection des données.
+                            </div>
+                            <div class="social-links">
+                                <a href="#" class="social-btn" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-btn" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-btn" aria-label="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-btn" aria-label="Contact via WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Membre 3 -->
+                <div class="card-variant-3" tabindex="0" aria-label="Team Member Card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/team/team-josias.jpg" alt="Akanna Signing Josias" class="card-img">
+                            <div class="text-container">
+                                <h3 class="card-title">Akanna Signing Josias</h3>
+                                <div class="card-tap-hint">Appuyez pour plus d'infos</div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="card-title">Akanna Signing Josias</h3>
+                            <p class="member-role">Red Teamer & Développeur Sécurité</p>
+                            <div class="card-desc">
+                                Expert en sécurité offensive et développement sécurisé. Spécialiste des tests d'intrusion et de la recherche de vulnérabilités dans les applications et systèmes.
+                            </div>
+                            <div class="social-links">
+                                <a href="#" class="social-btn" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-btn" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-btn" aria-label="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-btn" aria-label="Contact via WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Membre 4 -->
+                <div class="card-variant-3" tabindex="0" aria-label="Team Member Card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/team/team-pharel.jpeg" alt="Lembou Pharel" class="card-img">
+                            <div class="text-container">
+                                <h3 class="card-title">Lembou Pharel</h3>
+                                <div class="card-tap-hint">Appuyez pour plus d'infos</div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="card-title">Lembou Pharel</h3>
+                            <p class="member-role">Chasseur de Bugs & Expert Réseaux</p>
+                            <div class="card-desc">
+                                Spécialiste en chasse aux bugs et en sécurité des réseaux. Expérimenté dans l'identification et la correction des vulnérabilités critiques dans divers systèmes et applications.
+                            </div>
+                            <div class="social-links">
+                                <a href="#" class="social-btn" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-btn" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-btn" aria-label="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-btn" aria-label="Contact via WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Membre 5 -->
+                <div class="card-variant-3" tabindex="0" aria-label="Team Member Card">
+                    <div class="card-inner">
+                        <div class="card-front">
+                            <img src="images/team/team-darren.jpeg" alt="Akoumou Darren" class="card-img">
+                            <div class="text-container">
+                                <h3 class="card-title">Akoumou Darren</h3>
+                                <div class="card-tap-hint">Appuyez pour more info</div>
+                            </div>
+                        </div>
+                        <div class="card-back">
+                            <h3 class="card-title">Akoumou Darren</h3>
+                            <p class="member-role">Expert en Analyse de Données & Design</p>
+                            <div class="card-desc">
+                                Professionnel en analyse de données et en design graphique. Expert dans la visualisation des données et la création d'interfaces utilisateur intuitives pour des applications de cybersécurité.
+                            </div>
+                            <div class="social-links">
+                                <a href="#" class="social-btn" aria-label="LinkedIn Profile"><i class="fab fa-linkedin"></i></a>
+                                <a href="#" class="social-btn" aria-label="GitHub Profile"><i class="fab fa-github"></i></a>
+                                <a href="#" class="social-btn" aria-label="Twitter Profile"><i class="fab fa-twitter"></i></a>
+                                <a href="#" class="social-btn" aria-label="Contact via WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact + Footer -->
+        <footer id="contact" class="footer bg-dark text-white py-4 hidden-up">
+            <div class="container text-center">
+                <h5 class="text-neon mb-3">Contactez-nous</h5>
+                <p>Email : support@xybershield.com | WhatsApp : +237 654 269 488</p>
+                <div class="social-icons mb-3">
+                    <a href="#" class="text-white mx-2"><i class="fab fa-facebook fa-lg"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="fab fa-whatsapp fa-lg"></i></a>
+                    <a href="#" class="text-white mx-2"><i class="fab fa-linkedin fa-lg"></i></a>
+                </div>
+                <p class="small">&copy; 2025 XyberShield. Tous droits réservés.</p>
+            </div>
+        </footer>
+    </div>
+    
+    <!-- Scripts -->
+     <script scr="animation/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /* =========================
+           MATRIX BACKGROUND EFFECT
+           ========================= */
+        const canvas = document.getElementById('matrix-bg');
+        const ctx = canvas.getContext('2d');
+
+        // Set canvas size to fill the window
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+
+        // Matrix effect implementation
+        const letters = '';
+        const chars = letters.split("");
+        const fontSize = 12;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(0, 8, 2, 0.08)";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = "rgba(16, 201, 87, 0.67)";
+            ctx.font = fontSize + "px monospace";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = letters.charAt(Math.floor(Math.random() * letters.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 35);
+
+        // Adjust canvas on window resize
+        window.addEventListener('resize', () => {
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+        });
+
+        /* =========================
+           SCROLL ANIMATIONS
+           ========================= */
+        document.addEventListener('DOMContentLoaded', function() {
+            const hiddenDownElements = document.querySelectorAll('.hidden-down');
+            const hiddenUpElements = document.querySelectorAll('.hidden-up');
+            const hiddenElements = document.querySelectorAll('.hidden');
+            
+            // Create Intersection Observers for different animation directions
+            const observerDown = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    } else {
+                        entry.target.classList.remove('show');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            const observerUp = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    } else {
+                        entry.target.classList.remove('show');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('show');
+                    } else {
+                        entry.target.classList.remove('show');
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe elements
+            hiddenDownElements.forEach(el => observerDown.observe(el));
+            hiddenUpElements.forEach(el => observerUp.observe(el));
+            hiddenElements.forEach(el => observer.observe(el));
+        });
+
+        /* =========================
+           MOBILE MENU FUNCTIONALITY
+           ========================= */
+        function closeNavMenu() {
+            const navMenu = document.getElementById('navbarNav');
+            const bsCollapse = new bootstrap.Collapse(navMenu, {toggle: false});
+            bsCollapse.hide();
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navbarNav');
+            const navbarToggler = document.querySelector('.navbar-toggler');
+            
+            if (window.innerWidth <= 991 && !event.target.closest('.navbar') && !event.target.closest('.navbar-toggler')) {
+                closeNavMenu();
+            }
+        });
+
+        /* =========================
+           CARD FLIP FUNCTIONALITY
+           ========================= */
+        function initCardFlip() {
+            const cards = document.querySelectorAll('.card-variant-3');
+            let touchStartX = 0;
+            let touchEndX = 0;
+            let isMobile = window.innerWidth <= 991;
+
+            // Handle card interactions
+            cards.forEach(card => {
+                // For desktop - hover effect
+                if (!isMobile) {
+                    card.addEventListener('mouseenter', () => {
+                        if (!card.classList.contains('flipped')) {
+                            card.classList.add('flipped');
+                        }
+                    });
+                    
+                    card.addEventListener('mouseleave', () => {
+                        if (card.classList.contains('flipped')) {
+                            card.classList.remove('flipped');
+                        }
+                    });
+                } 
+                // For mobile - click to flip
+                else {
+                    // Handle touch events
+                    card.addEventListener('touchstart', (e) => {
+                        touchStartX = e.changedTouches[0].screenX;
+                        e.preventDefault();
+                    }, { passive: false });
+                    
+                    card.addEventListener('touchend', (e) => {
+                        touchEndX = e.changedTouches[0].screenX;
+                        if (Math.abs(touchEndX - touchStartX) < 10) {
+                            e.preventDefault();
+                            toggleCard(card, cards);
+                        }
+                    }, { passive: false });
+                    
+                    // Click handler for mobile
+                    card.addEventListener('click', (e) => {
+                        if (!e.target.closest('a, button')) {
+                            e.preventDefault();
+                            toggleCard(card, cards);
+                        }
+                    });
+                }
+                
+                // Keyboard navigation support
+                card.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleCard(card, cards);
+                    } else if (e.key === 'Escape' && card.classList.contains('flipped')) {
+                        card.classList.remove('flipped');
+                    }
+                });
+            });
+            
+            // Close card when clicking outside (for mobile)
+            if (isMobile) {
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('.card-variant-3')) {
+                        cards.forEach(card => {
+                            if (card.classList.contains('flipped')) {
+                                card.classList.remove('flipped');
+                            }
+                        });
+                    }
+                });
+            }
+            
+            // Close card when pressing Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    document.querySelectorAll('.card-variant-3.flipped').forEach(card => {
+                        card.classList.remove('flipped');
+                    });
+                }
+            });
+        }
+        
+        // Helper function to toggle card state
+        function toggleCard(card, allCards) {
+            const isMobile = window.innerWidth <= 991;
+            const wasFlipped = card.classList.contains('flipped');
+            
+            // On mobile, we want to toggle the card state
+            if (isMobile) {
+                if (wasFlipped) {
+                    card.classList.remove('flipped');
+                } else {
+                    // Close all other cards first
+                    allCards.forEach(otherCard => {
+                        if (otherCard !== card) {
+                            otherCard.classList.remove('flipped');
+                        }
+                    });
+                    card.classList.add('flipped');
+                    card.focus();
+                }
+            } 
+            // On desktop, just ensure the card is flipped (handled by hover)
+            else if (!wasFlipped) {
+                allCards.forEach(otherCard => {
+                    if (otherCard !== card) {
+                        otherCard.classList.remove('flipped');
+                    }
+                });
+                card.classList.add('flipped');
+                card.focus();
+            }
+        }
+        
+        // Initialize card flip functionality when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            initCardFlip();
+            
+            // Re-initialize on window resize (in case of device rotation)
+            let resizeTimer;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(() => {
+                    initCardFlip();
+                }, 250);
+            });
+        });
+
+        /* =========================
+           USER PROFILE FUNCTIONALITY
+           ========================= */
+        function loadUserProfile() {
+            console.log("User profile loading...");
+            // Your user profile loading logic here
+        }
+
+        /* =========================
+           SMOOTH SCROLL FUNCTIONALITY
+           ========================= */
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        /* =========================
+           PARALLAX EFFECT
+           ========================= */
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const banner = document.querySelector('.banner-image');
+            const rate = scrolled * -0.5;
+            banner.style.transform = `scale(1.1) translateY(${rate}px)`;
+        });
+    </script>
+</body>
 </html>

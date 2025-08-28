@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signalement - XyberShield</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="style/report.css">
+  
+</head>
+<body>
+    <!-- Background Matrix -->
+    <canvas id="matrix-bg"></canvas>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container d-flex align-items-center">
+            <a class="navbar-brand d-flex align-items-center text-neon" href="index.html">
+                <img src="images/logos/logo.png" alt="Logo XyberShield" style="height: 40px; width: auto; margin-right: 10px;">
+                XyberShield
+            </a>
+            <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html#">Accueil</a></li>
+                  
+                    
+                </ul>
+            </div>
+        </div>
+    </nav> 
+
+<!-- ================= FORMULAIRE DE SIGNALEMENT ================= -->
+<section class="report-section">
+  <div class="container">
+    <h2 class="form-title">Formulaire de Signalement</h2>
+
+    <!-- Barre de progression -->
+    <div class="progressbar">
+      <div class="progress" id="progress"></div>
+      <div class="progress-step active" data-title="Infos"></div>
+      <div class="progress-step" data-title="Détails"></div>
+      <div class="progress-step" data-title="Confirmation"></div>
+    </div>
+
+    <form id="multiStepForm">
+      
+      <!-- Step 1: Personal Information -->
+      <div class="form-step active">
+        <h3>Informations personnelles</h3>
+        <div class="form-group">
+          <input type="text" name="nom" placeholder="Nom complet" required>
+          <div class="error-message" id="name-error"></div>
+        </div>
+        <div class="form-group">
+          <input type="email" name="email" placeholder="Adresse email" required>
+          <div class="error-message" id="email-error"></div>
+        </div>
+        <div class="form-group">
+          <input type="tel" name="telephone" placeholder="Téléphone (ex: +33 6 12 34 56 78)" required>
+          <div class="error-message" id="phone-error"></div>
+        </div>
+        <div class="buttons">
+          <button type="button" class="next-btn">Suivant</button>
+        </div>
+      </div>
+
+      <!-- Step 2: Incident Details -->
+      <div class="form-step">
+        <h3>Détails de l'incident</h3>
+        <div class="form-group">
+          <select name="type" required>
+            <option value="">Sélectionner un type d'incident</option>
+            <option value="phishing">Hameçonnage (Phishing)</option>
+            <option value="account-hijacking">Piratage de compte</option>
+            <option value="scam">Arnaque en ligne</option>
+            <option value="malware">Logiciel malveillant</option>
+            <option value="data-breach">Fuites de données</option>
+            <option value="other">Autre</option>
+          </select>
+          <div class="error-message" id="type-error"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="incident-date">Date de l'incident :</label>
+          <input type="datetime-local" id="incident-date" name="date" required>
+          <div class="error-message" id="date-error"></div>
+        </div>
+        
+        <div class="form-group">
+          <textarea name="description" placeholder="Décrivez l'incident en détail (quoi, comment, quand, où, etc.)" required></textarea>
+          <div class="error-message" id="description-error"></div>
+        </div>
+        
+        <div class="buttons">
+          <button type="button" class="prev-btn">Précédent</button>
+          <button type="button" class="next-btn">Suivant</button>
+        </div>
+      </div>
+
+      <!-- Step 3: Additional Information -->
+      <div class="form-step">
+        <h3>Informations complémentaires</h3>
+        
+        <div class="form-group">
+          <input type="text" name="systeme" placeholder="Système/Application concerné(e) (optionnel)">
+          <div class="error-message" id="system-error"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="evidence">Preuves (fichiers) :</label>
+          <div class="file-upload-container">
+            <input type="file" name="evidence" id="evidence" class="file-upload-input" multiple accept=".jpg,.jpeg,.png,.pdf,.doc,.docx,.txt" data-max-size="5">
+            <label for="evidence" class="file-upload-label">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span class="file-upload-text">Glissez-déposez vos fichiers ici ou cliquez pour sélectionner</span>
+              <span class="file-upload-hint">Formats acceptés : JPG, PNG, PDF, DOC, DOCX, TXT (max 5 Mo par fichier)</span>
+            </label>
+            <div id="file-preview" class="file-preview-container">
+              <!-- Files will be previewed here -->
+            </div>
+            <div id="file-upload-progress" class="file-upload-progress" style="display: none;">
+              <div class="progress-bar">
+                <div class="progress"></div>
+              </div>
+              <div class="progress-text">Téléversement en cours : <span class="progress-percentage">0%</span></div>
+            </div>
+          </div>
+          <div class="form-text">Vous pouvez téléverser jusqu'à 5 fichiers (max 5 Mo chacun)</div>
+          <div id="file-upload-errors" class="error-message"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="evidence-links">Liens supplémentaires (optionnel) :</label>
+          <input type="text" name="evidence_links" id="evidence-links" placeholder="Liens vers des captures d'écran ou autres preuves">
+          <small class="form-text">Séparez les liens par des virgules si vous en avez plusieurs</small>
+        </div>
+        
+        <div class="form-check mb-4">
+          <input type="checkbox" class="form-check-input" id="anonyme" name="anonyme">
+          <label class="form-check-label" for="anonyme">Je souhaite rester anonyme</label>
+          <small class="form-text d-block">Vos informations personnelles ne seront pas partagées avec des tiers</small>
+        </div>
+        
+        <div class="form-check mb-4">
+          <input type="checkbox" class="form-check-input" id="consent" required>
+          <label class="form-check-label" for="consent">
+            J'accepte que ces informations soient utilisées pour traiter mon signalement conformément à la 
+            <a href="#" data-bs-toggle="modal" data-bs-target="#privacyPolicy">politique de confidentialité</a>.
+          </label>
+        </div>
+        
+        <div class="buttons">
+          <button type="button" class="prev-btn">Précédent</button>
+          <button type="submit" class="submit-btn">
+            <span class="submit-text">Envoyer le signalement</span>
+            <span class="spinner-border spinner-border-sm d-none" role="status" aria-hidden="true"></span>
+          </button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</section>
+
+<!-- Confirmation -->
+<div id="confirmation" class="confirmation hidden">
+  <div class="confirmation-box">
+    <div class="checkmark"><span>✔</span></div>
+    <h2>Signalement envoyé avec succès</h2>
+    <p>Merci de nous avoir contactés. Notre équipe vous répondra rapidement.</p>
+    <a href="#home" class="btn-home">Retour à l'accueil</a>
+  </div>
+</div>
+<script>
+// Fonction pour gérer le défilement fluide
+function initSmoothScroll() {
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        });
+    });
+}
+
+// Charger le script principal
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialiser le défilement fluide
+    initSmoothScroll();
+    
+    // Charger le script principal de manière non-module
+    const script = document.createElement('script');
+    script.src = 'animation/report.js';
+    script.onload = function() {
+        console.log('Script report.js chargé avec succès');
+        // Initialiser le formulaire si la fonction existe
+        if (typeof initializeForm === 'function') {
+            initializeForm();
+        }
+    };
+    script.onerror = function() {
+        console.error('Erreur lors du chargement du script report.js');
+    };
+    document.body.appendChild(script);
+});
+</script>
+</body>
+</html>
