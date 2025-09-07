@@ -3,7 +3,9 @@
 **Slogan** : _Signalez. Protégez. Prévenez._
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/yourusername/xybershield)
+[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/CYBERCLAN23/XyberShield)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D16.14.0-brightgreen)](https://nodejs.org/)
+[![npm](https://img.shields.io/badge/npm-%3E%3D8.5.0-blue)](https://www.npmjs.com/)
 
 ## 🌐 Présentation
 
@@ -17,37 +19,102 @@
 - 📊 **Tableau de bord** de suivi des signalements
 - 📚 **Centre d'éducation** sur la cybersécurité
 
+## 🏗️ Structure du Projet
+
+```
+XyberShield/
+├── FRONT/                    # Dossier frontend
+│   ├── assets/              # Ressources statiques
+│   │   ├── css/             # Feuilles de style
+│   │   ├── js/              # Fichiers JavaScript
+│   │   ├── images/          # Images
+│   │   └── fonts/           # Polices de caractères
+│   ├── src/                 # Code source du frontend
+│   │   ├── components/      # Composants réutilisables
+│   │   ├── views/           # Vues/Pages
+│   │   └── utils/           # Utilitaires
+│   ├── index.html           # Point d'entrée HTML
+│   └── home.html            # Page d'accueil
+├── BACKEND/                 # Dossier backend
+│   ├── config/              # Configuration
+│   ├── controllers/         # Contrôleurs
+│   ├── models/              # Modèles de données
+│   ├── routes/              # Routes API
+│   └── middleware/          # Middleware Express
+├── public/                  # Fichiers publics servis statiquement
+├── .env.example             # Exemple de variables d'environnement
+├── .eslintrc.json           # Configuration ESLint
+├── .prettierrc              # Configuration Prettier
+├── babel.config.json        # Configuration Babel
+├── webpack.config.js        # Configuration Webpack
+├── package.json             # Dépendances et scripts
+└── README.md                # Ce fichier
+```
+
 ## 🚀 Démarrage rapide
 
 ### Prérequis
 
-- Node.js (v14+)
-- npm (v6+)
+- Node.js (v16.14.0 ou supérieur)
+- npm (v8.5.0 ou supérieur)
+- MongoDB (pour la base de données)
 - Navigateur web moderne (Chrome, Firefox, Safari, Edge)
 
 ### Installation
 
 1. **Cloner le dépôt**
    ```bash
-   git clone https://github.com/yourusername/xybershield.git
-   cd xybershield
+   git clone https://github.com/CYBERCLAN23/XyberShield.git
+   cd XyberShield
    ```
 
 2. **Installer les dépendances**
    ```bash
-   cd FRONT
    npm install
    ```
 
-3. **Démarrer le serveur de développement**
+3. **Configurer l'environnement**
    ```bash
-   npm start
+   cp .env.example .env
+   # Modifier les variables d'environnement selon votre configuration
    ```
 
-4. **Ouvrir dans le navigateur**
+4. **Démarrer le serveur de développement**
+   ```bash
+   # Développement frontend
+   npm run dev:frontend
+   
+   # Développement backend
+   npm run dev
    ```
-   http://localhost:3000
+
+5. **Ouvrir dans le navigateur**
    ```
+   http://localhost:3000 (Frontend)
+   http://localhost:3001 (API, si différente)
+   ```
+
+## 🛠 Scripts disponibles
+
+- `npm start` - Démarrer le serveur en production
+- `npm run dev` - Démarrer le serveur en mode développement
+- `npm run dev:frontend` - Démarrer le serveur de développement frontend
+- `npm run build:frontend` - Construire les assets pour la production
+- `npm test` - Exécuter les tests
+- `npm run lint` - Vérifier le code avec ESLint
+- `npm run format` - Formater le code avec Prettier
+
+## 📝 Licence
+
+Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de détails.
+
+## 👥 Équipe
+
+- [Cedrik Yepmo](https://github.com/cedrikyepmo)
+- [Onana Gregoire](https://github.com/onanagregoire)
+- [Lembou Pharel](https://github.com/lemboupharel)
+- [Akanna Signing Josias](https://github.com/akannasigning)
+- [Akoumou Darren](https://github.com/akoumoudarren)
 
 ## 🏗️ Structure du projet
 
@@ -180,8 +247,8 @@ Ce projet est sous licence MIT - voir le fichier [LICENSE](LICENSE) pour plus de
 
 ## 📬 Contact
 
-Équipe XyberShield - [contact@xybershield.fr]([mailto:(https://xyber-clan-5t9i03i3q-josiasange37s-projects.vercel.app))
+Équipe XyberShield - [contact@xybershield.fr](mailto:contact@xybershield.fr)
 
 ---
 
-> **Note** : Ce projet est en cours de développement actif. Consultez la section [Problèmes](https://github.com/yourusername/xybershield/issues) pour voir les fonctionnalités à venir et les problèmes connus.
+> **Note** : Ce projet est en cours de développement actif. et nest pas open source
