@@ -1,0 +1,105 @@
+/* =========================
+   SWITCHING ANIMATION
+   ========================= */
+.login-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100vh;
+    transition: transform 0.6s ease-in-out;
+    position: relative;
+}
+
+.right-panel, .left-panel {
+    transition: all 0.6s ease-in-out;
+}
+
+/* Slide Left when switching */
+.switch .login-wrapper {
+    transform: translateX(-100%);
+}
+
+/* Right panel glitch effect */
+@keyframes panel-glitch {
+    0% { transform: skewX(0deg) translateX(0); }
+    20% { transform: skewX(5deg) translateX(-5px); }
+    40% { transform: skewX(-5deg) translateX(5px); }
+    60% { transform: skewX(3deg) translateX(-3px); }
+    80% { transform: skewX(-3deg) translateX(3px); }
+    100% { transform: skewX(0deg) translateX(0); }
+}
+
+/* Apply glitch animation during switch */
+.switch .right-panel, .switch .left-panel {
+    animation: panel-glitch 0.4s ease-in-out;
+}
+
+/* Smooth opacity fade between forms */
+#login-form, #register-form {
+    transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#login-form.hide, #register-form.hide {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+#login-form.show, #register-form.show {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+/* =========================
+   TEXT & BUTTON GLITCH ON SWITCH
+   ========================= */
+@keyframes text-glitch-flicker {
+    0% { text-shadow: 1px 0 red, -1px 0 rgb(0, 255, 55); }
+    15% { text-shadow: -2px 0 red, 2px 0 rgb(0, 255, 55); }
+    30% { text-shadow: 2px 0 red, -2px 0 rgb(0, 255, 55); }
+    45% { text-shadow: -1px 0 red, 1px 0 rgb(0, 255, 55); }
+    60% { text-shadow: 3px 0 red, -3px 0 rgb(0, 255, 55); }
+    75% { text-shadow: -2px 0 red, 2px 0 rgb(0, 255, 55); }
+    100% { text-shadow: 0 0 red, 0 0 rgb(0, 255, 55); }
+}
+
+/* Apply glitch effect to headings during switch */
+.switch .head,
+.switch .left-panel h1,
+.switch .slogant {
+    animation: text-glitch-flicker 0.3s linear 3;
+}
+
+/* Button glitch flicker */
+@keyframes button-glitch {
+    0%, 100% {
+        box-shadow: 0 0 15px #00ff55, 0 0 25px rgba(0,255,85,0.5);
+    }
+    25% {
+        box-shadow: -2px 0 red, 2px 0 #00ff55;
+    }
+    50% {
+        box-shadow: 2px 0 red, -2px 0 #00ff55;
+    }
+    75% {
+        box-shadow: -1px 0 red, 1px 0 #00ff55;
+    }
+}
+
+/* Buttons flicker when switching */
+.switch #valide,
+.switch .reg,
+.switch #back-login {
+    animation: button-glitch 0.3s linear 3;
+}
+
+/* Lordicon glitch pulse */
+@keyframes icon-pulse {
+    0% { filter: hue-rotate(0deg) brightness(1); }
+    50% { filter: hue-rotate(90deg) brightness(1.5); }
+    100% { filter: hue-rotate(0deg) brightness(1); }
+}
+
+.switch lord-icon {
+    animation: icon-pulse 0.5s ease-in-out 2;
+}
+

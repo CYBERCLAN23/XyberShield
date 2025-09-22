@@ -1,0 +1,133 @@
+/* Professional Video Player Styles */
+
+/* Video Container Base Styles */
+#videoContainer {
+    display: block !important;
+    visibility: visible !important;
+    position: relative;
+    width: 100%;
+    min-height: 80vh;
+    background: transparent;
+}
+
+/* Video Wrapper Styles */
+#videoContainer .video-wrapper-cyber,
+#videoContainer > div {
+    position: relative;
+    width: 100% !important;
+    height: 80vh !important;
+    background-color: #000;
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+    margin: 0 auto;
+}
+
+/* YouTube iframe styles */
+#videoContainer iframe {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+    display: block !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: 1000 !important;
+    background: #000;
+}
+
+/* Regular video styles */
+#videoContainer video {
+    width: 100% !important;
+    height: 100% !important;
+    border: none !important;
+    display: block !important;
+    object-fit: contain;
+    background: #000;
+}
+
+/* Ensure modal content is properly sized */
+#lightboxModal .modal-content {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+#lightboxModal .modal-dialog {
+    max-width: 95vw !important;
+    width: 100% !important;
+    margin: 2.5vh auto !important;
+}
+
+/* Loading indicator positioning */
+#loadingIndicator {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+    color: white;
+    text-align: center;
+}
+
+/* Caption styling */
+#lightboxCaption {
+    color: white;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #videoContainer .video-wrapper-cyber,
+    #videoContainer > div {
+        height: 60vh !important;
+        border-radius: 12px;
+    }
+    
+    #lightboxModal .modal-dialog {
+        margin: 1rem !important;
+        max-width: calc(100vw - 2rem) !important;
+    }
+}
+
+@media (max-width: 480px) {
+    #videoContainer .video-wrapper-cyber,
+    #videoContainer > div {
+        height: 50vh !important;
+        border-radius: 8px;
+    }
+}
+
+/* Additional fixes for video visibility */
+.modal.show #videoContainer {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+/* Ensure iframe is always visible */
+#videoContainer iframe[src*="youtube"] {
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: auto !important;
+}
+
+/* Debug styles - remove in production */
+.debug-video #videoContainer {
+    border: 2px solid red !important;
+}
+
+.debug-video #videoContainer iframe {
+    border: 2px solid green !important;
+}
+
+.debug-video #videoContainer .video-wrapper-cyber {
+    border: 2px solid blue !important;
+}
+
