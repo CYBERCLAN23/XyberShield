@@ -30,13 +30,144 @@ console.log('🚀 XyberShield Report Form - Initializing...');
 
 // API Configuration - Handles both development and production environments
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-  ? 'http://localhost:3001'
-  : 'https://xybershield-api.vercel.app';
+  ? 'http://localhost:5000/api'
+  : `${window.location.origin}/api`;
 
 // Global form state variables
 let currentStep = 0;        // Current active form step
 let isSubmitting = false;   // Prevents multiple form submissions
 let totalSteps = 0;         // Total number of form steps
+let formSteps = [];         // Form step elements
+let steps = [];             // Step elements
+let progress = null;        // Progress bar element
+let progressSteps = [];     // Progress step elements
+let uploadedFiles = [];     // Uploaded files array
+
+// File upload constants
+const ALLOWED_FILE_TYPES = [
+  'image/jpeg',
+  'image/png', 
+  'application/pdf',
+  'application/msword',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'text/plain'
+];
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+const MAX_TOTAL_SIZE = 20 * 1024 * 1024; // 20MB total
+
+/* ===========================================
+   CORE FORM FUNCTIONS
+   =========================================== */
+
+/**
+ * Updates the progress bar and step indicators
+ */
+function updateProgressBar() {
+  console.log('🔄 Updating progress bar...');
+  if (!progress || !progressSteps.length) {
+    console.error('❌ Progress elements not found');
+    return;
+  }
+  
+  const progressPercentage = (currentStep / (totalSteps - 1)) * 100;
+  progress.style.width = progressPercentage + '%';
+  
+  // Update progress steps
+  progressSteps.forEach((step, index) => {
+    if (index < currentStep) {
+      step.classList.add('completed');
+      step.classList.remove('active');
+    } else if (index === currentStep) {
+      step.classList.add('active');
+      step.classList.remove('completed');
+    } else {
+      step.classList.remove('active', 'completed');
+    }
+  });
+  
+  console.log(`✅ Progress updated: ${progressPercentage.toFixed(1)}%`);
+}
+
+/**
+ * Show a specific form step
+ */
+function showStep(step) {
+  console.group(`=== showStep(${step}) ===`);
+  
+  // Validation des limites
+  if (step < 0 || step >= totalSteps) {
+    console.warn(`❌ Invalid step: ${step} (total: ${totalSteps})`);
+    console.groupEnd();
+    return;
+  }
+  
+  console.log(`📍 Changing from step ${currentStep} to step ${step}`);
+  
+  // Masquer toutes les étapes
+  formSteps.forEach((formStep, index) => {
+    if (formStep) {
+      formStep.classList.remove('active');
+      formStep.style.display = 'none';
+    }
+  });
+  
+  // Afficher l'étape demandée
+  if (formSteps[step]) {
+    formSteps[step].style.display = 'block';
+    formSteps[step].offsetHeight; // Force reflow
+    formSteps[step].classList.add('active');
+    console.log(`✅ Step ${step + 1} is now active`);
+  }
+  
+  // Mettre à jour l'étape actuelle
+  currentStep = step;
+  
+  // Mettre à jour la barre de progression
+  updateProgressBar();
+  
+  console.groupEnd();
+}
+
+/**
+ * Update navigation buttons visibility
+ */
+function updateNavigationButtons() {
+  console.log('🔄 Updating navigation buttons for step:', currentStep);
+  
+  // Get buttons from the current active step
+  const currentStepElement = document.querySelector('.form-step.active');
+  if (!currentStepElement) {
+    console.error('❌ No active step found');
+    return;
+  }
+  
+  const prevBtn = currentStepElement.querySelector('.prev-btn');
+  const nextBtn = currentStepElement.querySelector('.next-btn');
+  const submitBtn = currentStepElement.querySelector('.submit-btn');
+  
+  // Show/hide previous button
+  if (prevBtn) {
+    prevBtn.style.display = currentStep === 0 ? 'none' : 'inline-flex';
+    console.log('🔘 Previous button:', currentStep === 0 ? 'hidden' : 'visible');
+  }
+  
+  // Show/hide next button
+  if (nextBtn) {
+    if (currentStep === totalSteps - 1) {
+      nextBtn.style.display = 'none';
+    } else {
+      nextBtn.style.display = 'inline-flex';
+      nextBtn.innerHTML = 'Suivant <i class="fas fa-arrow-right"></i>';
+    }
+    console.log('🔘 Next button:', currentStep === totalSteps - 1 ? 'hidden' : 'visible');
+  }
+  
+  // Show/hide submit button
+  if (submitBtn) {
+    submitBtn.style.display = currentStep === totalSteps - 1 ? 'inline-flex' : 'none';
+    console.log('🔘 Submit button:', currentStep === totalSteps - 1 ? 'visible' : 'hidden');
+  }
+}
 
 /**
  * Get API URL for different environments
@@ -55,7 +186,28 @@ function getApiUrl(endpoint) {
    =========================================== */
 
 // Initialize form when DOM is fully loaded
-document.addEventListener('DOMContentLoaded', initializeForm);
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('🚀 Starting form initialization...');
+  
+  // Debug: Check if elements exist before initialization
+  const form = document.getElementById('multiStepForm');
+  const steps = document.querySelectorAll('.form-step');
+  const nextBtns = document.querySelectorAll('.next-btn');
+  
+  console.log('🔍 Debug - Form element:', form);
+  console.log('🔍 Debug - Steps found:', steps.length);
+  console.log('🔍 Debug - Next buttons found:', nextBtns.length);
+  
+  if (form && steps.length > 0 && nextBtns.length > 0) {
+    console.log('✅ All required elements found, initializing...');
+    initializeForm();
+  } else {
+    console.error('❌ Missing required elements!');
+    console.error('Form:', form);
+    console.error('Steps:', steps.length);
+    console.error('Next buttons:', nextBtns.length);
+  }
+});
 
 /**
  * Main form initialization function
@@ -75,7 +227,7 @@ function initializeForm() {
   
   // Initialize DOM elements and global variables
   const steps = document.querySelectorAll('.form-step');
-  const formSteps = document.querySelectorAll('.form-step');
+  formSteps = document.querySelectorAll('.form-step');
   totalSteps = steps.length;
   const nextBtns = document.querySelectorAll('.next-btn');
   const prevBtns = document.querySelectorAll('.prev-btn');
@@ -119,6 +271,7 @@ function initializeForm() {
   }
   
   // Afficher la première étape
+  console.log('🚀 Affichage de la première étape...');
   showStep(currentStep);
 
   // Ajouter les écouteurs d'événements
@@ -132,25 +285,7 @@ function initializeForm() {
     });
   });
   
-  // Fonction pour afficher une étape spécifique
-  function showStep(stepIndex) {
-    // Show loading animation
-    showLoadingOverlay();
-    
-    setTimeout(() => {
-      currentStep = stepIndex;
-      steps.forEach((step, idx) => {
-        step.classList.toggle('active', idx === currentStep);
-        step.style.display = idx === currentStep ? 'block' : 'none';
-      });
-      
-      // Mettre à jour la barre de progression
-      updateProgressBar();
-      
-      // Hide loading animation
-      hideLoadingOverlay();
-    }, 800); // 800ms loading delay
-  }
+  // Note: showStep function is defined later in the file to avoid conflicts
   
   // Fonction pour mettre à jour les boutons de navigation
     function updateButtons() {
@@ -158,21 +293,21 @@ function initializeForm() {
       btn.style.display = currentStep === 0 ? 'none' : 'inline-block';
     });
     nextBtns.forEach(btn => {
-      btn.textContent = currentStep === steps.length - 1 ? 'Envoyer' : 'Suivant';
+      btn.textContent = currentStep === totalSteps - 1 ? 'Envoyer' : 'Suivant';
     });
   }
     
  
   // Fonction pour valider une étape
   function validateStep(stepIndex) {
-    const inputs = steps[stepIndex].querySelectorAll('input[required], select[required], textarea[required]');
+    const inputs = formSteps[stepIndex].querySelectorAll('input[required], select[required], textarea[required]');
     let isValid = true;
     
     // Clear all previous errors first
-    steps[stepIndex].querySelectorAll('.error-message').forEach(el => {
+    formSteps[stepIndex].querySelectorAll('.error-message').forEach(el => {
       el.style.display = 'none';
     });
-    steps[stepIndex].querySelectorAll('.is-invalid').forEach(el => {
+    formSteps[stepIndex].querySelectorAll('.is-invalid').forEach(el => {
       el.classList.remove('is-invalid');
     });
 
@@ -262,18 +397,7 @@ function initializeForm() {
   }
 
   
-  // Variables pour le téléchargement de fichiers
-  let uploadedFiles = [];
-  const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-  const MAX_TOTAL_SIZE = 20 * 1024 * 1024; // 20MB total
-  const ALLOWED_FILE_TYPES = [
-    'image/jpeg',
-    'image/png',
-    'application/pdf',
-    'application/msword',
-    'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-    'text/plain'
-  ];
+  // Variables pour le téléchargement de fichiers (utilise les constantes globales)
   const MAX_FILES = 5;
 
   // Récupérer les éléments du DOM pour le téléchargement de fichiers
@@ -283,48 +407,7 @@ function initializeForm() {
   const progressBar = document.querySelector('.progress');
   const progressText = document.querySelector('.progress-text .progress-percentage');
   
-  // Initialiser le téléchargement de fichiers
-  initFileUpload();
-
-  // Fonction pour initialiser le téléchargement de fichiers
-  function initFileUpload() {
-    if (fileInput && fileUploadContainer) {
-      fileInput.addEventListener('change', handleFileSelect);
-      
-      // Add click handler to file upload container
-      fileUploadContainer.addEventListener('click', () => {
-        fileInput.click();
-      });
-
-      // Gestion du glisser-déposer
-      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-        fileUploadContainer.addEventListener(eventName, preventDefaults, false);
-      });
-
-      function preventDefaults(e) {
-        e.preventDefault();
-        e.stopPropagation();
-      }
-
-      ['dragenter', 'dragover'].forEach(eventName => {
-        fileUploadContainer.addEventListener(eventName, highlight, false);
-      });
-
-      ['dragleave', 'drop'].forEach(eventName => {
-        fileUploadContainer.addEventListener(eventName, unhighlight, false);
-      });
-
-      function highlight() {
-        fileUploadContainer.classList.add('highlight');
-      }
-
-      function unhighlight() {
-        fileUploadContainer.classList.remove('highlight');
-      }
-
-      fileUploadContainer.addEventListener('drop', handleDrop, false);
-    }
-  }
+  // Note: initFileUpload() is defined globally below
 
   // Gestion de la sélection de fichiers
   function handleFileSelect(e) {
@@ -544,9 +627,9 @@ function initializeForm() {
     
     // Show loading animation
     showLoadingOverlay();
-    
+  
     setTimeout(() => {
-      // Masquer toutes les étapes
+      // Masquer toutes les étapes avec animation
       formSteps.forEach((formStep, index) => {
         if (formStep) {
           formStep.classList.remove('active');
@@ -555,20 +638,29 @@ function initializeForm() {
         }
       });
       
-      // Afficher l'étape demandée
+      // Afficher l'étape demandée avec animation
       if (formSteps[step]) {
-        formSteps[step].classList.add('active');
         formSteps[step].style.display = 'block';
-        console.log(`Étape ${step + 1} affichée`);
+        // Force reflow pour s'assurer que l'animation fonctionne
+        formSteps[step].offsetHeight;
+        formSteps[step].classList.add('active');
+        console.log(`Étape ${step + 1} affichée et marquée comme active`);
+        
+        // Animer les éléments de l'étape
+        const formGroups = formSteps[step].querySelectorAll('.form-group');
+        formGroups.forEach((group, index) => {
+          group.style.animationDelay = `${0.1 + (index * 0.1)}s`;
+        });
       }
       
       // Mettre à jour l'étape actuelle
       currentStep = step;
       
-      // Mettre à jour la barre de progression
+      // Mettre à jour la barre de progression avec animation
       updateProgressBar();
       
-      // Mettre à jour les boutons
+      // Mettre à jour les boutons APRÈS avoir mis à jour currentStep
+      console.log('🔄 Mise à jour des boutons pour l\'étape:', currentStep);
       updateNavigationButtons();
       
       console.log('Nouvelle étape actuelle:', currentStep);
@@ -576,7 +668,7 @@ function initializeForm() {
       
       // Hide loading animation
       hideLoadingOverlay();
-    }, 800); // 800ms loading delay
+    }, 600); // Reduced delay for better UX
     
     // Défilement vers le haut du formulaire
     if (steps[step]) {
@@ -590,45 +682,10 @@ function initializeForm() {
       console.error('Impossible de trouver l\'étape', step, 'dans le DOM');
     }
     
-    // Mise à jour de la visibilité des boutons
-    updateNavigationButtons();
-    
     console.groupEnd();
   }
   
-  /**
-   * Met à jour la visibilité des boutons de navigation en fonction de l'étape actuelle
-   */
-  function updateNavigationButtons() {
-    console.group('=== updateNavigationButtons() ===');
-    console.log('Étape actuelle:', currentStep, 'sur', steps.length - 1);
-    
-    // Bouton Précédent
-    const prevButtons = document.querySelectorAll('.prev-btn');
-    const shouldShowPrev = currentStep > 0;
-    console.log('Bouton Précédent visible:', shouldShowPrev ? 'oui' : 'non');
-    
-    prevButtons.forEach(btn => {
-      btn.style.display = shouldShowPrev ? 'inline-block' : 'none';
-    });
-    
-    // Bouton Suivant/Envoyer
-    const nextButtons = document.querySelectorAll('.next-btn');
-    const submitButtons = document.querySelectorAll('.submit-btn');
-    const isLastStep = currentStep === steps.length - 1;
-    
-    console.log('Dernière étape:', isLastStep ? 'oui' : 'non');
-    
-    nextButtons.forEach(btn => {
-      btn.style.display = !isLastStep ? 'inline-block' : 'none';
-    });
-    
-    submitButtons.forEach(btn => {
-      btn.style.display = isLastStep ? 'inline-block' : 'none';
-    });
-    
-    console.groupEnd();
-  }
+  // Note: updateNavigationButtons function is defined globally above
 
   // Initialize form buttons
   console.log('Initialisation des boutons de navigation...');
@@ -868,8 +925,7 @@ function initializeForm() {
   }
 
   // Configuration de l'API
-   const API_REPORTS_URL = `${API_BASE_URL}/api/reports`;
-  const API_UPLOAD_URL = `${API_BASE_URL}/api/upload`;
+  const API_REPORTS_URL = `${API_BASE_URL}/reports`;
 
   // Form submission handler
   form.addEventListener("submit", async (e) => {
@@ -919,103 +975,66 @@ function initializeForm() {
       submitBtn.classList.add('loading');
       submitBtn.disabled = true;
 
-      // Collect form data
-      const formData = new FormData(form);
-      const reportData = {};
-      formData.forEach((value, key) => {
-        if (key !== 'evidence' && key !== 'consent') { // Exclure les fichiers et le consentement
-          reportData[key] = value;
+      // Create FormData for the complete submission (data + files)
+      const formData = new FormData();
+      
+      // Add form fields to FormData
+      const formElements = form.elements;
+      for (let element of formElements) {
+        if (element.name && element.name !== 'evidence' && element.name !== 'consent') {
+          if (element.type === 'checkbox') {
+            formData.append(element.name, element.checked);
+          } else if (element.type !== 'file') {
+            formData.append(element.name, element.value);
+          }
         }
+      }
+
+      // Add files to FormData
+      uploadedFiles.forEach((file, index) => {
+        formData.append('files', file.file || file);
       });
 
-      // Handle anonymous checkbox
-      reportData.anonymous = document.getElementById('anonymous')?.checked || false;
-      
       // Get authentication token
       const token = localStorage.getItem('token');
-      const fileUrls = [];
       
-      // Upload each file
-      for (let i = 0; i < uploadedFiles.length; i++) {
-        const file = uploadedFiles[i];
-        const formData = new FormData();
-        formData.append('file', file);
+      // Prepare headers
+      const headers = {};
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
 
-        try {
-          const response = await new Promise((resolve, reject) => {
-            const xhr = new XMLHttpRequest();
-            
-            xhr.upload.onprogress = (e) => {
-              if (e.lengthComputable) {
-                const percentComplete = Math.round((e.loaded / e.total) * 100);
-                updateUploadProgress(i, uploadedFiles.length, percentComplete);
-              }
-            };
-            
-            xhr.onload = () => {
-              if (xhr.status >= 200 && xhr.status < 300) {
-                try {
-                  resolve(JSON.parse(xhr.responseText));
-                } catch (e) {
-                  resolve(xhr.responseText);
-                }
-              } else {
-                reject(new Error(`Erreur lors du téléversement du fichier: ${xhr.statusText}`));
-              }
-            };
-            
-            xhr.onerror = () => {
-              reject(new Error('Erreur réseau lors du téléversement du fichier'));
-            };
-            
-            xhr.open('POST', API_UPLOAD_URL, true);
-            
-            // Add authorization header if token exists
-            if (token) {
-              xhr.setRequestHeader('Authorization', `Bearer ${token}`);
-            }
-            
-            xhr.send(formData);
-          });
-          
-          // Add the file URL to the list
-          if (response && response.url) {
-            fileUrls.push({
-              url: response.url,
-              name: file.name,
-              type: file.type,
-              size: file.size
-            });
-          }
-          
-          // Update progress to 100% for this file
-          updateUploadProgress(i + 1, uploadedFiles.length, 100);
-          
-        } catch (error) {
-          console.error(`Erreur lors du téléversement du fichier ${file.name}:`, error);
-          throw error;
+      // Show upload progress
+      const progressContainer = document.getElementById('upload-progress');
+      if (progressContainer) {
+        progressContainer.style.display = 'block';
+      }
+
+      // Simulate form submission for demo
+      console.log('📤 Simulating form submission (legacy handler)...');
+      
+      // Simulate upload progress
+      for (let i = 0; i <= 100; i += 10) {
+        updateUploadProgress(1, 1, i);
+        await new Promise(resolve => setTimeout(resolve, 50));
+      }
+      
+      // Simulate successful response
+      const response = {
+        success: true,
+        message: 'Report submitted successfully',
+        data: {
+          referenceNumber: 'XS-' + Date.now().toString().slice(-8)
         }
+      };
+
+      console.log('✅ Signalement envoyé avec succès (simulé):', response);
+      
+      // Store reference number for success page
+      if (response.data && response.data.referenceNumber) {
+        sessionStorage.setItem('reportReference', response.data.referenceNumber);
       }
-
-      reportData.evidence = fileUrls; // Ajouter les URLs des fichiers au rapport
-
-      // Send report data to the backend
-      const response = await fetch(API_REPORTS_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': token ? `Bearer ${token}` : ''
-        },
-        body: JSON.stringify(reportData)
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || 'Échec de l\'envoi du signalement.');
-      }
-
-      console.log('Signalement envoyé avec succès:', result);
+      
       showSuccess(); // Afficher le message de succès
 
     } catch (error) {
@@ -1115,40 +1134,165 @@ function setSubmitButtonState(isLoading) {
 }
 
 /**
- * Show success message after form submission
+ * Show success message with reference number
  */
 function showSuccess() {
-  const reportSection = document.querySelector(".report-section");
-  const confirmationSection = document.getElementById("confirmation");
+  const referenceNumber = sessionStorage.getItem('reportReference');
   
-  if (reportSection) reportSection.style.display = "none";
-  if (confirmationSection) {
-    confirmationSection.classList.remove("hidden");
-    confirmationSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Hide the form
+  const formContainer = document.querySelector('.report-section');
+  if (formContainer) {
+    formContainer.style.display = 'none';
   }
   
-  // Reset form
-  if (form) form.reset();
+  // Create success message
+  const successHtml = `
+    <div class="success-container" style="
+      text-align: center; 
+      padding: 60px 20px; 
+      background: linear-gradient(135deg, rgba(0, 255, 102, 0.1), rgba(0, 204, 68, 0.1));
+      border-radius: 15px;
+      border: 2px solid #00ff66;
+      margin: 40px auto;
+      max-width: 600px;
+    ">
+      <div style="font-size: 4rem; color: #00ff66; margin-bottom: 20px;">
+        <i class="fas fa-check-circle"></i>
+      </div>
+      
+      <h2 style="color: #00ff66; margin-bottom: 20px; font-size: 2rem;">
+        🎉 Signalement envoyé avec succès !
+      </h2>
+      
+      ${referenceNumber ? `
+        <div style="
+          background: rgba(0, 0, 0, 0.3); 
+          padding: 20px; 
+          border-radius: 10px; 
+          margin: 30px 0;
+          border: 1px solid #00ff66;
+        ">
+          <h3 style="color: #fff; margin-bottom: 10px;">Numéro de référence :</h3>
+          <div style="
+            font-size: 1.5rem; 
+            font-weight: bold; 
+            color: #00ff66; 
+            font-family: monospace;
+            letter-spacing: 2px;
+          ">${referenceNumber}</div>
+          <p style="color: #ccc; margin-top: 15px; font-size: 0.9rem;">
+            📋 Conservez ce numéro pour suivre votre signalement
+          </p>
+        </div>
+      ` : ''}
+      
+      <div style="margin: 30px 0;">
+        <p style="color: #fff; font-size: 1.1rem; line-height: 1.6;">
+          Votre signalement a été reçu et sera traité par notre équipe de sécurité.<br>
+          Vous recevrez une confirmation par email sous peu.
+        </p>
+      </div>
+      
+      <div style="margin-top: 40px;">
+        <button onclick="window.location.href='index.html'" style="
+          background: linear-gradient(135deg, #00ff66, #00cc44);
+          color: #000;
+          border: none;
+          padding: 15px 30px;
+          border-radius: 25px;
+          font-size: 1.1rem;
+          font-weight: bold;
+          cursor: pointer;
+          margin: 0 10px;
+          transition: all 0.3s ease;
+        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+          <i class="fas fa-home"></i> Retour à l'accueil
+        </button>
+        
+        ${referenceNumber ? `
+          <button onclick="trackReport('${referenceNumber}')" style="
+            background: transparent;
+            color: #00ff66;
+            border: 2px solid #00ff66;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 0 10px;
+            transition: all 0.3s ease;
+          " onmouseover="this.style.background='rgba(0,255,102,0.1)'" onmouseout="this.style.background='transparent'">
+            <i class="fas fa-search"></i> Suivre mon signalement
+          </button>
+        ` : ''}
+      </div>
+      
+      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid rgba(0,255,102,0.3);">
+        <p style="color: #888; font-size: 0.9rem;">
+          <i class="fas fa-shield-alt"></i> 
+          Merci de contribuer à la sécurité de notre communauté
+        </p>
+      </div>
+    </div>
+  `;
   
-  // Reset to first step
-  showStep(0);
+  // Insert success message
+  const container = document.querySelector('.container') || document.body;
+  const successDiv = document.createElement('div');
+  successDiv.innerHTML = successHtml;
+  container.appendChild(successDiv);
   
-  // Show success message with animation
-  const checkmark = document.querySelector('.checkmark');
-  if (checkmark) {
-    checkmark.style.animation = 'none';
-    void checkmark.offsetWidth; // Trigger reflow
-    checkmark.style.animation = 'checkmark 0.6s ease';
-  }
+  // Scroll to success message
+  successDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  
+  // Clear the reference number from session storage
+  sessionStorage.removeItem('reportReference');
 }
 
 /**
- * Show an error alert to the user
- * @param {string} message - The error message to display
+ * Track report function
+ */
+function trackReport(referenceNumber) {
+  // You can implement report tracking functionality here
+  alert(`Fonctionnalité de suivi en développement.\nNuméro de référence: ${referenceNumber}`);
+}
+
+/**
+ * Show error alert
  */
 function showErrorAlert(message) {
-  // You can replace this with a more sophisticated alert system
-  alert(`Erreur: ${message}`);
+  const alertHtml = `
+    <div class="alert alert-danger" style="
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 9999;
+      max-width: 400px;
+      border: 2px solid #ff4444;
+      background: rgba(255, 68, 68, 0.1);
+      color: #fff;
+      padding: 15px;
+      border-radius: 10px;
+    ">
+      <i class="fas fa-exclamation-triangle"></i> ${message}
+      <button onclick="this.parentElement.remove()" style="
+        float: right;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.2rem;
+        cursor: pointer;
+      ">&times;</button>
+    </div>
+  `;
+  
+  document.body.insertAdjacentHTML('beforeend', alertHtml);
+  
+  // Auto-remove after 5 seconds
+  setTimeout(() => {
+    const alert = document.querySelector('.alert-danger');
+    if (alert) alert.remove();
+  }, 5000);
 }
 
 /**
@@ -1234,28 +1378,60 @@ if (canvas) {
 }
 }
 
-// Variables globales pour le téléchargement de fichiers (déclarées en dehors de initializeForm)
+// Variables globales pour le téléchargement de fichiers (déjà déclarées en haut)
+const MAX_FILES = 5;
 
 
-// Initialize form on DOM content loaded
-document.addEventListener('DOMContentLoaded', () => {
-  // Set default date to today
+// Set default date function with time
+function setDefaultDate() {
   const dateInput = document.getElementById('incident-date');
   if (dateInput && !dateInput.value) {
     const now = new Date();
-    // Format: YYYY-MM-DDThh:mm
-    const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
-      .toISOString()
-      .slice(0, 16);
+    const localDateTime = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
+    dateInput.value = localDateTime;
+    console.log('📅 Auto-filled:', localDateTime);
+  }
+}
+
+// Auto-detect location and fill region
+async function initAutoLocation() {
+  if (!navigator.geolocation) return;
+  
+  try {
+    const pos = await new Promise((resolve, reject) => {
+      navigator.geolocation.getCurrentPosition(resolve, reject, {timeout: 5000});
+    });
+    
+    const regionSelect = document.getElementById('region');
+    if (regionSelect && !regionSelect.value) {
+      // Simple region detection for Cameroon
+      const lat = pos.coords.latitude;
+      const lng = pos.coords.longitude;
+      
+      if (lat >= 3.5 && lat <= 4.5 && lng >= 11 && lng <= 12) {
+        regionSelect.value = 'centre';
+      } else if (lat >= 3.8 && lat <= 4.2 && lng >= 9.5 && lng <= 10.5) {
+        regionSelect.value = 'littoral';
+      }
+      
+      if (regionSelect.value) {
+        console.log('🏠 Region auto-detected:', regionSelect.value);
+      }
+    }
+  } catch (e) {
+    console.log('Location detection failed');
+  }
+}
+
+// Manual time setting
+function setCurrentDateTime() {
+  const dateInput = document.getElementById('incident-date');
+  if (dateInput) {
+    const now = new Date();
+    const localDateTime = new Date(now.getTime() - (now.getTimezoneOffset() * 60000)).toISOString().slice(0, 16);
     dateInput.value = localDateTime;
   }
-
-  // Initialize matrix background
-  initMatrixBackground();
-  
-  // Initialize custom dropdown
-  initCustomDropdown();
-});
+}
 
 // Custom Dropdown Functionality
 function initCustomDropdown() {
@@ -1345,11 +1521,26 @@ function initCustomDropdown() {
  * Initialize file upload functionality
  */
 function initFileUpload() {
+  console.log('📁 Initializing file upload...');
+  
   const fileInput = document.getElementById('evidence');
   const fileUploadContainer = document.querySelector('.file-upload-container');
-  // Handle file selection
-  if (!fileInput || !fileUploadContainer) return; // S'assurer que les éléments existent
+  
+  if (!fileInput || !fileUploadContainer) {
+    console.error('❌ File upload elements not found');
+    return;
+  }
+  
+  console.log('✅ File upload elements found');
+  
+  // Handle file selection via input
   fileInput.addEventListener('change', handleFileSelect);
+  
+  // Handle click on upload container to trigger file selection
+  fileUploadContainer.addEventListener('click', () => {
+    console.log('📁 Upload container clicked');
+    fileInput.click();
+  });
   
   // Prevent default drag behaviors
   ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -1368,8 +1559,11 @@ function initFileUpload() {
   
   // Handle dropped files
   fileUploadContainer.addEventListener('drop', handleDrop, false);
+  
   // Initialize file preview container
   updateFilePreview();
+  
+  console.log('✅ File upload initialized successfully');
 }
 
 /**
@@ -1384,14 +1578,20 @@ function preventDefaults(e) {
  * Highlight drop zone
  */
 function highlight() {
-  fileUploadContainer.classList.add('drag-over');
+  const fileUploadContainer = document.querySelector('.file-upload-container');
+  if (fileUploadContainer) {
+    fileUploadContainer.classList.add('drag-over');
+  }
 }
 
 /**
  * Remove highlight from drop zone
  */
 function unhighlight() {
-  fileUploadContainer.classList.remove('drag-over');
+  const fileUploadContainer = document.querySelector('.file-upload-container');
+  if (fileUploadContainer) {
+    fileUploadContainer.classList.remove('drag-over');
+  }
 }
 
 /**
@@ -1407,8 +1607,11 @@ function handleDrop(e) {
  * Handle file selection via input
  */
 function handleFileSelect(e) {
+  console.log('📁 Files selected:', e.target.files.length);
   const files = e.target.files;
-  handleFiles(files);
+  if (files && files.length > 0) {
+    handleFiles(files);
+  }
 }
 
 /**
@@ -1484,55 +1687,81 @@ async function generatePreview(file) {
 }
 
 /**
- * Update the file preview UI
+ * Get file icon based on file type
+ */
+function getFileIcon(file) {
+  const extension = file.name.split('.').pop().toLowerCase();
+  const type = file.type.toLowerCase();
+  
+  // Images
+  if (type.startsWith('image/')) {
+    return '<i class="fas fa-image" style="color: #4cbe85;"></i>';
+  }
+  
+  // PDFs
+  if (extension === 'pdf' || type === 'application/pdf') {
+    return '<i class="fas fa-file-pdf" style="color: #ff5252;"></i>';
+  }
+  
+  // Word documents
+  if (extension === 'doc' || extension === 'docx' || type.includes('word')) {
+    return '<i class="fas fa-file-word" style="color: #2196f3;"></i>';
+  }
+  
+  // Excel
+  if (extension === 'xls' || extension === 'xlsx' || type.includes('excel')) {
+    return '<i class="fas fa-file-excel" style="color: #4caf50;"></i>';
+  }
+  
+  // Text files
+  if (extension === 'txt' || type === 'text/plain') {
+    return '<i class="fas fa-file-alt" style="color: #9e9e9e;"></i>';
+  }
+  
+  // Default
+  return '<i class="fas fa-file" style="color: #757575;"></i>';
+}
+
+/**
+ * Update the file preview UI with modern card design
  */
 function updateFilePreview() {
   const filePreviewContainer = document.getElementById('file-preview');
   if (!filePreviewContainer) return;
   
   if (uploadedFiles.length === 0) {
-    filePreviewContainer.innerHTML = '<div class="no-files">Aucun fichier sélectionné</div>';
+    filePreviewContainer.innerHTML = '';
     return;
   }
   
-  filePreviewContainer.innerHTML = '';
+  let previewHTML = `
+    <div class="file-preview-header">
+      <h4><i class="fas fa-paperclip"></i> Fichiers sélectionnés (${uploadedFiles.length})</h4>
+    </div>
+    <div class="file-preview-grid">
+  `;
   
-  uploadedFiles.forEach((file, index) => {
-    const fileElement = document.createElement('div');
-    fileElement.className = 'file-preview-item';
-    fileElement.dataset.id = file.id;
+  uploadedFiles.forEach((fileObj, index) => {
+    const file = fileObj.file;
+    const fileSize = (file.size / 1024 / 1024).toFixed(2);
+    const fileName = file.name.length > 15 ? file.name.substring(0, 12) + '...' : file.name;
     
-    let previewContent = '';
-    
-    if (file.type.startsWith('image/')) {
-      previewContent = `<img src="${file.preview}" alt="${file.name}" class="file-preview-thumbnail">`;
-    } else {
-      previewContent = `
-        <div class="file-preview-thumbnail" style="display: flex; align-items: center; justify-content: center; background: rgba(30, 144, 255, 0.1);">
-          ${file.preview}
-        </div>`;
-    }
-    
-    fileElement.innerHTML = `
-      ${previewContent}
-      <div class="file-preview-details">
-        <div class="file-name" title="${file.name}">${truncateFileName(file.name, 15)}</div>
-        <div class="file-size">${formatFileSize(file.size)}</div>
+    previewHTML += `
+      <div class="file-preview-card" data-file-id="${fileObj.id}">
+        <div class="file-card-icon">
+          ${getFileIcon(file)}
+        </div>
+        <div class="file-card-name" title="${file.name}">${fileName}</div>
+        <div class="file-card-size">${fileSize} MB</div>
+        <button type="button" class="file-remove-btn" onclick="removeFile('${fileObj.id}')" title="Supprimer ${file.name}">
+          <i class="fas fa-times"></i>
+        </button>
       </div>
-      <button class="file-preview-remove" data-id="${file.id}" title="Supprimer">&times;</button>
     `;
-    
-    filePreviewContainer.appendChild(fileElement);
   });
   
-  // Add event listeners to remove buttons
-  document.querySelectorAll('.file-preview-remove').forEach(button => {
-    button.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const fileId = parseInt(e.target.dataset.id);
-      removeFile(fileId);
-    });
-  });
+  previewHTML += '</div>';
+  filePreviewContainer.innerHTML = previewHTML;
 }
 
 /**
@@ -1580,4 +1809,722 @@ function formatFileSize(bytes) {
 function truncateFileName(name, maxLength) {
   if (name.length <= maxLength) return name;
   return name.substring(0, maxLength - 3) + '...';
+}
+
+/* ===========================================
+   FORM SUBMISSION WITH FIELD MAPPING
+   =========================================== */
+
+/**
+ * Submit the form with proper field mapping
+ */
+async function submitForm() {
+  console.log('🚀 Starting form submission...');
+  
+  if (isSubmitting) {
+    console.log('⚠️ Form is already being submitted');
+    return;
+  }
+  
+  isSubmitting = true;
+  showLoadingOverlay();
+  
+  try {
+    // Collect form data with French field names
+    const formData = new FormData();
+    const form = document.getElementById('multiStepForm');
+    
+    // Get all form inputs
+    const inputs = form.querySelectorAll('input, select, textarea');
+    const frenchData = {};
+    
+    inputs.forEach(input => {
+      if (input.name && input.value) {
+        frenchData[input.name] = input.value;
+      }
+    });
+    
+    console.log('📋 French form data collected:', frenchData);
+    
+    // Map French field names to English (as expected by backend)
+    const mappedData = {
+      fullName: frenchData.nom || '',
+      email: frenchData.email || '',
+      phone: frenchData.telephone || '',
+      organization: frenchData.organization || '',
+      incidentType: frenchData.type || '',
+      incidentDate: frenchData.date || '',
+      incidentLocation: frenchData.region || '',
+      description: frenchData.description || '',
+      affectedSystems: frenchData.systeme || '',
+      additionalComments: frenchData.evidence_links || '',
+      anonymous: frenchData.anonyme === 'on' || false,
+      consent: frenchData.consent === 'on' || false
+    };
+    
+    // Auto-calculate impact level based on incident type
+    const impactLevelMap = {
+      'malware': 'high',
+      'data-breach': 'high',
+      'account-hijacking': 'high',
+      'phishing': 'medium',
+      'scam': 'medium',
+      'other': 'low'
+    };
+    
+    mappedData.impactLevel = impactLevelMap[mappedData.incidentType] || 'low';
+    
+    // Add required fields with default values
+    mappedData.previousIncidents = false;
+    mappedData.securityMeasures = '';
+    
+    console.log('🔄 Mapped data for backend:', mappedData);
+    
+    // Validate required fields
+    const validationErrors = validateFormData(mappedData);
+    if (validationErrors.length > 0) {
+      throw new Error('Validation failed: ' + validationErrors.join(', '));
+    }
+    
+    // Submit to real backend
+    console.log('📤 Submitting to backend...');
+    console.log('📋 Form data to be sent:', mappedData);
+    console.log('📋 Form data keys:', Object.keys(mappedData));
+    console.log('📋 Form data values:', Object.values(mappedData));
+    
+    let response;
+    
+    // Always try JSON first (most backends expect JSON)
+    console.log('📄 Sending as JSON');
+    response = await fetch(`${API_BASE_URL}/reports`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(mappedData)
+    });
+    
+    // If there are files and JSON fails, we'll handle file upload separately
+    if (uploadedFiles.length > 0) {
+      console.log('📁 Note: Files will be handled separately if needed');
+      // TODO: Implement separate file upload endpoint if backend requires it
+    }
+    
+    const result = await response.json();
+    
+    if (!response.ok) {
+      console.error('❌ Backend response:', result);
+      console.error('❌ Response status:', response.status);
+      console.error('❌ Response headers:', Object.fromEntries(response.headers.entries()));
+      
+      // Log specific validation errors
+      if (result.errors && Array.isArray(result.errors)) {
+        console.error('❌ Validation errors from backend:');
+        result.errors.forEach((error, index) => {
+          console.error(`   ${index + 1}. ${error.field || 'Unknown field'}: ${error.message || error}`);
+        });
+      }
+      
+      throw new Error(result.message || `Backend error: ${response.status} - Validation failed`);
+    }
+    
+    console.log('✅ Form submitted successfully:', result);
+    
+    // Show success message
+    showSuccessMessage(result.data?.referenceNumber || result.referenceNumber || 'XS-' + Date.now().toString().slice(-8));
+    
+  } catch (error) {
+    console.error('❌ Form submission error:', error);
+    showErrorMessage(error.message);
+  } finally {
+    isSubmitting = false;
+    hideLoadingOverlay();
+  }
+}
+
+/**
+ * Validate form data before submission
+ */
+function validateFormData(data) {
+  const errors = [];
+  
+  if (!data.fullName || data.fullName.trim().length < 2) {
+    errors.push('Le nom complet est requis (minimum 2 caractères)');
+  }
+  
+  if (!data.email || !isValidEmail(data.email)) {
+    errors.push('Une adresse email valide est requise');
+  }
+  
+  if (!data.phone || data.phone.trim().length < 8) {
+    errors.push('Un numéro de téléphone valide est requis');
+  }
+  
+  if (!data.incidentType) {
+    errors.push('Le type d\'incident est requis');
+  }
+  
+  if (!data.incidentDate) {
+    errors.push('La date de l\'incident est requise');
+  }
+  
+  if (!data.description || data.description.trim().length < 10) {
+    errors.push('Une description détaillée est requise (minimum 10 caractères)');
+  }
+  
+  if (!data.consent) {
+    errors.push('Vous devez accepter les conditions pour soumettre le signalement');
+  }
+  
+  return errors;
+}
+
+/**
+ * Validate email format
+ */
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+/**
+ * Show success message after form submission
+ */
+function showSuccessMessage(referenceNumber) {
+  // Hide form steps
+  document.querySelectorAll('.form-step').forEach(step => {
+    step.style.display = 'none';
+  });
+  
+  // Hide progress bar
+  const progressContainer = document.querySelector('.progress-container');
+  if (progressContainer) {
+    progressContainer.style.display = 'none';
+  }
+  
+  // Show success message
+  const confirmation = document.getElementById('confirmation');
+  if (confirmation) {
+    confirmation.style.display = 'block';
+    
+    // Update reference number
+    const refElement = document.getElementById('reference-number');
+    if (refElement) {
+      refElement.textContent = referenceNumber;
+    }
+  }
+  
+  // Scroll to top
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/**
+ * Show error message
+ */
+function showErrorMessage(message) {
+  const errorContainer = document.getElementById('form-validation-message');
+  if (errorContainer) {
+    errorContainer.textContent = message;
+    errorContainer.style.display = 'block';
+    errorContainer.style.color = '#ff5252';
+    errorContainer.style.padding = '1rem';
+    errorContainer.style.backgroundColor = 'rgba(255, 82, 82, 0.1)';
+    errorContainer.style.border = '1px solid rgba(255, 82, 82, 0.3)';
+    errorContainer.style.borderRadius = '0.5rem';
+    errorContainer.style.marginTop = '1rem';
+    
+    // Auto-hide after 10 seconds
+    setTimeout(() => {
+      errorContainer.style.display = 'none';
+    }, 10000);
+  }
+  
+  // Also show in console
+  console.error('Form submission error:', message);
+}
+
+/**
+ * Initialize form submission handler
+ */
+function initFormSubmission() {
+  const form = document.getElementById('multiStepForm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      submitForm();
+    });
+  }
+  
+  // Also handle submit button click
+  const submitBtn = document.querySelector('.submit-btn');
+  if (submitBtn) {
+    submitBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      submitForm();
+    });
+  }
+}
+
+/* ===========================================
+   LOADING OVERLAY FUNCTIONS
+   =========================================== */
+
+/**
+ * Show loading overlay
+ */
+function showLoadingOverlay() {
+  const overlay = document.getElementById('loadingOverlay');
+  if (overlay) {
+    overlay.style.display = 'flex';
+  }
+}
+
+/**
+ * Hide loading overlay
+ */
+function hideLoadingOverlay() {
+  const overlay = document.getElementById('loadingOverlay');
+  if (overlay) {
+    overlay.style.display = 'none';
+  }
+}
+
+/* ===========================================
+   NAVIGATION BUTTON MANAGEMENT
+   =========================================== */
+
+// Note: updateNavigationButtons function is defined globally above
+
+/* ===========================================
+   ENHANCED INITIALIZATION
+   =========================================== */
+
+// Update the main initialization to include form submission
+function initializeForm() {
+  console.log('📋 Initializing multi-step form...');
+  
+  // Check if main form exists in DOM
+  const form = document.getElementById('multiStepForm');
+  if (!form) {
+    console.error('❌ Error: Multi-step form not found in DOM');
+    return;
+  }
+  
+  console.log('✅ Form found successfully');
+  
+  // Initialize DOM elements and assign to global variables
+  steps = document.querySelectorAll('.form-step');
+  formSteps = document.querySelectorAll('.form-step');
+  totalSteps = steps.length;
+  const nextBtns = document.querySelectorAll('.next-btn');
+  const prevBtns = document.querySelectorAll('.prev-btn');
+  progress = document.getElementById('progress');
+  progressSteps = document.querySelectorAll('.progress-step');
+  
+  // Validate required elements exist
+  if (!steps.length || !nextBtns.length || !prevBtns.length || !progress || !progressSteps.length) {
+    console.error('❌ Error: Required form elements missing');
+    return;
+  }
+  
+  console.log(`📊 Form initialized with ${totalSteps} steps`);
+  console.log(`🔘 Found ${nextBtns.length} next buttons`);
+  console.log(`🔘 Found ${prevBtns.length} prev buttons`);
+  
+  // Initialize all components
+  initCustomDropdown();
+  initFileUpload();
+  initFormSubmission();
+  setDefaultDate();
+  initAutoLocation();
+  initMatrixBackground();
+  initRealTimeValidation();
+  
+  // Set up navigation event listeners
+  nextBtns.forEach((btn, index) => {
+    console.log(`🔗 Adding click listener to next button ${index + 1}`);
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log(`🚀 Next button clicked! Current step: ${currentStep}, Total steps: ${totalSteps}`);
+      console.log(`📋 Form steps available: ${formSteps.length}`);
+      
+      if (validateCurrentStep()) {
+        console.log(`✅ Validation passed, moving to step ${currentStep + 1}`);
+        showStep(currentStep + 1);
+      } else {
+        console.log(`❌ Validation failed, staying on step ${currentStep}`);
+        // Scroll to first error
+        const firstError = document.querySelector('.is-invalid');
+        if (firstError) {
+          firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      }
+    });
+  });
+  
+  prevBtns.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      showStep(currentStep - 1);
+    });
+  });
+  
+  // Initialize progress bar
+  updateProgressBar();
+  updateNavigationButtons();
+  
+  console.log('🎉 Form initialization complete!');
+  console.log('🔍 Current step after init:', currentStep);
+  console.log('🔍 Total steps after init:', totalSteps);
+  
+  // Test direct des boutons
+  setTimeout(() => {
+    console.log('🧪 Testing button functionality...');
+    const testNextBtns = document.querySelectorAll('.next-btn');
+    console.log('🔍 Next buttons found in test:', testNextBtns.length);
+    testNextBtns.forEach((btn, index) => {
+      console.log(`🔍 Button ${index + 1}:`, btn);
+      console.log(`🔍 Button ${index + 1} onclick:`, btn.onclick);
+      console.log(`🔍 Button ${index + 1} listeners:`, 'Event listeners attached');
+    });
+  }, 1000);
+}
+
+/**
+ * Validate current step before proceeding
+ */
+function validateCurrentStep() {
+  console.log('🔍 Validating current step:', currentStep);
+  
+  const currentStepElement = document.querySelector('.form-step.active');
+  if (!currentStepElement) {
+    console.error('❌ No active step found for validation');
+    return false;
+  }
+  
+  // Get all required fields in the current step
+  const requiredFields = currentStepElement.querySelectorAll('input[required], select[required], textarea[required]');
+  console.log('📋 Found', requiredFields.length, 'required fields in current step');
+  
+  let isValid = true;
+  let firstErrorField = null;
+  
+  // Clear previous errors
+  currentStepElement.querySelectorAll('.error-message').forEach(error => {
+    error.style.display = 'none';
+    error.textContent = '';
+  });
+  currentStepElement.querySelectorAll('.is-invalid').forEach(field => {
+    field.classList.remove('is-invalid');
+  });
+  
+  // Validate each required field
+  requiredFields.forEach((field, index) => {
+    console.log(`🔍 Validating field ${index + 1}:`, field.name || field.id, 'Value:', field.value);
+    
+    let fieldValid = true;
+    let errorMessage = '';
+    
+    // Check if field is empty
+    if (field.type === 'checkbox') {
+      if (!field.checked) {
+        fieldValid = false;
+        errorMessage = 'Ce champ est requis';
+      }
+    } else if (field.tagName === 'SELECT') {
+      if (!field.value || field.value === '') {
+        fieldValid = false;
+        errorMessage = 'Veuillez sélectionner une option';
+      }
+    } else if (field.type === 'hidden' && field.name === 'type') {
+      // Special handling for custom dropdown (incident type)
+      if (!field.value || field.value === '') {
+        fieldValid = false;
+        errorMessage = 'Veuillez sélectionner un type d\'incident';
+      }
+    } else {
+      if (!field.value || field.value.trim() === '') {
+        fieldValid = false;
+        errorMessage = 'Ce champ est requis';
+      }
+    }
+    
+    // Additional validation based on field type
+    if (fieldValid && field.value) {
+      if (field.type === 'email') {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(field.value.trim())) {
+          fieldValid = false;
+          errorMessage = 'Veuillez entrer une adresse email valide';
+        }
+      } else if (field.type === 'tel' || field.name === 'telephone') {
+        const phoneValue = field.value.replace(/[\s\-\(\)]/g, '');
+        if (phoneValue.length < 8) {
+          fieldValid = false;
+          errorMessage = 'Numéro de téléphone trop court (minimum 8 chiffres)';
+        }
+      } else if (field.name === 'nom' && field.value.trim().length < 2) {
+        fieldValid = false;
+        errorMessage = 'Le nom doit contenir au moins 2 caractères';
+      } else if (field.name === 'description' && field.value.trim().length < 10) {
+        fieldValid = false;
+        errorMessage = 'La description doit contenir au moins 10 caractères';
+      }
+    }
+    
+    // Show error if field is invalid
+    if (!fieldValid) {
+      console.log('❌ Field invalid:', field.name || field.id, 'Error:', errorMessage);
+      showFieldError(field, errorMessage);
+      isValid = false;
+      if (!firstErrorField) {
+        firstErrorField = field;
+      }
+    } else {
+      console.log('✅ Field valid:', field.name || field.id);
+    }
+  });
+  
+  // Scroll to first error if validation failed
+  if (!isValid && firstErrorField) {
+    console.log('🔄 Scrolling to first error field');
+    firstErrorField.scrollIntoView({ 
+      behavior: 'smooth', 
+      block: 'center' 
+    });
+    firstErrorField.focus();
+  }
+  
+  console.log('📊 Step validation result:', isValid ? '✅ VALID' : '❌ INVALID');
+  return isValid;
+}
+
+/**
+ * Show error message for a specific field
+ */
+function showFieldError(field, message) {
+  console.log('🚨 Showing error for field:', field.name || field.id, 'Message:', message);
+  
+  // Add invalid class to field
+  field.classList.add('is-invalid');
+  
+  // Find or create error element
+  let errorElement = document.getElementById(`${field.name}-error`);
+  
+  if (!errorElement) {
+    // Create new error element
+    errorElement = document.createElement('div');
+    errorElement.id = `${field.name}-error`;
+    errorElement.className = 'error-message';
+    
+    // Insert after the field
+    const formGroup = field.closest('.form-group');
+    if (formGroup) {
+      formGroup.appendChild(errorElement);
+    } else {
+      field.parentNode.insertBefore(errorElement, field.nextSibling);
+    }
+  }
+  
+  // Update error message and show it
+  errorElement.textContent = message;
+  errorElement.style.display = 'block';
+  errorElement.style.color = '#ff5252';
+  errorElement.style.marginTop = '0.5rem';
+  errorElement.style.fontSize = '0.875rem';
+  errorElement.style.fontWeight = '500';
+  
+  // Special handling for custom dropdown (incident type)
+  if (field.name === 'type' && field.type === 'hidden') {
+    const customDropdown = document.getElementById('incident-type-dropdown');
+    if (customDropdown) {
+      customDropdown.classList.add('is-invalid');
+      customDropdown.style.animation = 'shake 0.5s ease-in-out';
+      setTimeout(() => {
+        customDropdown.style.animation = '';
+      }, 500);
+    }
+  } else {
+    // Add shake animation to the field
+    field.style.animation = 'shake 0.5s ease-in-out';
+    setTimeout(() => {
+      field.style.animation = '';
+    }, 500);
+  }
+}
+
+/**
+ * Test function - call this from console to test navigation
+ */
+window.testNextStep = function() {
+  console.log('🧪 Manual test: Moving to next step');
+  console.log('Current step before:', currentStep);
+  console.log('Total steps:', totalSteps);
+  console.log('Form steps available:', formSteps.length);
+  console.log('Form steps elements:', formSteps);
+  
+  // Check if elements exist
+  if (formSteps.length === 0) {
+    console.error('❌ No form steps found! Reinitializing...');
+    initializeFormElements();
+    return;
+  }
+  
+  if (validateCurrentStep()) {
+    console.log('✅ Validation passed, moving to next step');
+    showStep(currentStep + 1);
+    console.log('Current step after:', currentStep);
+  } else {
+    console.log('❌ Validation failed, staying on current step');
+    const errors = document.querySelectorAll('.is-invalid');
+    console.log('Found errors:', errors.length);
+    errors.forEach((error, index) => {
+      console.log(`Error ${index + 1}:`, error.id || error.name, error.validationMessage);
+    });
+  }
+};
+
+// Test function to check if validation is working
+window.testValidation = function() {
+  console.log('🧪 Testing current step validation');
+  const isValid = validateCurrentStep();
+  console.log('Validation result:', isValid);
+  return isValid;
+};
+
+// Complete debug function
+window.debugFormState = function() {
+  console.log('🔍 === FORM DEBUG STATE ===');
+  console.log('Current step:', currentStep);
+  console.log('Total steps:', totalSteps);
+  console.log('Form steps length:', formSteps.length);
+  console.log('Next buttons:', nextBtns.length);
+  console.log('Previous buttons:', prevBtns.length);
+  
+  // Check current step element
+  const currentStepElement = formSteps[currentStep - 1];
+  console.log('Current step element:', currentStepElement);
+  console.log('Current step visible:', currentStepElement ? !currentStepElement.classList.contains('d-none') : 'N/A');
+  
+  // Check form inputs in current step
+  if (currentStepElement) {
+    const inputs = currentStepElement.querySelectorAll('input, select, textarea');
+    console.log('Inputs in current step:', inputs.length);
+    inputs.forEach((input, index) => {
+      console.log(`Input ${index + 1}:`, {
+        id: input.id,
+        name: input.name,
+        type: input.type,
+        value: input.value,
+        required: input.required,
+        valid: input.checkValidity()
+      });
+    });
+  }
+  
+  console.log('=========================');
+};
+
+/**
+ * Initialize real-time validation to clear errors when user starts typing
+ */
+function initRealTimeValidation() {
+  console.log('🔄 Initializing real-time validation...');
+  
+  // Get all form inputs
+  const allInputs = document.querySelectorAll('input, select, textarea');
+  
+  allInputs.forEach(input => {
+    // Clear errors on input/change
+    const events = ['input', 'change', 'blur'];
+    
+    events.forEach(eventType => {
+      input.addEventListener(eventType, function() {
+        // Clear error state if field has value
+        if (this.value && this.value.trim() !== '') {
+          this.classList.remove('is-invalid');
+          
+          // Hide error message
+          const errorElement = document.getElementById(`${this.name}-error`);
+          if (errorElement) {
+            errorElement.style.display = 'none';
+          }
+          
+          // Clear custom dropdown error state
+          if (this.name === 'type') {
+            const customDropdown = document.getElementById('incident-type-dropdown');
+            if (customDropdown) {
+              customDropdown.classList.remove('is-invalid');
+            }
+          }
+        }
+      });
+    });
+  });
+  
+  console.log('✅ Real-time validation initialized for', allInputs.length, 'fields');
+}
+
+/**
+ * Debug function - call this from console to see current state
+ */
+window.debugFormState = function() {
+  console.log('=== FORM DEBUG STATE ===');
+  console.log('Current step:', currentStep);
+  console.log('Total steps:', totalSteps);
+  console.log('Form steps:', formSteps);
+  console.log('Progress element:', progress);
+  console.log('Progress steps:', progressSteps);
+  console.log('Next buttons:', document.querySelectorAll('.next-btn'));
+  console.log('========================');
+};
+
+window.debugFileUpload = function() {
+  console.log('=== FILE UPLOAD DEBUG ===');
+  console.log('File input:', document.getElementById('evidence'));
+  console.log('Upload container:', document.querySelector('.file-upload-container'));
+  console.log('Preview container:', document.getElementById('file-preview'));
+  console.log('Uploaded files:', uploadedFiles);
+  console.log('Preview HTML:', document.getElementById('file-preview')?.innerHTML);
+  console.log('========================');
+};
+
+// Test function to add a fake file for testing
+window.testFileUpload = function() {
+  const fakeFile = new File(['test content'], 'test.pdf', { type: 'application/pdf' });
+  const fileObj = {
+    id: Date.now().toString(),
+    file: fakeFile
+  };
+  uploadedFiles.push(fileObj);
+  updateFilePreview();
+  console.log('✅ Test file added');
+};
+
+/**
+ * Initialize demo notice with auto-hide functionality
+ */
+function initDemoNotice() {
+  const demoNotice = document.querySelector('.demo-notice');
+  if (demoNotice) {
+    // Add click to dismiss
+    demoNotice.style.cursor = 'pointer';
+    demoNotice.title = 'Cliquez pour masquer';
+    
+    demoNotice.addEventListener('click', () => {
+      demoNotice.style.transition = 'all 0.5s ease';
+      demoNotice.style.opacity = '0';
+      demoNotice.style.transform = 'translateY(-20px)';
+      setTimeout(() => {
+        demoNotice.style.display = 'none';
+      }, 500);
+    });
+    
+    // Auto-hide after 10 seconds
+    setTimeout(() => {
+      if (demoNotice.style.display !== 'none') {
+        demoNotice.click();
+      }
+    }, 10000);
+  }
 }

@@ -1,0 +1,310 @@
+/* ===========================================
+   ENHANCED ANIMATIONS FOR REPORT FORM
+   Additional animations and improvements
+   =========================================== */
+
+/* Enhanced form container animation */
+.form-container {
+  animation: formAppear 0.8s ease-out;
+}
+
+@keyframes formAppear {
+  0% {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Enhanced form title animation */
+.form-title {
+  animation: titleGlow 0.8s ease-out, titleFloat 3s ease-in-out infinite 1s;
+}
+
+@keyframes titleGlow {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px);
+    text-shadow: 0 0 0 rgba(76, 148, 190, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    text-shadow: 0 0 20px rgba(76, 148, 190, 0.5);
+  }
+}
+
+@keyframes titleFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+/* Enhanced step transitions */
+.form-step {
+  animation-duration: 0.8s;
+  animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-step.active {
+  animation-name: stepSlideIn;
+}
+
+@keyframes stepSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(50px) rotateY(15deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) rotateY(0deg);
+  }
+}
+
+/* Enhanced input focus animations */
+.form-control:focus,
+select:focus,
+textarea:focus {
+  animation: inputFocusGlow 0.4s ease-out;
+}
+
+@keyframes inputFocusGlow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(57, 255, 20, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(57, 255, 20, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 0 4px rgba(57, 255, 20, 0.2), 0 8px 32px rgba(76, 148, 190, 0.3);
+  }
+}
+
+/* Enhanced button animations */
+.btn {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.btn:active::after {
+  width: 300px;
+  height: 300px;
+}
+
+/* Enhanced progress step animations */
+.progress-step {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-step::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(transparent, rgba(100, 255, 218, 0.3), transparent);
+  animation: stepRotate 2s linear infinite;
+  opacity: 0;
+}
+
+.progress-step.active::before {
+  opacity: 1;
+}
+
+@keyframes stepRotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Enhanced file upload animations */
+.file-upload-container {
+  transition: all 0.3s ease;
+}
+
+.file-upload-container.drag-over {
+  animation: dragPulse 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes dragPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.4);
+  }
+  100% {
+    transform: scale(1.02);
+    box-shadow: 0 0 0 10px rgba(100, 255, 218, 0.1);
+  }
+}
+
+/* Enhanced loading animations */
+.loading-overlay {
+  animation: overlayFadeIn 0.3s ease-out;
+}
+
+@keyframes overlayFadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.loading-spinner {
+  animation: spinGlow 1s linear infinite;
+}
+
+@keyframes spinGlow {
+  0% {
+    transform: rotate(0deg);
+    filter: drop-shadow(0 0 5px rgba(100, 255, 218, 0.5));
+  }
+  100% {
+    transform: rotate(360deg);
+    filter: drop-shadow(0 0 15px rgba(100, 255, 218, 0.8));
+  }
+}
+
+/* Enhanced error animations */
+.error-message {
+  animation: errorSlideIn 0.4s ease-out;
+}
+
+@keyframes errorSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-20px);
+    max-height: 0;
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+    max-height: 100px;
+  }
+}
+
+.is-invalid {
+  animation: errorShake 0.5s ease-in-out, errorGlow 2s ease-in-out;
+}
+
+@keyframes errorShake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+@keyframes errorGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(255, 82, 82, 0);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(255, 82, 82, 0.3);
+  }
+}
+
+/* Enhanced success animations */
+.success-message {
+  animation: successBounce 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+@keyframes successBounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) translateY(-50px);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Enhanced dropdown animations */
+.custom-select .select-options {
+  animation: dropdownSlide 0.3s ease-out;
+}
+
+@keyframes dropdownSlide {
+  0% {
+    opacity: 0;
+    transform: translateY(-10px) scaleY(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scaleY(1);
+  }
+}
+
+.select-option:hover {
+  animation: optionHighlight 0.2s ease-out;
+}
+
+@keyframes optionHighlight {
+  0% {
+    background: transparent;
+    transform: translateX(0);
+  }
+  100% {
+    background: rgba(76, 148, 190, 0.1);
+    transform: translateX(5px);
+  }
+}
+
+/* Enhanced mobile animations */
+@media (max-width: 768px) {
+  .form-step.active {
+    animation: mobileSlideIn 0.6s ease-out;
+  }
+  
+  @keyframes mobileSlideIn {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .btn:hover {
+    animation: mobileButtonPulse 0.3s ease-out;
+  }
+  
+  @keyframes mobileButtonPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+}
+
+/* Reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

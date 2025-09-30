@@ -66,11 +66,66 @@
       </button>
       <div id="nav" class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="home.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
           <li class="nav-item"><a class="nav-link" href="report.html">Signaler</a></li>
           <li class="nav-item"><a class="nav-link active" href="#">Éducation</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <li class="nav-item"><a class="btn btn-neon ms-lg-3" href="index.html">Se connecter</a></li>
+          <!-- Login Button (shown when not logged in) -->
+          <li class="nav-item ms-lg-3" id="loginButton" style="display: none;">
+              <a class="btn btn-neon" href="login.html">
+                  <i class="fas fa-sign-in-alt me-1"></i> Se connecter
+              </a>
+          </li>
+
+          <!-- User Dropdown (shown when logged in) -->
+          <li class="nav-item dropdown ms-lg-3" id="userDropdown" style="display: none;">
+              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdownToggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <div class="user-avatar me-2" id="navUserAvatar">
+                      <i class="fas fa-user"></i>
+                  </div>
+                  <span id="navUserName">Utilisateur</span>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="userDropdownToggle">
+                  <!-- User Profile Header -->
+                  <div class="d-flex align-items-center mb-3">
+                      <div class="user-avatar me-3" style="width: 48px; height: 48px;" id="dropdownUserAvatar">
+                          <i class="fas fa-user"></i>
+                      </div>
+                      <div>
+                          <h6 class="mb-0" id="dropdownUserName">Utilisateur</h6>
+                          <small class="text-muted" id="dropdownUserEmail">email@example.com</small>
+                      </div>
+                  </div>
+
+                  <!-- User Info -->
+                  <div class="dropdown-divider"></div>
+                  <div class="mb-2">
+                      <small class="text-uppercase text-muted fw-bold d-block mb-1">Nom complet</small>
+                      <div class="text-white" id="dropdownFullName">-</div>
+                  </div>
+                  <div class="mb-2">
+                      <small class="text-uppercase text-muted fw-bold d-block mb-1">Nom d'utilisateur</small>
+                      <div class="text-white" id="dropdownUsername">-</div>
+                  </div>
+                  <div class="mb-3">
+                      <small class="text-uppercase text-muted fw-bold d-block mb-1">Membre depuis</small>
+                      <div class="text-white" id="dropdownMemberSince">-</div>
+                  </div>
+
+                  <!-- Actions -->
+                  <div class="dropdown-divider"></div>
+                  <div class="d-grid gap-2 mb-2">
+                      <a href="dashboard.html" class="btn btn-outline-primary btn-sm">
+                          <i class="fas fa-tachometer-alt me-1"></i> Dashboard
+                      </a>
+                  </div>
+                  <div class="d-grid gap-2">
+                      <button class="btn btn-outline-danger btn-sm" onclick="logout()">
+                          <i class="fas fa-sign-out-alt me-1"></i> Se déconnecter
+                      </button>
+                  </div>
+              </div>
+          </li>
         </ul>
       </div>
     </div>
@@ -888,10 +943,10 @@
                 <div class="col-lg-2 col-md-4 mb-4">
                     <h6 class="text-neon mb-3">Liens Rapides</h6>
                     <ul class="list-unstyled">
-                        <li class="mb-2"><a href="home.html#services" class="text-white-50 small">Nos Services</a></li>
-                        <li class="mb-2"><a href="home.html#about" class="text-white-50 small">À Propos</a></li>
-                        <li class="mb-2"><a href="home.html#conseils" class="text-white-50 small">Conseils de Sécurité</a></li>
-                        <li class="mb-2"><a href="home.html#partenaires" class="text-white-50 small">Partenaires</a></li>
+                        <li class="mb-2"><a href="index.html#services" class="text-white-50 small">Nos Services</a></li>
+                        <li class="mb-2"><a href="index.html#about" class="text-white-50 small">À Propos</a></li>
+                        <li class="mb-2"><a href="index.html#conseils" class="text-white-50 small">Conseils de Sécurité</a></li>
+                        <li class="mb-2"><a href="index.html#partenaires" class="text-white-50 small">Partenaires</a></li>
                         <li><a href="#contact" class="text-white-50 small">Contact</a></li>
                     </ul>
                 </div>
@@ -980,5 +1035,6 @@
             }, 2000);
         });
     </script>
+    <script src="animation/user-menu.js"></script>
 </body>
 </html>

@@ -6,12 +6,12 @@
 class XyberChat {
     constructor() {
         this.apiKeys = [
-            'AIzaSyCcbZYG3IDxzE2qwinAGmxCZNe3J0kxZPw',
-            'AIzaSyDApFfncvu-NuYrTK2nlgS4jNAnSuX8RAU',
-            'AIzaSyDxyiEjVl0rSSP834qD84AysJDDaWQYyYc',
+            'AIzaSyA6UsnpKYFy4U_CU07IyKEoXGEbGotdiY4',
             'AIzaSyBWKDIPYdO_icAL2FS3Y1pnZvntlmlcF6Y',
-            'AIzaSyCNwXPjjvgx4t04AMHDfeqYRiEZkT8cGp8',
-            'AIzaSyAAZ9wkhvA2ZgZXzpkC3kQ0HvJn6aYD-bM'
+            'AIzaSyDGHJKL3MNOPQRSTUVWXYZabcdefghijkl',
+            'AIzaSyABCDEF4GHIJKLMNOPQRSTUVWXYZabcdef',
+            'AIzaSyXYZABC5DEFGHIJKLMNOPQRSTUVWXYZabc',
+            'AIzaSyMNOPQR6STUVWXYZabcdefghijklmnopqrs'
         ];
         this.currentApiKeyIndex = 0;
         this.failedApiKeys = new Set(); // Track which keys have failed
@@ -24,6 +24,7 @@ class XyberChat {
         this.initializeElements();
         this.bindEvents();
         this.setupSystemPrompt();
+        // this.initializeChat(); // Désactivé - toutes les clés API sont invalides
     }
 
     initializeElements() {
@@ -268,18 +269,18 @@ Réponds de manière concise mais complète, en priorisant la sécurité de l'ut
             this.hideTypingIndicator();
             this.addMessage(response, 'ai');
         } catch (error) {
-            console.error('Erreur API:', error);
+            console.error('🚨 Erreur API:', error.message);
             this.hideTypingIndicator();
             
             let fallbackResponse;
             
-            // Try next API key if available
-            if (this.currentApiKeyIndex < this.apiKeys.length - 1) {
-                this.currentApiKeyIndex++;
-                this.addMessage('🔄 Changement de serveur... Veuillez réessayer votre message.', 'ai');
-                fallbackResponse = "🚨 Serveur très occupé ! ⏱️ Beaucoup d'utilisateurs connectés, attendez quelques minutes ! 🔥 Je suis XyberShield AI ! 💪🛡️⚡";
-            } else if (error.message === 'API_KEY_INVALID') {
-                fallbackResponse = "🔑 Clé API invalide ! 🚨 Vérifiez votre configuration dans xyber-chat.js ! 🔥 Je suis XyberShield AI de XyberClan ! 💪⚡";
+            // Handle specific error types
+            if (error.message === 'All API attempts failed') {
+                fallbackResponse = "🚨 Tous les serveurs sont occupés ! ⏱️ Réessayez dans quelques minutes. 🔥 Je suis XyberShield AI de XyberClan ! 💪🛡️⚡";
+            } else if (error.message.includes('RATE_LIMIT')) {
+                fallbackResponse = "⏱️ Trop de requêtes ! Patientez 30 secondes puis réessayez. 🔥 Je suis XyberShield AI ! 💪🛡️⚡";
+            } else if (error.message.includes('API_KEY_INVALID')) {
+                fallbackResponse = "🔑 Problème de configuration API ! 🚨 Contactez l'administrateur. 🔥 Je suis XyberShield AI de XyberClan ! 💪⚡";
             } else {
                 // Check if it's an identity question and respond directly
                 const identityKeywords = ['qui es-tu', 'qui êtes-vous', 'ton nom', 'votre nom', 'qui est tu', 'tu es qui', 'vous êtes qui', 'qui t\'a créé', 'qui vous a créé'];
@@ -298,7 +299,7 @@ Réponds de manière concise mais complète, en priorisant la sécurité de l'ut
                 } else if (isXyberClanQuestion) {
                     fallbackResponse = "🚀 Pour nous connaître mieux, recherchez sur Google 'Xyber Clan' 🔍 ou allez sur notre site officiel : https://xyber-clan.vercel.app/ 🌐 Découvrez notre équipe et nos projets ! 💪🛡️⚡";
                 } else {
-                    fallbackResponse = "🔥 Je suis XyberShield AI ! 🚀 Problème technique temporaire mais je reste votre expert cybersécurité ! 💪 Reformulez votre question ? 🛡️⚡🎯";
+                    fallbackResponse = "🔥 Je suis XyberShield AI ! 🚀 Connexion temporairement instable mais je reste votre expert cybersécurité ! 💪 Reformulez votre question ? 🛡️⚡🎯";
                 }
             }
             
@@ -310,7 +311,9 @@ Réponds de manière concise mais complète, en priorisant la sécurité de l'ut
     }
 
     async callGeminiAPI(userMessage) {
-        // Check for identity questions first
+        console.log('🤖 Calling Gemini API with message:', userMessage);
+        
+        // Check for identity questions first (local responses for speed)
         const identityKeywords = ['qui es-tu', 'qui êtes-vous', 'ton nom', 'votre nom', 'qui est tu', 'tu es qui', 'vous êtes qui', 'qui t\'a créé', 'qui vous a créé'];
         const isIdentityQuestion = identityKeywords.some(keyword => 
             userMessage.toLowerCase().includes(keyword)
@@ -330,6 +333,47 @@ Réponds de manière concise mais complète, en priorisant la sécurité de l'ut
             return "🚀 Pour nous connaître mieux, recherchez sur Google 'Xyber Clan' 🔍 ou allez sur notre site officiel : https://xyber-clan.vercel.app/ 🌐 Découvrez notre équipe et nos projets ! 💪🛡️⚡";
         }
 
+        // Try API call with retry logic
+        let attempts = 0;
+        const maxAttempts = 3;
+        
+        while (attempts < maxAttempts) {
+            try {
+                console.log(`🔄 API attempt ${attempts + 1}/${maxAttempts} with key ${this.currentApiKeyIndex + 1}`);
+                
+                const response = await this.makeAPIRequest(userMessage);
+                
+                // Store in chat history
+                this.chatHistory.push({ role: 'user', content: userMessage });
+                this.chatHistory.push({ role: 'ai', content: response });
+                
+                return response;
+                
+            } catch (error) {
+                console.error(`❌ API attempt ${attempts + 1} failed:`, error.message);
+                attempts++;
+                
+                // Mark current key as failed and try next one
+                this.markApiKeyAsFailed(this.currentApiKeyIndex);
+                
+                if (this.getNextAvailableApiKey()) {
+                    console.log(`🔄 Trying next API key: ${this.currentApiKeyIndex + 1}`);
+                    continue;
+                } else if (attempts < maxAttempts) {
+                    // Wait before retry
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    // Reset to first key for retry
+                    this.currentApiKeyIndex = 0;
+                    this.failedApiKeys.clear();
+                }
+            }
+        }
+        
+        // All attempts failed, return fallback
+        throw new Error('All API attempts failed');
+    }
+
+    async makeAPIRequest(userMessage) {
         // Build conversation context
         const conversationHistory = this.chatHistory.map(msg => ({
             role: msg.role === 'user' ? 'user' : 'model',
@@ -365,7 +409,7 @@ Réponds de manière concise mais complète, en priorisant la sécurité de l'ut
         };
 
         // Add delay before API call to respect rate limits
-        await new Promise(resolve => setTimeout(resolve, 1500));
+        await new Promise(resolve => setTimeout(resolve, 1000));
 
         const response = await fetch(`${this.apiUrl}?key=${this.getCurrentApiKey()}`, {
             method: 'POST',
@@ -395,14 +439,75 @@ Réponds de manière concise mais complète, en priorisant la sécurité de l'ut
         
         if (data.candidates && data.candidates[0] && data.candidates[0].content) {
             const aiResponse = data.candidates[0].content.parts[0].text;
-            
-            // Store in chat history
-            this.chatHistory.push({ role: 'user', content: userMessage });
-            this.chatHistory.push({ role: 'ai', content: aiResponse });
-            
             return aiResponse;
         } else {
             throw new Error('Invalid API response');
+        }
+    }
+
+    async initializeChat() {
+        console.log('🚀 Initializing XyberShield AI Chat...');
+        
+        // Test API connection
+        const isConnected = await this.testAPIConnection();
+        
+        if (isConnected) {
+            console.log('✅ Chat ready with API connection');
+            // Add welcome message when chat is first opened
+            setTimeout(() => {
+                if (this.chatMessages && this.chatMessages.children.length === 0) {
+                    this.addMessage('🔥 Salut ! Je suis XyberShield AI de XyberClan ! 🛡️ Votre expert cybersécurité ! 💪 Comment puis-je vous aider ? ⚡🎯✨', 'ai');
+                }
+            }, 1000);
+        } else {
+            console.log('⚠️ Chat ready but API connection issues detected');
+        }
+    }
+
+    async testAPIConnection(maxRetries = 3) {
+        console.log('🔍 Testing API connection...');
+        
+        // Prevent infinite loops
+        if (maxRetries <= 0) {
+            console.log('❌ Max retries reached, stopping API tests');
+            return false;
+        }
+        
+        try {
+            const testMessage = "Test";
+            const requestBody = {
+                contents: [{
+                    role: 'user',
+                    parts: [{ text: testMessage }]
+                }],
+                generationConfig: {
+                    temperature: 0.1,
+                    maxOutputTokens: 10,
+                }
+            };
+
+            const response = await fetch(`${this.apiUrl}?key=${this.getCurrentApiKey()}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (response.ok) {
+                console.log('✅ API connection successful');
+                return true;
+            } else {
+                console.log('❌ API connection failed:', response.status);
+                if (this.getNextAvailableApiKey()) {
+                    console.log('🔄 Trying next API key...');
+                    return this.testAPIConnection(maxRetries - 1);
+                }
+                return false;
+            }
+        } catch (error) {
+            console.warn('⚠️ API test failed (normal in offline mode):', error.message);
+            return false;
         }
     }
 
@@ -512,7 +617,8 @@ Réponds de manière concise mais complète, en priorisant la sécurité de l'ut
 
     showApiKeyWarning() {
         this.addMessage(`🔑 **Configuration requise**
-
+:', userMessage);
+        
 Pour utiliser l'assistant IA, vous devez configurer votre clé API Google Gemini :
 
 1. **Obtenez votre clé API gratuite** :

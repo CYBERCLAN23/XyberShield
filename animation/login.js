@@ -106,8 +106,8 @@ async function login() {
     try {
         // Utiliser l'URL de l'API à partir du fichier de configuration
         const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-            ? 'http://localhost:3001/api/auth/login'
-            : 'https://xybershield-api.vercel.app/api/auth/login';
+            ? 'http://localhost:5000/api/auth/login'
+            : `${window.location.origin}/api/auth/login`;
 
         const response = await fetch(apiUrl, {
             method: 'POST',
@@ -133,13 +133,18 @@ async function login() {
             
             // Mettre à jour l'interface utilisateur immédiatement
             updateUserUI(data.user);
+            
+            // Mettre à jour le menu utilisateur si disponible
+            if (typeof updateUserMenu === 'function') {
+                updateUserMenu();
+            }
         }
 
         showNotification("Connexion réussie ! Redirection en cours...", false);
         
         // Rediriger vers la page d'accueil après un court délai
         setTimeout(() => {
-            window.location.href = 'home.html';
+            window.location.href = 'index.html';
         }, 1500);
 
     } catch (error) {
@@ -221,21 +226,21 @@ async function register() {
 
         // Utiliser l'URL de l'API à partir du fichier de configuration
         const apiUrl = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-            ? 'http://localhost:3001/api/auth/register'
-            : 'https://xybershield-api.vercel.app/api/auth/register';
+            ? 'http://localhost:5000/api/auth/register'
+            : `${window.location.origin}/api/auth/register`;
 
         const response = await fetch(apiUrl, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ name, username: pseudo, email, password }),
+            body: JSON.stringify({ name, pseudo, email, password, confirmPassword }),
         });
 
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error(data.error || "Échec de l'inscription");
+            throw new Error(data.message || "Échec de l'inscription");
         }
 
         // Sauvegarder le token dans le localStorage
@@ -243,8 +248,18 @@ async function register() {
             localStorage.setItem('token', data.token);
         }
         
+        // Sauvegarder les données utilisateur
+        if (data.user) {
+            localStorage.setItem('user', JSON.stringify(data.user));
+            
+            // Mettre à jour le menu utilisateur si disponible
+            if (typeof updateUserMenu === 'function') {
+                updateUserMenu();
+            }
+        }
+        
         // Afficher un message de succès
-        showNotification("Inscription réussie ! Un email de bienvenue a été envoyé à votre adresse email.");
+        showNotification("Inscription réussie ! Redirection vers l'accueil...");
         
         // Vider le formulaire
         document.getElementById("name").value = "";
@@ -253,9 +268,9 @@ async function register() {
         document.getElementById("reg-password").value = "";
         document.getElementById("confirm-password").value = "";
         
-        // Revenir au formulaire de connexion après un court délai
+        // Rediriger vers la page d'accueil après un court délai
         setTimeout(() => {
-            switchForm();
+            window.location.href = 'index.html';
         }, 2000);
         
     } catch (error) {

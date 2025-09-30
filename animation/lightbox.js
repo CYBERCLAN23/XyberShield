@@ -708,8 +708,8 @@ function loadYouTubeAPI() {
         
         // Add error handling
         tag.onerror = function(error) {
-            console.error('Failed to load YouTube API:', error);
-            reject(new Error('Failed to load YouTube API'));
+            console.warn('⚠️ YouTube API failed to load (normal in offline mode):', error.message || 'Network error');
+            reject(new Error('YouTube API unavailable'));
         };
     });
 }

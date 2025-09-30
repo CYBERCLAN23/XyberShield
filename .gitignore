@@ -29,3 +29,22 @@ yarn-error.log*
 
 # Vercel
 .vercel
+
+# Database
+server/database/*.db
+server/database/*.db-journal
+
+# Runtime
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# Temporary folders
+tmp/
+temp/
+
+# Uploads
+server/uploads/

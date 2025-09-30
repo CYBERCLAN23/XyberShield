@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="theme-color" content="#0a192f">
+    <title>Dashboard - XyberShield</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/dashboard.css">
+    <link rel="stylesheet" href="style/responsive.css">
+    <link rel="stylesheet" href="style/dashboard-responsive.css">
+    <link rel="stylesheet" href="style/global-responsive.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- SweetAlert2 for modals -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Header -->
+        <header class="dashboard-header">
+            <div class="header-content">
+                <div class="logo">
+                    <h1><i class="fas fa-shield-alt"></i> XyberShield</h1>
+                </div>
+                <div class="user-menu">
+                    <div class="user-avatar" id="userAvatar">U</div>
+                    <div class="user-info">
+                        <span class="user-name" id="userName">Loading...</span>
+                        <span class="user-email" id="userEmail">Loading...</span>
+                    </div>
+                    <button class="logout-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="dashboard-main">
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-card">
+                    <h2>Welcome back, <span id="welcomeName">User</span>!</h2>
+                    <p>Your cybersecurity dashboard is ready. Monitor your account activity and stay secure.</p>
+                </div>
+            </section>
+
+            <!-- Stats Grid -->
+            <section class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Member Since</h3>
+                        <p id="memberSince">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Last Login</h3>
+                        <p id="lastLogin">Loading...</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-shield-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Account Status</h3>
+                        <p id="accountStatus">Active</p>
+                    </div>
+                </div>
+
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-envelope-check"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3>Email Status</h3>
+                        <p id="emailStatus">Loading...</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- User Profile Section -->
+            <section class="profile-section">
+                <div class="profile-card">
+                    <h3><i class="fas fa-user"></i> Profile Information</h3>
+                    <div class="profile-grid">
+                        <div class="profile-item">
+                            <label>Full Name:</label>
+                            <span id="profileName">Loading...</span>
+                        </div>
+                        <div class="profile-item">
+                            <label>Username:</label>
+                            <span id="profilePseudo">Loading...</span>
+                        </div>
+                        <div class="profile-item">
+                            <label>Email:</label>
+                            <span id="profileEmail">Loading...</span>
+                        </div>
+                        <div class="profile-item">
+                            <label>Account ID:</label>
+                            <span id="profileId">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity Section -->
+            <section class="activity-section">
+                <div class="activity-card">
+                    <h3><i class="fas fa-history"></i> Recent Activity</h3>
+                    <div class="activity-list" id="activityList">
+                        <div class="loading-spinner">
+                            <i class="fas fa-spinner fa-spin"></i> Loading activity...
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="actions-section">
+                <div class="actions-card">
+                    <h3><i class="fas fa-bolt"></i> Quick Actions</h3>
+                    <div class="actions-grid">
+                        <button class="action-btn" onclick="goToHome()">
+                            <i class="fas fa-home"></i>
+                            <span>Go to Home</span>
+                        </button>
+                        <button class="action-btn" onclick="goToReports()">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <span>Report Incident</span>
+                        </button>
+                        <button class="action-btn" onclick="goToEducation()">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>Learn Security</span>
+                        </button>
+                        <button class="action-btn" onclick="refreshData()">
+                            <i class="fas fa-sync-alt"></i>
+                            <span>Refresh Data</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Notification -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Scripts -->
+    <script src="animation/dashboard.js"></script>
+</body>
+</html>

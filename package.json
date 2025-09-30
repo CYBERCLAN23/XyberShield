@@ -1,16 +1,40 @@
 {
-  "name": "xybershield-frontend",
+  "name": "xybershield-fullstack",
   "version": "1.0.0",
-  "description": "XyberShield Cybersecurity Frontend",
+  "description": "XyberShield Cybersecurity Full Stack Application",
+  "main": "server/server.js",
   "scripts": {
-    "dev": "live-server --port=3000",
-    "start": "live-server --port=3000",
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev-server-only": "nodemon server/server.js",
+    "server": "nodemon server/server.js",
+    "client": "npx live-server --port=3000",
+    "client-alt": "python3 -m http.server 3000",
+    "start": "node server/server.js",
     "test": "echo \"No tests specified\" && exit 0"
   },
-  "keywords": ["cybersecurity", "frontend", "education"],
+  "keywords": [
+    "cybersecurity",
+    "frontend",
+    "backend",
+    "authentication"
+  ],
   "author": "",
   "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.10.0",
+    "helmet": "^7.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
+    "sqlite3": "^5.1.6",
+    "validator": "^13.11.0"
+  },
   "devDependencies": {
-    "live-server": "^1.2.2"
+    "concurrently": "^8.2.0",
+    "live-server": "^1.2.2",
+    "nodemon": "^3.0.1"
   }
 }

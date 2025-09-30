@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
@@ -21,8 +21,8 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" href="style/animations.css">
     <link rel="stylesheet" href="style/report.css">
+    <link rel="stylesheet" href="style/report-animations.css">
 
     <!-- Fonts with preloading and font-display: swap -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
@@ -41,7 +41,7 @@
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
             <div class="container">
-                <a class="navbar-brand d-flex align-items-center" href="home.html">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
                     <img src="./images/logos/logo.png" alt="XyberShield Logo" class="logo">
                     XyberShield
                 </a>
@@ -53,20 +53,27 @@
                         <i class="fas fa-times"></i>
                     </button>
                     <ul class="navbar-nav ms-auto align-items-lg-center">
-                        <li class="nav-item"><a class="nav-link" href="home.html">Accueil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
                         <li class="nav-item"><a class="nav-link active" href="report.html">Signaler</a></li>
                         <li class="nav-item"><a class="nav-link" href="Education.html">Éducation</a></li>
-                        <li class="nav-item"><a class="nav-link" href="home.html#contact">Contact</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
 
-                        <!-- User Dropdown -->
-                        <li class="nav-item dropdown ms-lg-3">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <!-- Login Button (shown when not logged in) -->
+                        <li class="nav-item ms-lg-3" id="loginButton" style="display: none;">
+                            <a class="btn btn-outline-success" href="login.html">
+                                <i class="fas fa-sign-in-alt me-1"></i> Se connecter
+                            </a>
+                        </li>
+
+                        <!-- User Dropdown (shown when logged in) -->
+                        <li class="nav-item dropdown ms-lg-3" id="userDropdown" style="display: none;">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdownToggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 <div class="user-avatar me-2" id="navUserAvatar">
                                     <i class="fas fa-user"></i>
                                 </div>
                                 <span id="navUserName">Utilisateur</span>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="userDropdownToggle">
                                 <!-- User Profile Header -->
                                 <div class="d-flex align-items-center mb-3">
                                     <div class="user-avatar me-3" style="width: 48px; height: 48px;" id="dropdownUserAvatar">
@@ -95,10 +102,15 @@
 
                                 <!-- Actions -->
                                 <div class="dropdown-divider"></div>
-                                <div class="d-grid gap-2">
-                                    <a href="#" class="btn btn-outline-danger btn-sm" id="dropdownLogout">
-                                        <i class="fas fa-sign-out-alt me-1"></i> Se déconnecter
+                                <div class="d-grid gap-2 mb-2">
+                                    <a href="dashboard.html" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-tachometer-alt me-1"></i> Dashboard
                                     </a>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-danger btn-sm" onclick="logout()">
+                                        <i class="fas fa-sign-out-alt me-1"></i> Se déconnecter
+                                    </button>
                                 </div>
                             </div>
                         </li>
@@ -153,9 +165,26 @@
           <div class="error-message" id="email-error"></div>
         </div>
         <div class="form-group">
-          <label for="telephone">Téléphone</label>
-          <input type="tel" id="telephone" name="telephone" class="form-control" placeholder="+33 6 12 34 56 78" required>
+          <label for="telephone">Téléphone(whatsapp)ou(messagerie)</label>
+          <input type="tel" id="telephone" name="telephone" class="form-control" placeholder="+237 6 XX XX XX XX" required>
           <div class="error-message" id="phone-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="region">Région du Cameroun</label>
+          <select id="region" name="region" class="form-control" required>
+            <option value="">Sélectionnez votre région</option>
+            <option value="centre">Centre (Yaoundé)</option>
+            <option value="littoral">Littoral (Douala)</option>
+            <option value="ouest">Ouest (Bafoussam)</option>
+            <option value="nord-ouest">Nord-Ouest (Bamenda)</option>
+            <option value="sud-ouest">Sud-Ouest (Buea)</option>
+            <option value="nord">Nord (Garoua)</option>
+            <option value="adamaoua">Adamaoua (Ngaoundéré)</option>
+            <option value="est">Est (Bertoua)</option>
+            <option value="extreme-nord">Extrême-Nord (Maroua)</option>
+            <option value="sud">Sud (Ebolowa)</option>
+          </select>
+          <div class="error-message" id="region-error"></div>
         </div>
         <div class="buttons">
           <button type="button" class="btn btn-primary next-btn">Suivant <i class="fas fa-arrow-right"></i></button>
@@ -207,7 +236,12 @@
         
         <div class="form-group">
           <label for="incident-date">Date de l'incident</label>
-          <input type="datetime-local" id="incident-date" name="date" class="form-control" required>
+          <div class="input-with-button">
+            <input type="datetime-local" id="incident-date" name="date" class="form-control" required>
+            <button type="button" class="btn-auto-fill" onclick="setCurrentDateTime()" title="Utiliser l'heure actuelle">
+              <i class="fas fa-clock"></i>
+            </button>
+          </div>
           <div class="error-message" id="date-error"></div>
         </div>
         
@@ -311,7 +345,7 @@
             <h2>Signalement envoyé avec succès !</h2>
             <p>Votre signalement a été transmis à nos équipes de sécurité. Nous vous contacterons dans les plus brefs délais.</p>
             <p><strong>Numéro de référence :</strong> <span id="reference-number"></span></p>
-            <button class="btn btn-primary mt-3" onclick="window.location.href='home.html'">
+            <button class="btn btn-primary mt-3" onclick="window.location.href='index.html'">
               <i class="fas fa-home"></i> Retour à l'accueil
             </button>
           </div>
@@ -348,10 +382,10 @@
                     <div class="col-lg-2 col-md-4 mb-4">
                         <h6 class="text-neon mb-3">Liens Rapides</h6>
                         <ul class="list-unstyled">
-                            <li class="mb-2"><a href="home.html#services" class="text-white-50 small">Nos Services</a></li>
-                            <li class="mb-2"><a href="home.html#about" class="text-white-50 small">À Propos</a></li>
-                            <li class="mb-2"><a href="home.html#conseils" class="text-white-50 small">Conseils de Sécurité</a></li>
-                            <li class="mb-2"><a href="home.html#partenaires" class="text-white-50 small">Partenaires</a></li>
+                            <li class="mb-2"><a href="index.html#services" class="text-white-50 small">Nos Services</a></li>
+                            <li class="mb-2"><a href="index.html#about" class="text-white-50 small">À Propos</a></li>
+                            <li class="mb-2"><a href="index.html#conseils" class="text-white-50 small">Conseils de Sécurité</a></li>
+                            <li class="mb-2"><a href="index.html#partenaires" class="text-white-50 small">Partenaires</a></li>
                             <li><a href="#contact" class="text-white-50 small">Contact</a></li>
                         </ul>
                     </div>
@@ -398,5 +432,6 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="animation/report.js" defer></script>
+<script src="animation/user-menu.js"></script>
 </body>
 </html>

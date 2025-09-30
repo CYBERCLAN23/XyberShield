@@ -1,33 +1,46 @@
-# XyberShield Frontend
+# XyberShield - Complete Full-Stack Cybersecurity Platform
 
-Cybersecurity education and awareness platform.
+A modern cybersecurity education and incident reporting platform with complete user authentication and backend system.
 
-## Project Structure
+## 🚀 Features
 
-- `index.html` - Main entry point
-- `home.html` - Home page
-- `style/` - CSS stylesheets
-- `animation/` - JavaScript functionality
-- `images/` - Image assets
+### Frontend
+- **Interactive Login/Registration System** - Secure user authentication
+- **User Dashboard** - Personalized user profile and activity tracking
+- **Cybersecurity Education Modules** - Interactive learning content
+- **Incident Reporting System** - Report and track security incidents
+- **Real-time Threat Map** - Visualize cybersecurity threats
+- **Responsive Design** - Works on all devices
 
-## Development
+### Backend
+- **RESTful API** - Complete backend API with Express.js
+- **User Authentication** - JWT-based authentication with bcrypt password hashing
+- **SQLite Database** - Lightweight database for user data and activity tracking
+- **Session Management** - Secure session handling and token management
+- **Activity Logging** - Track user activities and login history
+- **Rate Limiting** - Protection against brute force attacks
+- **Security Headers** - Helmet.js for enhanced security
 
-1. Install dependencies:
-   ```bash
-   npm install
-   ```
+## 🛠️ Tech Stack
 
-2. Start development server:
-   ```bash
-   npm run dev
-   ```
-   This will start a live server at http://localhost:3000
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Backend**: Node.js, Express.js
+- **Database**: SQLite3
+- **Authentication**: JWT (JSON Web Tokens)
+- **Security**: bcryptjs, Helmet.js, express-rate-limit
+- **Deployment**: Vercel/Netlify ready
 
-## Deployment
+## 📦 Installation & Setup
 
-This project is configured for deployment on Vercel. Simply connect your GitHub repository to Vercel and it will automatically deploy.
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
 
-## Features
+### 1. Clone the Repository
+```bash
+git clone <your-repo-url>
+cd XyberShield
+```
 
 - Interactive cybersecurity education
 - Video tutorials

@@ -3910,7 +3910,7 @@ button {
         }
 
         /* High contrast mode support */
-        @media (prefers-contrast: high) {
+        @media screen and (prefers-contrast: high) {
             .footer {
                 background: #000 !important;
                 color: #fff !important;
