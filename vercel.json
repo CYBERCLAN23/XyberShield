@@ -6,59 +6,29 @@
       "use": "@vercel/static"
     }
   ],
-  "routes": [
+  "redirects": [
     {
-      "src": "/style/(.*)",
-      "dest": "/style/$1"
+      "source": "/(.*)\\.html",
+      "destination": "/$1",
+      "permanent": true
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/report",
+      "destination": "/report.html"
     },
     {
-      "src": "/animation/(.*)",
-      "dest": "/animation/$1"
+      "source": "/login",
+      "destination": "/login.html"
     },
     {
-      "src": "/js/(.*)",
-      "dest": "/js/$1"
+      "source": "/dashboard",
+      "destination": "/dashboard.html"
     },
     {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
-      "dest": "/$1"
-    },
-    {
-      "src": "/(.*)\\.html",
-      "headers": { "Location": "/$1" },
-      "status": 301
-    },
-    {
-      "src": "/report",
-      "dest": "/report.html"
-    },
-    {
-      "src": "/login",
-      "dest": "/login.html"
-    },
-    {
-      "src": "/dashboard",
-      "dest": "/dashboard.html"
-    },
-    {
-      "src": "/reset-password",
-      "dest": "/reset-password.html"
-    },
-    {
-      "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1.html"
+      "source": "/reset-password",
+      "destination": "/reset-password.html"
     }
   ],
   "cleanUrls": true
