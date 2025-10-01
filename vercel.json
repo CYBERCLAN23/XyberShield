@@ -32,8 +32,33 @@
       "dest": "/$1"
     },
     {
-      "src": "/(.*)",
+      "src": "/(.*)\\.html",
+      "headers": { "Location": "/$1" },
+      "status": 301
+    },
+    {
+      "src": "/report",
+      "dest": "/report.html"
+    },
+    {
+      "src": "/login",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/dashboard.html"
+    },
+    {
+      "src": "/reset-password",
+      "dest": "/reset-password.html"
+    },
+    {
+      "src": "/",
       "dest": "/index.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1.html"
     }
   ],
   "cleanUrls": true
