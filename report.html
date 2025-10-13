@@ -1,0 +1,440 @@
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Signalement - XyberShield</title>
+    <!-- CSS -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Font Awesome Icons - Direct CSS Load -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Bootstrap -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    </noscript>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/report.css">
+    <link rel="stylesheet" href="style/report-animations.css">
+    <link rel="stylesheet" href="style/responsive-report.css">
+    <link rel="stylesheet" href="style/upward-dropdown.css">
+
+    <!-- Fonts with preloading and font-display: swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    </noscript>
+  
+</head>
+<body>
+    <!-- Matrix Background Canvas --> 
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand d-flex align-items-center" href="index.html">
+                    <img src="./images/logos/logo.png" alt="XyberShield Logo" class="logo">
+                    XyberShield
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <button class="close-menu d-lg-none" type="button" aria-label="Close menu">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <ul class="navbar-nav ms-auto align-items-lg-center">
+                        <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                        <li class="nav-item"><a class="nav-link active" href="report.html">Signaler</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Education.html">Éducation</a></li>
+                        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+
+                        <!-- Login Button (shown when not logged in) -->
+                        <li class="nav-item ms-lg-3" id="loginButton" style="display: none;">
+                            <a class="btn btn-outline-success" href="login.html">
+                                <i class="fas fa-sign-in-alt me-1"></i> Se connecter
+                            </a>
+                        </li>
+
+                        <!-- User Dropdown (shown when logged in) -->
+                        <li class="nav-item dropdown ms-lg-3" id="userDropdown" style="display: none;">
+                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdownToggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="user-avatar me-2" id="navUserAvatar">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <span id="navUserName">Utilisateur</span>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="userDropdownToggle">
+                                <!-- User Profile Header -->
+                                <div class="d-flex align-items-center mb-3">
+                                    <div class="user-avatar me-3" style="width: 48px; height: 48px;" id="dropdownUserAvatar">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div>
+                                        <h6 class="mb-0" id="dropdownUserName">Utilisateur</h6>
+                                        <small class="text-muted" id="dropdownUserEmail">email@example.com</small>
+                                    </div>
+                                </div>
+
+                                <!-- User Info -->
+                                <div class="dropdown-divider"></div>
+                                <div class="mb-2">
+                                    <small class="text-uppercase text-muted fw-bold d-block mb-1">Nom complet</small>
+                                    <div class="text-white" id="dropdownFullName">-</div>
+                                </div>
+                                <div class="mb-2">
+                                    <small class="text-uppercase text-muted fw-bold d-block mb-1">Nom d'utilisateur</small>
+                                    <div class="text-white" id="dropdownUsername">-</div>
+                                </div>
+                                <div class="mb-3">
+                                    <small class="text-uppercase text-muted fw-bold d-block mb-1">Membre depuis</small>
+                                    <div class="text-white" id="dropdownMemberSince">-</div>
+                                </div>
+
+                                <!-- Actions -->
+                                <div class="dropdown-divider"></div>
+                                <div class="d-grid gap-2 mb-2">
+                                    <a href="dashboard.html" class="btn btn-outline-primary btn-sm">
+                                        <i class="fas fa-tachometer-alt me-1"></i> Dashboard
+                                    </a>
+                                </div>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-outline-danger btn-sm" onclick="logout()">
+                                        <i class="fas fa-sign-out-alt me-1"></i> Se déconnecter
+                                    </button>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> 
+
+<!-- ================= FORMULAIRE DE SIGNALEMENT ================= -->
+<section class="report-section">
+  <div class="container-fluid">
+    <div class="form-container">
+      <!-- Tech Professional Loading Overlay -->
+      <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+          <div class="loading-spinner-container">
+            <div class="loading-spinner"></div>
+          </div>
+          <div class="loading-text">PROCESSING</div>
+          <div class="loading-subtext">Chargement de l'étape suivante<span class="loading-dots"></span></div>
+        </div>
+      </div>
+      
+      <h2 class="form-title">Signalement de Menace Cyber</h2>
+
+      <!-- Barre de progression -->
+      <div class="progress-container">
+        <div class="progress-steps">
+          <div class="progress-step active">1</div>
+          <div class="progress-step">2</div>
+          <div class="progress-step">3</div>
+          <div class="progress-step">4</div>
+        </div>
+        <div class="progress-bar-container">
+          <div id="progress"></div>
+        </div>
+      </div>
+
+    <form id="multiStepForm">
+      
+      <!-- Step 1: Personal Information -->
+      <div class="form-step active">
+        <h3><i class="fas fa-user"></i> Informations personnelles</h3>
+        <div class="form-group">
+          <label for="nom">Nom complet</label>
+          <input type="text" id="nom" name="nom" class="form-control" placeholder="Votre nom complet" required>
+          <div class="error-message" id="name-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="email">Adresse email</label>
+          <input type="email" id="email" name="email" class="form-control" placeholder="votre.email@exemple.com" required>
+          <div class="error-message" id="email-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="telephone">Téléphone(whatsapp)</label>
+          <input type="tel" id="telephone" name="telephone" class="form-control" placeholder="+237 6 XX XX XX XX" required>
+          <div class="error-message" id="phone-error"></div>
+        </div>
+        <div class="form-group">
+          <label for="region">Région du Cameroun</label>
+          <select id="region" name="region" class="form-control" required>
+            <option value="">Sélectionnez votre région</option>
+            <option value="centre">Centre (Yaoundé)</option>
+            <option value="littoral">Littoral (Douala)</option>
+            <option value="ouest">Ouest (Bafoussam)</option>
+            <option value="nord-ouest">Nord-Ouest (Bamenda)</option>
+            <option value="sud-ouest">Sud-Ouest (Buea)</option>
+            <option value="nord">Nord (Garoua)</option>
+            <option value="adamaoua">Adamaoua (Ngaoundéré)</option>
+            <option value="est">Est (Bertoua)</option>
+            <option value="extreme-nord">Extrême-Nord (Maroua)</option>
+            <option value="sud">Sud (Ebolowa)</option>
+          </select>
+          <div class="error-message" id="region-error"></div>
+        </div>
+        <div class="buttons">
+          <button type="button" class="btn btn-primary next-btn">Suivant <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 2: Incident Details -->
+      <div class="form-step">
+        <h3><i class="fas fa-shield-virus"></i> Détails de l'incident</h3>
+        <div class="form-group">
+          <label for="type">Type d'incident</label>
+          <div class="custom-select-wrapper">
+            <div class="custom-select incident-type-select" id="incident-type-dropdown">
+              <div class="select-trigger">
+                <span class="select-text">Sélectionner un type d'incident</span>
+                <i class="fas fa-chevron-down select-arrow"></i>
+              </div>
+              <div class="select-options">
+                <div class="select-option" data-value="phishing">
+                  <i class="fas fa-fish option-icon"></i>
+                  <span>Phishing</span>
+                </div>
+                <div class="select-option" data-value="account-hijacking">
+                  <i class="fas fa-user-lock option-icon"></i>
+                  <span>Compte piraté</span>
+                </div>
+                <div class="select-option" data-value="scam">
+                  <i class="fas fa-exclamation-triangle option-icon"></i>
+                  <span>Arnaque</span>
+                </div>
+                <div class="select-option" data-value="malware">
+                  <i class="fas fa-virus option-icon"></i>
+                  <span>Virus</span>
+                </div>
+                <div class="select-option" data-value="data-breach">
+                  <i class="fas fa-database option-icon"></i>
+                  <span>Données volées</span>
+                </div>
+                <div class="select-option" data-value="other">
+                  <i class="fas fa-question-circle option-icon"></i>
+                  <span>Autre</span>
+                </div>
+              </div>
+            </div>
+            <input type="hidden" id="type" name="type" required>
+          </div>
+          <div class="error-message" id="type-error"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="incident-date">Date de l'incident</label>
+          <div class="input-with-button">
+            <input type="datetime-local" id="incident-date" name="date" class="form-control" required>
+            <button type="button" class="btn-auto-fill" onclick="setCurrentDateTime()" title="Utiliser l'heure actuelle">
+              <i class="fas fa-clock"></i>
+            </button>
+          </div>
+          <div class="error-message" id="date-error"></div>
+        </div>
+        
+        <div class="form-group">
+          <label for="description">Description détaillée</label>
+          <textarea id="description" name="description" class="form-control" rows="5" placeholder="Décrivez l'incident en détail : que s'est-il passé, comment, quand, où, quelles sont les conséquences..." required></textarea>
+          <div class="error-message" id="description-error"></div>
+        </div>
+        
+        <div class="buttons">
+          <button type="button" class="btn btn-secondary prev-btn"><i class="fas fa-arrow-left"></i> Précédent</button>
+          <button type="button" class="btn btn-primary next-btn">Suivant <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 3: File Upload -->
+      <div class="form-step">
+        <h3><i class="fas fa-paperclip"></i> Preuves et Fichiers</h3>
+        <div class="form-group">
+          <label for="evidence">Joindre des preuves (captures d'écran, etc.)</label>
+          <div class="file-upload-container">
+            <div class="file-upload-icon">
+              <i class="fas fa-cloud-upload-alt"></i>
+            </div>
+            <div class="file-upload-text">Glissez vos fichiers ici ou cliquez pour sélectionner</div>
+            <div class="file-upload-hint">Images, PDF, documents (max 5 fichiers, 5MB chacun)</div>
+            <input type="file" id="evidence" name="evidence" multiple accept="image/*,.pdf,.doc,.docx,.txt" style="display: none;">
+          </div>
+          <div id="file-preview" class="file-preview-container"></div>
+        </div>
+        <div class="buttons">
+            <button type="button" class="btn btn-secondary prev-btn"><i class="fas fa-arrow-left"></i> Précédent</button>
+            <button type="button" class="btn btn-primary next-btn">Suivant <i class="fas fa-arrow-right"></i></button>
+        </div>
+      </div>
+
+      <!-- Step 4: Additional Information -->
+      <div class="form-step">
+        <h3><i class="fas fa-info-circle"></i> Informations complémentaires</h3>
+        
+        <div class="additional-info-section">
+          <div class="form-group">
+            <label for="systeme">Système/Application concerné(e)</label>
+            <input type="text" id="systeme" name="systeme" class="form-control" placeholder="Ex: Windows 10, Gmail, Facebook...">
+            <small class="form-text">Précisez le système ou l'application où l'incident s'est produit (optionnel)</small>
+            <div class="error-message" id="system-error"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="evidence-links">Liens supplémentaires</label>
+            <input type="url" name="evidence_links" id="evidence-links" class="form-control" placeholder="https://exemple.com/capture-ecran.png">
+            <small class="form-text">Liens vers des captures d'écran ou autres preuves (optionnel)</small>
+          </div>
+        </div>
+
+        <div class="privacy-section">
+          <h4><i class="fas fa-shield-alt"></i> Confidentialité & Consentement</h4>
+          
+          <div class="form-check-group">
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="anonyme" name="anonyme">
+              <label class="form-check-label" for="anonyme">
+                <i class="fas fa-user-secret"></i>
+                Je souhaite rester anonyme
+              </label>
+              <small class="form-text">Vos informations personnelles ne seront pas partagées avec des tiers</small>
+            </div>
+            
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="consent" name="consent" required>
+              <label class="form-check-label" for="consent">
+                <i class="fas fa-check-circle"></i>
+                J'accepte que ces informations soient utilisées pour traiter mon signalement
+              </label>
+              <small class="form-text">
+                Conformément à notre 
+                <a href="privacy-policy.html" class="privacy-link" target="_blank">
+                  <i class="fas fa-external-link-alt"></i> politique de confidentialité
+                </a>
+              </small>
+            </div>
+          </div>
+        </div>
+        
+        <div class="buttons">
+          <button type="button" class="btn btn-secondary prev-btn"><i class="fas fa-arrow-left"></i> Précédent</button>
+          <button type="submit" class="btn btn-primary submit-btn">
+            <span class="submit-text"><i class="fas fa-paper-plane"></i> Envoyer le signalement</span>
+            <span class="spinner-border spinner-border-sm d-none" role="status"></span>
+          </button>
+        </div>
+      </div>
+      
+      <!-- Global form validation message (shown on final validation failure) -->
+      <div id="form-validation-message" class="global-form-error" style="display: none; margin-top: 1rem; color: #ff5252;"></div>
+
+      <!-- Success confirmation section (not a form step) -->
+      <div id="confirmation" style="display: none;">
+          <div class="success-message text-center">
+            <i class="fas fa-check-circle" style="font-size: 3rem; color: #22c55e; margin-bottom: 1rem;"></i>
+            <h2>Signalement envoyé avec succès !</h2>
+            <p>Votre signalement a été transmis à nos équipes de sécurité. Nous vous contacterons dans les plus brefs délais.</p>
+            <p><strong>Numéro de référence :</strong> <span id="reference-number"></span></p>
+            <button class="btn btn-primary mt-3" onclick="window.location.href='index.html'">
+              <i class="fas fa-home"></i> Retour à l'accueil
+            </button>
+          </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</section>
+
+
+        <!-- Contact + Footer -->
+        <footer id="contact" class="footer bg-dark text-white py-4">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 mb-4">
+                        <h5 class="text-neon mb-3">À propos de XyberShield</h5>
+                        <p class="small text-white-50">Une initiative de <a href="https://xyber-clan.vercel.app/" target="_blank" class="text-neon">XyberClan</a>, une startup innovante spécialisée dans la cybersécurité et la protection des données.</p>
+                        <div class="social-icons mt-3">
+                            <a href="https://www.linkedin.com/groups/13252179/" target="_blank" rel="noopener noreferrer" class="text-white me-3" aria-label="LinkedIn" title="Rejoignez notre groupe LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="https://github.com/CYBERCLAN23" target="_blank" rel="noopener noreferrer" class="text-white me-3" aria-label="GitHub" title="Visitez notre GitHub">
+                                <i class="fab fa-github"></i>
+                            </a>
+                            <a href="mailto:CyberClan237@gmail.com" class="text-white me-3" aria-label="Email" title="Contactez-nous par email">
+                                <i class="fas fa-envelope"></i>
+                            </a>
+                            <a href="https://whatsapp.com/channel/0029VbBLsii2P59lAGA3wO1O" target="_blank" rel="noopener noreferrer" class="text-white" aria-label="WhatsApp Channel" title="Rejoignez notre chaîne WhatsApp">
+                                <i class="fab fa-whatsapp"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-4 mb-4">
+                        <h6 class="text-neon mb-3">Liens Rapides</h6>
+                        <ul class="list-unstyled">
+                            <li class="mb-2"><a href="index.html#services" class="text-white-50 small">Nos Services</a></li>
+                            <li class="mb-2"><a href="index.html#about" class="text-white-50 small">À Propos</a></li>
+                            <li class="mb-2"><a href="index.html#conseils" class="text-white-50 small">Conseils de Sécurité</a></li>
+                            <li class="mb-2"><a href="index.html#partenaires" class="text-white-50 small">Partenaires</a></li>
+                            <li><a href="#contact" class="text-white-50 small">Contact</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 mb-4">
+                        <h6 class="text-neon mb-3">Contact</h6>
+                        <ul class="list-unstyled text-white-50 small">
+                            <li class="mb-2"><i class="fas fa-envelope me-2"></i> support@xybershield.com</li>
+                            <li class="mb-2"><i class="fab fa-whatsapp me-2"></i> +237 654 269 488</li>
+                            <li><i class="fas fa-map-marker-alt me-2"></i> Yaoundé, Cameroun</li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-4 mb-4">
+                        <h6 class="text-neon mb-3">Newsletter</h6>
+                        <p class="small text-white-50">Abonnez-vous pour recevoir nos conseils de sécurité</p>
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Votre email">
+                            <button class="btn btn-neon" type="button"><i class="fas fa-paper-plane"></i></button>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="bg-secondary my-4">
+
+                <div class="row align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
+                        <p class="small text-white-50 mb-0">&copy; 2025 XyberShield. Tous droits réservés.</p>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end">
+                        <a href="privacy-policy.html" class="text-white-50 small me-3">Politique de confidentialité</a>
+                        <span class="text-white-50">•</span>
+                        <a href="#" class="text-white-50 small ms-3">Conditions d'utilisation</a>
+                    </div>
+                </div>
+
+                <div class="text-center mt-3">
+                    <p class="small text-white-50 mb-0">Développé avec <i class="fas fa-heart text-danger"></i> par
+                        <a href="https://xyber-clan.vercel.app/" target="_blank" class="text-neon">XyberClan</a>
+                    </p>
+                </div>
+            </div>
+        </footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="animation/report.js" defer></script>
+<script src="animation/user-menu.js"></script>
+<script src="animation/upward-dropdown.js" defer></script>
+</body>
+</html>

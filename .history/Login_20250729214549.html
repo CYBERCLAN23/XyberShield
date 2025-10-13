@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/home/almight/Desktop/xybershield/XyberShield/FRONT/style/log.css">
+  <title>Login Stylé</title>
+</head>
+<body>
+  <!-- Welcome notification at the very top of the body -->
+  <div id="welcome-notification" class="notification" style="top:0;left:50%;transform:translateX(-50%);display:none;"></div>
+  <form action="home.html">
+    <div class="login">
+      <div class="left-panel">
+        <h1>XyberShield</h1>
+        <p class="slogant">Signalez. Protégez. Prévenez.</p>
+        <p class="welcome">Bienvenue sur XyberShield. Connectez-vous pour signaler un incident, consulter nos ressources de cybersécurité et contribuer à un internet plus sûr.</p>
+        <button class="reg" id="register-btn" type="button" onclick="showRegister()">Register</button>
+      </div>
+      <div class="right-panel">
+        <div id="notification" class="notification"></div>
+        <div class="head">LOGIN</div>
+        <div class="log-form">
+          <div class="email input-group">
+            <span class="input-icon">
+              <!-- Futuristic envelope SVG for email -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="6" width="20" height="12" rx="4" fill="#222"/>
+                <path d="M4 8l8 7 8-7" stroke="#00ff55" stroke-width="2"/>
+                <rect x="2" y="6" width="20" height="12" rx="4" stroke="#00ff55" stroke-width="2"/>
+                <circle cx="20" cy="8" r="2" fill="#00ff55"/>
+              </svg>
+            </span>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <div id="email-alert" class="input-alert"></div>
+          </div>
+          <div class="password input-group">
+            <span class="input-icon">
+              <!-- Futuristic lock SVG for password -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="6" y="10" width="12" height="8" rx="4" fill="#222"/>
+                <rect x="10" y="14" width="4" height="4" rx="2" fill="#00ff55"/>
+                <rect x="8" y="10" width="8" height="2" rx="1" fill="#00ff55"/>
+                <path d="M12 10V7a4 4 0 1 1 8 0v3" stroke="#00ff55" stroke-width="2"/>
+                <circle cx="20" cy="12" r="2" fill="#00ff55"/>
+              </svg>
+            </span>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <div id="password-alert" class="input-alert"></div>
+          </div>
+        <div id="login-fields">
+          <div class="email input-group">
+            <span class="input-icon">
+              <!-- Futuristic envelope SVG for email -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="6" width="20" height="12" rx="4" fill="#222"/>
+                <path d="M4 8l8 7 8-7" stroke="#00ff55" stroke-width="2"/>
+                <rect x="2" y="6" width="20" height="12" rx="4" stroke="#00ff55" stroke-width="2"/>
+                <circle cx="20" cy="8" r="2" fill="#00ff55"/>
+              </svg>
+            </span>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <div id="email-alert" class="input-alert"></div>
+          </div>
+          <div class="password input-group">
+            <span class="input-icon">
+              <!-- Futuristic lock SVG for password -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="6" y="10" width="12" height="8" rx="4" fill="#222"/>
+                <rect x="10" y="14" width="4" height="4" rx="2" fill="#00ff55"/>
+                <rect x="8" y="10" width="8" height="2" rx="1" fill="#00ff55"/>
+                <path d="M12 10V7a4 4 0 1 1 8 0v3" stroke="#00ff55" stroke-width="2"/>
+                <circle cx="20" cy="12" r="2" fill="#00ff55"/>
+              </svg>
+            </span>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <div id="password-alert" class="input-alert"></div>
+          </div>
+        </div>
+        <div id="register-fields" style="display:none;">
+          <div class="name input-group">
+            <span class="input-icon">
+              <!-- Futuristic user SVG for name -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#222"/><circle cx="12" cy="8" r="4" stroke="#00ff55" stroke-width="2"/><rect x="6" y="16" width="12" height="4" rx="2" fill="#222"/><rect x="6" y="16" width="12" height="4" rx="2" stroke="#00ff55" stroke-width="2"/></svg>
+            </span>
+            <input type="text" name="name" id="name" placeholder="Name" required>
+          </div>
+          <div class="pseudo input-group">
+            <span class="input-icon">
+              <!-- Futuristic user SVG for pseudo -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="8" r="4" fill="#222"/><circle cx="12" cy="8" r="4" stroke="#00ff55" stroke-width="2"/><rect x="6" y="16" width="12" height="4" rx="2" fill="#222"/><rect x="6" y="16" width="12" height="4" rx="2" stroke="#00ff55" stroke-width="2"/></svg>
+            </span>
+            <input type="text" name="pseudo" id="pseudo" placeholder="Pseudo" required>
+          </div>
+          <div class="email input-group">
+            <span class="input-icon">
+              <!-- Futuristic envelope SVG for email -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="2" y="6" width="20" height="12" rx="4" fill="#222"/>
+                <path d="M4 8l8 7 8-7" stroke="#00ff55" stroke-width="2"/>
+                <rect x="2" y="6" width="20" height="12" rx="4" stroke="#00ff55" stroke-width="2"/>
+                <circle cx="20" cy="8" r="2" fill="#00ff55"/>
+              </svg>
+            </span>
+            <input type="email" name="reg-email" id="reg-email" placeholder="Email" required>
+          </div>
+          <div class="password input-group">
+            <span class="input-icon">
+              <!-- Futuristic lock SVG for password -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="6" y="10" width="12" height="8" rx="4" fill="#222"/>
+                <rect x="10" y="14" width="4" height="4" rx="2" fill="#00ff55"/>
+                <rect x="8" y="10" width="8" height="2" rx="1" fill="#00ff55"/>
+                <path d="M12 10V7a4 4 0 1 1 8 0v3" stroke="#00ff55" stroke-width="2"/>
+                <circle cx="20" cy="12" r="2" fill="#00ff55"/>
+              </svg>
+            </span>
+            <input type="password" name="reg-password" id="reg-password" placeholder="Password" required>
+          </div>
+          <div class="password input-group">
+            <span class="input-icon">
+              <!-- Futuristic lock SVG for confirm password -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <rect x="6" y="10" width="12" height="8" rx="4" fill="#222"/>
+                <rect x="10" y="14" width="4" height="4" rx="2" fill="#00ff55"/>
+                <rect x="8" y="10" width="8" height="2" rx="1" fill="#00ff55"/>
+                <path d="M12 10V7a4 4 0 1 1 8 0v3" stroke="#00ff55" stroke-width="2"/>
+                <circle cx="20" cy="12" r="2" fill="#00ff55"/>
+              </svg>
+            </span>
+            <input type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password" required>
+          </div>
+        </div>
+          <div class="SUBMITE">
+            <button id="valide" type="button" onclick="login()"><i class="fas fa-terminal"></i> GO ON</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <!-- Welcome notification at the very top of the body -->
+  <div id="welcome-notification" class="notification" style="top:0;left:50%;transform:translateX(-50%);display:none;"></div>
+  <form action="home.html">
+    <div class="login">
+      <div class="left-panel">
+        <h1>XyberShield</h1>
+        <p class="slogant">Signalez. Protégez. Prévenez.</p>
+        <p class="welcome">Bienvenue sur XyberShield. Connectez-vous pour signaler un incident, consulter nos ressources de cybersécurité et contribuer à un internet plus sûr.</p>
+        <div class="reg"> Register</div>
+      </div>
+      <div class="right-panel">
+        <div id="notification" class="notification"></div>
+        <div class="head">LOGIN</div>
+        <div class="log-form">
+          <div class="email input-group">
+            <span class="input-icon">
+              <!-- Futuristic hacker SVG icon for email -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="4" fill="#222"/><path d="M4 6l8 7 8-7" stroke="#00ff55" stroke-width="2"/><circle cx="19" cy="7" r="2" fill="#00ff55"/><rect x="6" y="10" width="12" height="2" rx="1" fill="#00ff55"/></svg>
+            </span>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <div id="email-alert" class="input-alert"></div>
+          </div>
+          <div class="password input-group">
+            <span class="input-icon">
+              <!-- Futuristic hacker SVG icon for password -->
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="6" y="10" width="12" height="8" rx="4" fill="#222"/><rect x="10" y="14" width="4" height="4" rx="2" fill="#00ff55"/><path d="M12 10V7a3 3 0 1 1 6 0v3" stroke="#00ff55" stroke-width="2"/></svg>
+            </span>
+            <input type="password" name="password" id="password" placeholder="Password" required>
+            <div id="password-alert" class="input-alert"></div>
+          </div>
+          <div class="SUBMITE">
+            <button id="valide" type="button" onclick="login()"><i class="fas fa-terminal"></i> GO ON</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <script src="/home/almight/Desktop/xybershield/XyberShield/FRONT/animation/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+.history/
+*.md
+server.py
+.env.example

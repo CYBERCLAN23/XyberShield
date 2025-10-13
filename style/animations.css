@@ -1,0 +1,95 @@
+/* ===========================================
+   SCROLL ANIMATIONS
+   =========================================== */
+
+/* Prevent FOUC by hiding elements until JS loads */
+html:not(.js-initialized) [class*="hidden-"] {
+    visibility: hidden;
+}
+
+/* Initial hidden states with will-change for better performance */
+.hidden-up,
+.hidden-down,
+.hidden-left,
+.hidden-right {
+    will-change: opacity, transform;
+    backface-visibility: hidden;
+    opacity: 0;
+    /* Ensure smooth transitions */
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+/* Up animation */
+.hidden-up {
+    transform: translateY(30px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Down animation */
+.hidden-down {
+    transform: translateY(-30px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Left animation */
+.hidden-left {
+    transform: translateX(40px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Right animation */
+.hidden-right {
+    transform: translateX(-40px);
+    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), 
+                transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Visible state with hardware acceleration */
+.visible {
+    opacity: 1 !important;
+    transform: translate3d(0, 0, 0) !important;
+    will-change: auto;
+}
+
+/* Fallback for when JavaScript is disabled */
+.no-js .hidden-up,
+.no-js .hidden-down,
+.no-js .hidden-left,
+.no-js .hidden-right {
+    opacity: 1;
+    transform: none;
+}
+
+/* Staggered animations */
+.delay-1 { transition-delay: 0.1s; }
+.delay-2 { transition-delay: 0.2s; }
+.delay-3 { transition-delay: 0.3s; }
+.delay-4 { transition-delay: 0.4s; }
+.delay-5 { transition-delay: 0.5s; }
+
+/* Optimize animation performance */
+.animate-on-scroll {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
+/* Smooth scrolling for anchor links */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 80px; /* Account for fixed header */
+    }
+}
+
+/* Banner parallax effect */
+.banner-image {
+    transform: translate3d(0, 0, 0);
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}

@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Test Responsive Design - XyberShield</title>
+  
+  <!-- CSS -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+  <!-- Font Awesome Icons -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style/style.css">
+  <link rel="stylesheet" href="style/report.css">
+  <link rel="stylesheet" href="style/report-animations.css">
+  <link rel="stylesheet" href="style/responsive-report.css">
+  
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+  
+  <style>
+    /* Test-specific styles */
+    .test-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    
+    .test-section {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(76, 148, 190, 0.3);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 2rem;
+    }
+    
+    .test-title {
+      color: #4c94be;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    
+    .viewport-info {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #39ff14;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      z-index: 9999;
+    }
+    
+    .breakpoint-indicator {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #64ffda;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.8rem;
+      z-index: 9999;
+    }
+    
+    .test-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 1rem 0;
+    }
+    
+    .test-item {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(76, 148, 190, 0.2);
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+    }
+    
+    .test-button {
+      background: linear-gradient(135deg, #64ffda, #4cbe85);
+      color: #000;
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0.5rem;
+    }
+    
+    .test-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+    }
+    
+    .test-input {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(76, 148, 190, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      margin: 0.5rem 0;
+    }
+    
+    .test-input:focus {
+      outline: none;
+      border-color: #39ff14;
+      box-shadow: 0 0 0 2px rgba(57, 255, 20, 0.2);
+    }
+    
+    .test-textarea {
+      width: 100%;
+      min-height: 100px;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(76, 148, 190, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      margin: 0.5rem 0;
+      resize: vertical;
+    }
+    
+    .test-select {
+      width: 100%;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(76, 148, 190, 0.3);
+      border-radius: 8px;
+      color: #fff;
+      margin: 0.5rem 0;
+    }
+    
+    .test-checkbox {
+      margin: 0.5rem;
+    }
+    
+    .test-checkbox input {
+      margin-right: 0.5rem;
+    }
+    
+    .test-checkbox label {
+      color: #e2e8f0;
+      cursor: pointer;
+    }
+    
+    .test-file-upload {
+      border: 2px dashed rgba(76, 148, 190, 0.5);
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 0.5rem 0;
+    }
+    
+    .test-file-upload:hover {
+      border-color: #4c94be;
+      background: rgba(76, 148, 190, 0.05);
+    }
+    
+    .test-progress {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 0.5rem 0;
+    }
+    
+    .test-progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, #64ffda, #4cbe85);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+    
+    .test-alert {
+      padding: 1rem;
+      border-radius: 8px;
+      margin: 0.5rem 0;
+      border-left: 4px solid;
+    }
+    
+    .test-alert.success {
+      background: rgba(34, 197, 94, 0.1);
+      border-color: #22c55e;
+      color: #bbf7d0;
+    }
+    
+    .test-alert.warning {
+      background: rgba(255, 165, 0, 0.1);
+      border-color: #ffa500;
+      color: #ffd700;
+    }
+    
+    .test-alert.error {
+      background: rgba(255, 82, 82, 0.1);
+      border-color: #ff5252;
+      color: #ffb3b3;
+    }
+    
+    .test-alert.info {
+      background: rgba(76, 148, 190, 0.1);
+      border-color: #4c94be;
+      color: #a8d8ea;
+    }
+    
+    .test-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(76, 148, 190, 0.2);
+      border-radius: 12px;
+      padding: 1.5rem;
+      margin: 1rem 0;
+      transition: all 0.3s ease;
+    }
+    
+    .test-card:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(76, 148, 190, 0.4);
+      transform: translateY(-2px);
+    }
+    
+    .test-card h3 {
+      color: #4c94be;
+      margin-bottom: 1rem;
+    }
+    
+    .test-card p {
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+    
+    .test-nav {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 1rem 0;
+      margin-bottom: 2rem;
+      border-radius: 12px;
+    }
+    
+    .test-nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .test-nav a {
+      color: #64ffda;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+    
+    .test-nav a:hover {
+      background: rgba(100, 255, 218, 0.1);
+      color: #39ff14;
+    }
+    
+    .test-footer {
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 2rem 0;
+      margin-top: 2rem;
+      border-radius: 12px;
+      text-align: center;
+    }
+    
+    .test-footer p {
+      color: #e2e8f0;
+      margin: 0;
+    }
+    
+    .test-footer a {
+      color: #64ffda;
+      text-decoration: none;
+    }
+    
+    .test-footer a:hover {
+      color: #39ff14;
+    }
+    
+    /* Responsive test indicators */
+    .test-indicator {
+      position: fixed;
+      top: 50%;
+      left: 10px;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.8);
+      color: #39ff14;
+      padding: 0.5rem;
+      border-radius: 8px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.7rem;
+      z-index: 9999;
+      writing-mode: vertical-rl;
+      text-orientation: mixed;
+    }
+    
+    /* Animation test */
+    .test-animation {
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #64ffda, #4cbe85);
+      border-radius: 50%;
+      margin: 1rem auto;
+      animation: testPulse 2s infinite;
+    }
+    
+    @keyframes testPulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.2); opacity: 0.7; }
+    }
+    
+    /* Responsive typography test */
+    .typography-test h1 { font-size: var(--font-size-4xl); }
+    .typography-test h2 { font-size: var(--font-size-3xl); }
+    .typography-test h3 { font-size: var(--font-size-2xl); }
+    .typography-test h4 { font-size: var(--font-size-xl); }
+    .typography-test h5 { font-size: var(--font-size-lg); }
+    .typography-test h6 { font-size: var(--font-size-base); }
+    .typography-test p { font-size: var(--font-size-base); }
+    .typography-test small { font-size: var(--font-size-sm); }
+    
+    /* Responsive spacing test */
+    .spacing-test {
+      background: rgba(76, 148, 190, 0.1);
+      border: 1px solid rgba(76, 148, 190, 0.3);
+      border-radius: 8px;
+      padding: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+    
+    .spacing-test .space-xs { margin: var(--space-xs); padding: var(--space-xs); }
+    .spacing-test .space-sm { margin: var(--space-sm); padding: var(--space-sm); }
+    .spacing-test .space-md { margin: var(--space-md); padding: var(--space-md); }
+    .spacing-test .space-lg { margin: var(--space-lg); padding: var(--space-lg); }
+    .spacing-test .space-xl { margin: var(--space-xl); padding: var(--space-xl); }
+  </style>
+</head>
+<body>
+  <!-- Viewport Information -->
+  <div class="viewport-info" id="viewportInfo">
+    <div>Width: <span id="viewportWidth">0</span>px</div>
+    <div>Height: <span id="viewportHeight">0</span>px</div>
+    <div>Ratio: <span id="viewportRatio">0</span></div>
+  </div>
+  
+  <!-- Breakpoint Indicator -->
+  <div class="breakpoint-indicator" id="breakpointIndicator">
+    <div>Breakpoint: <span id="currentBreakpoint">Unknown</span></div>
+    <div>Device: <span id="deviceType">Unknown</span></div>
+  </div>
+  
+  <!-- Responsive Test Indicator -->
+  <div class="test-indicator" id="testIndicator">
+    RESPONSIVE TEST
+  </div>
+  
+  <div class="test-container">
+    <!-- Navigation -->
+    <nav class="test-nav">
+      <ul>
+        <li><a href="#typography">Typography</a></li>
+        <li><a href="#spacing">Spacing</a></li>
+        <li><a href="#components">Components</a></li>
+        <li><a href="#forms">Forms</a></li>
+        <li><a href="#layout">Layout</a></li>
+        <li><a href="#animations">Animations</a></li>
+      </ul>
+    </nav>
+    
+    <!-- Typography Test -->
+    <section class="test-section" id="typography">
+      <h2 class="test-title">Responsive Typography Test</h2>
+      <div class="typography-test">
+        <h1>Heading 1 - Main Title</h1>
+        <h2>Heading 2 - Section Title</h2>
+        <h3>Heading 3 - Subsection Title</h3>
+        <h4>Heading 4 - Component Title</h4>
+        <h5>Heading 5 - Small Title</h5>
+        <h6>Heading 6 - Tiny Title</h6>
+        <p>This is a paragraph with responsive font size. The text should scale appropriately across different screen sizes while maintaining readability and the PC-like appearance you requested.</p>
+        <small>This is small text that should also scale responsively.</small>
+      </div>
+    </section>
+    
+    <!-- Spacing Test -->
+    <section class="test-section" id="spacing">
+      <h2 class="test-title">Responsive Spacing Test</h2>
+      <div class="spacing-test">
+        <div class="space-xs" style="background: rgba(100, 255, 218, 0.2);">Extra Small Space</div>
+        <div class="space-sm" style="background: rgba(76, 190, 133, 0.2);">Small Space</div>
+        <div class="space-md" style="background: rgba(57, 255, 20, 0.2);">Medium Space</div>
+        <div class="space-lg" style="background: rgba(76, 148, 190, 0.2);">Large Space</div>
+        <div class="space-xl" style="background: rgba(100, 255, 218, 0.2);">Extra Large Space</div>
+      </div>
+    </section>
+    
+    <!-- Components Test -->
+    <section class="test-section" id="components">
+      <h2 class="test-title">Responsive Components Test</h2>
+      
+      <div class="test-grid">
+        <div class="test-item">
+          <h4>Buttons</h4>
+          <button class="test-button">Primary Button</button>
+          <button class="test-button" style="background: rgba(255, 255, 255, 0.1); color: #e2e8f0;">Secondary Button</button>
+        </div>
+        
+        <div class="test-item">
+          <h4>Inputs</h4>
+          <input type="text" class="test-input" placeholder="Text input">
+          <input type="email" class="test-input" placeholder="Email input">
+        </div>
+        
+        <div class="test-item">
+          <h4>Select</h4>
+          <select class="test-select">
+            <option>Option 1</option>
+            <option>Option 2</option>
+            <option>Option 3</option>
+          </select>
+        </div>
+        
+        <div class="test-item">
+          <h4>Checkboxes</h4>
+          <div class="test-checkbox">
+            <input type="checkbox" id="test1">
+            <label for="test1">Checkbox 1</label>
+          </div>
+          <div class="test-checkbox">
+            <input type="checkbox" id="test2">
+            <label for="test2">Checkbox 2</label>
+          </div>
+        </div>
+        
+        <div class="test-item">
+          <h4>File Upload</h4>
+          <div class="test-file-upload">
+            <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #4c94be; margin-bottom: 0.5rem;"></i>
+            <div>Click to upload files</div>
+          </div>
+        </div>
+        
+        <div class="test-item">
+          <h4>Progress Bar</h4>
+          <div class="test-progress">
+            <div class="test-progress-bar" id="testProgress"></div>
+          </div>
+          <button class="test-button" onclick="animateProgress()">Animate Progress</button>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Forms Test -->
+    <section class="test-section" id="forms">
+      <h2 class="test-title">Responsive Forms Test</h2>
+      
+      <div class="test-card">
+        <h3>Form Elements</h3>
+        <form>
+          <div style="margin-bottom: 1rem;">
+            <label for="testName" style="display: block; color: #4c94be; margin-bottom: 0.5rem;">Name:</label>
+            <input type="text" id="testName" class="test-input" placeholder="Enter your name">
+          </div>
+          
+          <div style="margin-bottom: 1rem;">
+            <label for="testEmail" style="display: block; color: #4c94be; margin-bottom: 0.5rem;">Email:</label>
+            <input type="email" id="testEmail" class="test-input" placeholder="Enter your email">
+          </div>
+          
+          <div style="margin-bottom: 1rem;">
+            <label for="testMessage" style="display: block; color: #4c94be; margin-bottom: 0.5rem;">Message:</label>
+            <textarea id="testMessage" class="test-textarea" placeholder="Enter your message"></textarea>
+          </div>
+          
+          <div style="margin-bottom: 1rem;">
+            <label for="testSelect" style="display: block; color: #4c94be; margin-bottom: 0.5rem;">Select Option:</label>
+            <select id="testSelect" class="test-select">
+              <option>Choose an option</option>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+            </select>
+          </div>
+          
+          <button type="submit" class="test-button">Submit Form</button>
+        </form>
+      </div>
+    </section>
+    
+    <!-- Layout Test -->
+    <section class="test-section" id="layout">
+      <h2 class="test-title">Responsive Layout Test</h2>
+      
+      <div class="test-grid">
+        <div class="test-card">
+          <h3>Card 1</h3>
+          <p>This is a test card that should adapt to different screen sizes. The grid layout should be responsive and maintain proper spacing.</p>
+        </div>
+        
+        <div class="test-card">
+          <h3>Card 2</h3>
+          <p>Another test card to demonstrate the responsive grid system. Cards should stack on smaller screens and arrange in columns on larger screens.</p>
+        </div>
+        
+        <div class="test-card">
+          <h3>Card 3</h3>
+          <p>Third test card to show how the layout adapts. The spacing and sizing should remain consistent across all screen sizes.</p>
+        </div>
+        
+        <div class="test-card">
+          <h3>Card 4</h3>
+          <p>Fourth test card to complete the grid. All cards should maintain their proportions and readability on any device.</p>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Alerts Test -->
+    <section class="test-section">
+      <h2 class="test-title">Alert Messages Test</h2>
+      
+      <div class="test-alert success">
+        <strong>Success!</strong> This is a success message that should be clearly visible and properly styled.
+      </div>
+      
+      <div class="test-alert warning">
+        <strong>Warning!</strong> This is a warning message that should stand out but not be too aggressive.
+      </div>
+      
+      <div class="test-alert error">
+        <strong>Error!</strong> This is an error message that should be prominent and easy to read.
+      </div>
+      
+      <div class="test-alert info">
+        <strong>Info!</strong> This is an informational message that should be helpful and clear.
+      </div>
+    </section>
+    
+    <!-- Animations Test -->
+    <section class="test-section" id="animations">
+      <h2 class="test-title">Animations Test</h2>
+      
+      <div style="text-align: center;">
+        <div class="test-animation"></div>
+        <p>This animation should work smoothly across all devices and screen sizes.</p>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="test-footer">
+      <p>Responsive Design Test - XyberShield</p>
+      <p>Resize your browser window to test responsiveness</p>
+      <p><a href="report.html">Back to Report Form</a></p>
+    </footer>
+  </div>
+  
+  <script>
+    // Viewport information update
+    function updateViewportInfo() {
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      const ratio = (width / height).toFixed(2);
+      
+      document.getElementById('viewportWidth').textContent = width;
+      document.getElementById('viewportHeight').textContent = height;
+      document.getElementById('viewportRatio').textContent = ratio;
+      
+      // Determine breakpoint
+      let breakpoint = 'Unknown';
+      let deviceType = 'Unknown';
+      
+      if (width < 576) {
+        breakpoint = 'XS (< 576px)';
+        deviceType = 'Mobile';
+      } else if (width < 768) {
+        breakpoint = 'SM (576px - 767px)';
+        deviceType = 'Mobile';
+      } else if (width < 992) {
+        breakpoint = 'MD (768px - 991px)';
+        deviceType = 'Tablet';
+      } else if (width < 1200) {
+        breakpoint = 'LG (992px - 1199px)';
+        deviceType = 'Desktop';
+      } else if (width < 1400) {
+        breakpoint = 'XL (1200px - 1399px)';
+        deviceType = 'Desktop';
+      } else {
+        breakpoint = 'XXL (≥ 1400px)';
+        deviceType = 'Large Desktop';
+      }
+      
+      document.getElementById('currentBreakpoint').textContent = breakpoint;
+      document.getElementById('deviceType').textContent = deviceType;
+    }
+    
+    // Progress bar animation
+    function animateProgress() {
+      const progressBar = document.getElementById('testProgress');
+      progressBar.style.width = '0%';
+      
+      setTimeout(() => {
+        progressBar.style.width = '100%';
+      }, 100);
+    }
+    
+    // Initialize
+    updateViewportInfo();
+    
+    // Update on resize
+    window.addEventListener('resize', updateViewportInfo);
+    
+    // Update on orientation change
+    window.addEventListener('orientationchange', () => {
+      setTimeout(updateViewportInfo, 100);
+    });
+    
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          target.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+          });
+        }
+      });
+    });
+    
+    // Test form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Form submitted successfully! (This is just a test)');
+    });
+    
+    // Test file upload
+    document.querySelector('.test-file-upload').addEventListener('click', function() {
+      alert('File upload clicked! (This is just a test)');
+    });
+    
+    // Console logging for debugging
+    console.log('Responsive Design Test Page Loaded');
+    console.log('Viewport:', window.innerWidth + 'x' + window.innerHeight);
+    console.log('User Agent:', navigator.userAgent);
+    console.log('Device Pixel Ratio:', window.devicePixelRatio);
+  </script>
+</body>
+</html>
