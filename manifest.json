@@ -1,0 +1,50 @@
+{
+  "name": "XYBER Shield",
+  "short_name": "XYBER Shield",
+  "description": "Advanced cybersecurity solutions and education platform",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a192f",
+  "theme_color": "#4c94be",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "images/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "images/screenshot1.png",
+      "sizes": "1280x800",
+      "type": "image/png",
+      "form_factor": "wide"
+    },
+    {
+      "src": "images/screenshot2.png",
+      "sizes": "750x1334",
+      "type": "image/png",
+      "form_factor": "narrow"
+    }
+  ],
+  "categories": ["education", "security", "productivity"],
+  "shortcuts": [
+    {
+      "name": "Login",
+      "url": "/login",
+      "description": "Access your account"
+    },
+    {
+      "name": "Learn",
+      "url": "/education",
+      "description": "Cybersecurity education"
+    }
+  ]
+}

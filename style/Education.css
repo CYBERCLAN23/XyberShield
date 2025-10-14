@@ -571,34 +571,82 @@
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .search-section {
-        padding: 2rem 1rem;
+        padding: 1.5rem 1rem;
     }
     
     .search-section h2 {
-        font-size: 1.8rem;
+        font-size: 1.6rem;
     }
     
     .search-section p {
-        font-size: 1rem;
+        font-size: 0.9rem;
     }
     
     .tech-input {
-        padding: 1rem 0.5rem 1rem 0 !important;
-        font-size: 1rem;
+        padding: 0.8rem 0.5rem 0.8rem 0 !important;
+        font-size: 0.9rem;
     }
     
     .search-placeholder {
-        font-size: 0.9rem;
-        left: 3rem;
+        font-size: 0.8rem;
+        left: 2.5rem;
     }
     
     .filter-btn {
-        padding: 0.5rem 1rem;
-        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
     }
     
     .tech-btn {
-        padding: 0 1.2rem !important;
+        padding: 0 1rem !important;
+    }
+
+    .category-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+}
+
+#suggestionsContainer .list-group-item {
+    background-color: #0f172a;
+    border-color: rgba(99, 102, 241, 0.2);
+    color: #e2e8f0;
+    transition: background-color 0.2s ease;
+}
+
+#suggestionsContainer .list-group-item:hover {
+    background-color: rgba(99, 102, 241, 0.1);
+}
+
+#menu-toggle {
+    display: none;
+}
+
+@media (max-width: 576px) {
+    .search-tech-input {
+        flex-direction: column;
+    }
+
+    .input-group {
+        flex-direction: row;
+    }
+
+    #filter-buttons {
+        display: none !important;
+        flex-direction: column;
+    }
+
+    #filter-buttons.show-filters {
+        display: flex;
+    }
+
+    #menu-toggle {
+        display: block;
+    }
+
+    .edu-card {
+        flex: 0 0 100%;
+        max-width: 100%;
     }
 }
 

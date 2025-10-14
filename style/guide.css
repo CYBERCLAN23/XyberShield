@@ -1,0 +1,157 @@
+/* Professional Guide Styles */
+:root {
+    --guide-bg: rgba(30, 41, 59, 0.8);
+    --guide-border: rgba(99, 102, 241, 0.5);
+    --guide-text: #e2e8f0;
+    --guide-bubble-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    --guide-animation-duration: 0.5s;
+}
+
+.guide-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity var(--guide-animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    backdrop-filter: blur(5px);
+}
+
+.guide-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.guide-spotlight {
+    position: absolute;
+    border-radius: 50%;
+    box-shadow: 0 0 0 9999px rgba(0, 0, 0, 0.8);
+    transition: all var(--guide-animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateZ(0);
+}
+
+.guide-content {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.guide-step {
+    position: absolute;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity var(--guide-animation-duration) cubic-bezier(0.4, 0, 0.2, 1), transform var(--guide-animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.guide-step.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.guide-bubble {
+    background: var(--guide-bg);
+    border: 1px solid var(--guide-border);
+    border-radius: 16px;
+    box-shadow: var(--guide-bubble-shadow);
+    color: var(--guide-text);
+    padding: 2rem;
+    max-width: 400px;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: bubble-in var(--guide-animation-duration) cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes bubble-in {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.guide-arrow {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 10px 10px 0 10px;
+    border-color: var(--guide-border) transparent transparent transparent;
+    transform: translateX(-50%);
+}
+
+.guide-progress {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    padding: 12px 25px;
+    border-radius: 30px;
+    color: white;
+    font-size: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.guide-progress-bar {
+    width: 120px;
+    height: 6px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 6px;
+    margin-top: 8px;
+    overflow: hidden;
+}
+
+.guide-progress-fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6);
+    transition: width var(--guide-animation-duration) cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.guide-skip {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.guide-skip:hover {
+    color: #3b82f6;
+}
+
+/* Responsive Guide CSS */
+@media (max-width: 768px) {
+    .guide-bubble {
+        max-width: 90vw;
+        font-size: 1rem;
+        padding: 1.5rem;
+    }
+
+    .guide-arrow {
+        display: none;
+    }
+
+    .guide-progress {
+        top: 15px;
+        padding: 8px 15px;
+        font-size: 0.9rem;
+    }
+
+    .guide-skip {
+        top: 15px;
+        right: 15px;
+        font-size: 0.9rem;
+    }
+}

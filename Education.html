@@ -1,10 +1,10 @@
-<!DOCTYPE html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+<!DOCTYPE html>
 <html lang="fr">
 <head>
     <base href="./">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.youtube.com https://youtube.com https://s.ytimg.com https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https: https://i.ytimg.com https://yt3.ggpht.com https://www.youtube.com; frame-src 'self' https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com https://youtu.be; connect-src 'self' https://generativelanguage.googleapis.com https://www.youtube.com https://youtube.com https://googlevideo.com https://*.googlevideo.com; media-src 'self' https: data: blob: https://*.googlevideo.com https://www.youtube.com https://youtube.com;">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; frame-src 'self' https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://generativelanguage.googleapis.com; media-src 'self' https: data: blob: https://*.googlevideo.com;">
     <meta http-equiv="Permissions-Policy" content="autoplay=(self https://www.youtube.com), encrypted-media=(self https://www.youtube.com), accelerometer=(self https://www.youtube.com), gyroscope=(self https://www.youtube.com), picture-in-picture=(self https://www.youtube.com), clipboard-write=(self https://www.youtube.com), web-share=(self https://www.youtube.com)">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="X-XSS-Protection" content="1; mode=block">
@@ -66,66 +66,11 @@
       </button>
       <div id="nav" class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
-          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="home.html">Accueil</a></li>
           <li class="nav-item"><a class="nav-link" href="report.html">Signaler</a></li>
           <li class="nav-item"><a class="nav-link active" href="#">Éducation</a></li>
           <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-          <!-- Login Button (shown when not logged in) -->
-          <li class="nav-item ms-lg-3" id="loginButton" style="display: none;">
-              <a class="btn btn-neon" href="login.html">
-                  <i class="fas fa-sign-in-alt me-1"></i> Se connecter
-              </a>
-          </li>
-
-          <!-- User Dropdown (shown when logged in) -->
-          <li class="nav-item dropdown ms-lg-3" id="userDropdown" style="display: none;">
-              <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdownToggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  <div class="user-avatar me-2" id="navUserAvatar">
-                      <i class="fas fa-user"></i>
-                  </div>
-                  <span id="navUserName">Utilisateur</span>
-              </a>
-              <div class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="userDropdownToggle">
-                  <!-- User Profile Header -->
-                  <div class="d-flex align-items-center mb-3">
-                      <div class="user-avatar me-3" style="width: 48px; height: 48px;" id="dropdownUserAvatar">
-                          <i class="fas fa-user"></i>
-                      </div>
-                      <div>
-                          <h6 class="mb-0" id="dropdownUserName">Utilisateur</h6>
-                          <small class="text-muted" id="dropdownUserEmail">email@example.com</small>
-                      </div>
-                  </div>
-
-                  <!-- User Info -->
-                  <div class="dropdown-divider"></div>
-                  <div class="mb-2">
-                      <small class="text-uppercase text-muted fw-bold d-block mb-1">Nom complet</small>
-                      <div class="text-white" id="dropdownFullName">-</div>
-                  </div>
-                  <div class="mb-2">
-                      <small class="text-uppercase text-muted fw-bold d-block mb-1">Nom d'utilisateur</small>
-                      <div class="text-white" id="dropdownUsername">-</div>
-                  </div>
-                  <div class="mb-3">
-                      <small class="text-uppercase text-muted fw-bold d-block mb-1">Membre depuis</small>
-                      <div class="text-white" id="dropdownMemberSince">-</div>
-                  </div>
-
-                  <!-- Actions -->
-                  <div class="dropdown-divider"></div>
-                  <div class="d-grid gap-2 mb-2">
-                      <a href="dashboard.html" class="btn btn-outline-primary btn-sm">
-                          <i class="fas fa-tachometer-alt me-1"></i> Dashboard
-                      </a>
-                  </div>
-                  <div class="d-grid gap-2">
-                      <button class="btn btn-outline-danger btn-sm" onclick="logout()">
-                          <i class="fas fa-sign-out-alt me-1"></i> Se déconnecter
-                      </button>
-                  </div>
-              </div>
-          </li>
+          <li class="nav-item"><a class="btn btn-neon ms-lg-3" href="index.html">Se connecter</a></li>
         </ul>
       </div>
     </div>
@@ -141,7 +86,7 @@
             <p class="text-muted mb-0">Tapez votre recherche ou sélectionnez une catégorie ci-dessous</p>
           </div>
           
-          <form class="youtube-search search-tech" onsubmit="performSearch(event)">
+          <form class="youtube-search search-tech">
             <div class="search-container">
               <div class="search-tech-bg"></div>
               <div class="search-tech-grid"></div>
@@ -153,8 +98,7 @@
                       class="form-control youtube-search-input tech-input" 
                       placeholder="" 
                       aria-label="Search"
-                      autocomplete="off"
-                      oninput="handleSearchInput()">
+                      autocomplete="off">
                 <div class="search-placeholder">
                   <span class="typing-text" 
                         data-text="Rechercher : phishing, mots de passe, WhatsApp, sécurité..."
@@ -167,6 +111,8 @@
               <div class="search-underline"></div>
             </div>
           </form>
+          <div id="suggestionsContainer" class="list-group position-absolute w-100" style="z-index: 1050;"></div>
+
           
           <div class="d-flex justify-content-center mb-4 flex-wrap" id="filter-buttons">
               <button class="btn btn-outline-primary me-2 mb-2 filter-btn active" data-filter="all">Tous</button>
@@ -176,6 +122,9 @@
               <button class="btn btn-guide-restart ms-3 mb-2" onclick="restartGuide()" title="Relancer le guide de visite">
                   <i class="fas fa-route me-2"></i>Guide de visite
               </button>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary d-sm-none" id="menu-toggle">Menu</button>
           </div>
         </div>
       </div>
@@ -239,7 +188,7 @@
       <div class="guide-step" data-step="4" data-target="quizSection" style="display: none;">
         <div class="guide-bubble">
           <h4>🎯 Quiz Interactif de Cybersécurité</h4>
-          <p>Testez vos connaissances avec notre quiz professionnel ! 10 questions sélectionnées aléatoirement, 5 minutes chrono, et obtenez votre certificat XyberShield.</p>
+          <p>Testez vos connaissances avec notre quiz intelligent ! 10 questions générées par IA, 5 minutes chrono, et obtenez votre certificat XyberShield.</p>
           <button class="btn btn-neon btn-sm" onclick="nextGuideStep()">
             <i class="fas fa-arrow-right me-1"></i>Suivant
           </button>
@@ -281,11 +230,11 @@
                     <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="video" data-title="Comprendre le phishing">
                         <div class="card cyber-card h-100">
                             <div class="card-media">
-                                <div class="thumb video-thumb" style="background-image:url('https://img.youtube.com/vi/Z7Wl2FW2TcA/maxresdefault.jpg');">
-                                    <button class="play-btn" data-video="https://www.youtube.com/embed/Z7Wl2FW2TcA?autoplay=1">
+                                <div class="thumb video-thumb" style="background-image:url('https://img.youtube.com/vi/PRSyNoUUXKk/maxresdefault.jpg');">
+                                    <button class="play-btn" data-video="https://www.youtube.com/embed/PRSyNoUUXKk?autoplay=1">
                                         <i class="fas fa-play"></i>
                                     </button>
-                                    <div class="video-duration">6:42</div>
+                                    <div class="video-duration">8:45</div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -304,14 +253,14 @@
                         </div>
                     </div>
 
-                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="video" data-title="Protection contre les malwares">
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="video" data-title="Protection contre le phishing">
                         <div class="card cyber-card h-100">
                             <div class="card-media">
-                                <div class="thumb video-thumb" style="background-image:url('https://img.youtube.com/vi/Dk7h22mRYHQ/maxresdefault.jpg');">
-                                    <button class="play-btn" data-video="https://www.youtube.com/embed/Dk7h22mRYHQ?autoplay=1">
+                                <div class="thumb video-thumb" style="background-image:url('https://img.youtube.com/vi/BX3y_an89PQ/maxresdefault.jpg');">
+                                    <button class="play-btn" data-video="https://www.youtube.com/embed/BX3y_an89PQ?autoplay=1">
                                         <i class="fas fa-play"></i>
                                     </button>
-                                    <div class="video-duration">4:18</div>
+                                    <div class="video-duration">12:30</div>
                                 </div>
                             </div>
                             <div class="card-body">
@@ -319,11 +268,11 @@
                                     <span class="badge badge-video"><i class="fas fa-video me-1"></i>Vidéo</span>
                                     <span class="card-views"><i class="fas fa-eye me-1"></i>1.8k vues</span>
                                 </div>
-                                <h5 class="card-title">Protection contre les malwares</h5>
-                                <p class="card-text">Techniques avancées pour identifier et éviter les logiciels malveillants et virus informatiques.</p>
+                                <h5 class="card-title">Protection contre le phishing</h5>
+                                <p class="card-text">Techniques avancées pour identifier et éviter les attaques de phishing sophistiquées.</p>
                                 <div class="card-tags">
-                                    <span class="tag">#malware</span>
-                                    <span class="tag">#antivirus</span>
+                                    <span class="tag">#protection</span>
+                                    <span class="tag">#prévention</span>
                                     <span class="tag">#cybersécurité</span>
                                 </div>
                             </div>
@@ -585,8 +534,40 @@
         </section>
 
 
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <p class="mb-0 small text-muted">© <span id="year"></span> XyberShield — Éduquer, Protéger, Agir.</p>
+            <div class="d-flex gap-3 social">
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
 
-    <!-- OLD VIDEO MODAL REMOVED - Using lightbox system instead -->
+    <!-- MODAL Video -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content modal-cyber">
+                <button type="button" class="btn-close btn-close-white ms-auto me-2 mt-2" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                <div class="ratio ratio-16x9">
+                    <iframe id="videoFrame" src="" title="Lecture vidéo" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                
+                <!-- Video Container -->
+                <div id="videoContainer" class="ratio ratio-16x9 d-none">
+                    <video id="lightboxVideo" controls class="rounded-3" style="background: #000;">
+                        <source src="" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                
+                <!-- Caption -->
+                <div id="lightboxCaption" class="text-center text-white mt-2 fw-light"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- YouTube IFrame API -->
     <script>
@@ -906,8 +887,8 @@
                                         <div class="loading-spinner">
                                             <div class="spinner"></div>
                                         </div>
-                                        <h4>Préparation du quiz...</h4>
-                                        <p>Sélection aléatoire des questions de cybersécurité</p>
+                                        <h4>Génération des questions...</h4>
+                                        <p>Notre IA prépare un quiz personnalisé pour vous</p>
                                     </div>
                                 </div>
                             </div>
@@ -917,124 +898,19 @@
             </div>
         </section>
 
-    <!-- Contact + Footer -->
-    <footer id="contact" class="footer bg-dark text-white py-5">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 mb-4">
-                    <h5 class="text-neon mb-3">À propos de XyberShield</h5>
-                    <p class="small text-white-50">Une initiative de <a href="https://xyber-clan.vercel.app/" target="_blank" class="text-neon">XyberClan</a>, une startup innovante spécialisée dans la cybersécurité et la protection des données.</p>
-                    <div class="social-icons mt-3">
-                        <a href="https://www.linkedin.com/groups/13252179/" target="_blank" rel="noopener noreferrer" class="text-white me-3" aria-label="LinkedIn" title="Rejoignez notre groupe LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
-                        <a href="https://github.com/CYBERCLAN23" target="_blank" rel="noopener noreferrer" class="text-white me-3" aria-label="GitHub" title="Visitez notre GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                        <a href="mailto:CyberClan237@gmail.com" class="text-white me-3" aria-label="Email" title="Contactez-nous par email">
-                            <i class="fas fa-envelope"></i>
-                        </a>
-                        <a href="https://whatsapp.com/channel/0029VbBLsii2P59lAGA3wO1O" target="_blank" rel="noopener noreferrer" class="text-white" aria-label="WhatsApp Channel" title="Rejoignez notre chaîne WhatsApp">
-                            <i class="fab fa-whatsapp"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-4 mb-4">
-                    <h6 class="text-neon mb-3">Liens Rapides</h6>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="index.html#services" class="text-white-50 small">Nos Services</a></li>
-                        <li class="mb-2"><a href="index.html#about" class="text-white-50 small">À Propos</a></li>
-                        <li class="mb-2"><a href="index.html#conseils" class="text-white-50 small">Conseils de Sécurité</a></li>
-                        <li class="mb-2"><a href="index.html#partenaires" class="text-white-50 small">Partenaires</a></li>
-                        <li><a href="#contact" class="text-white-50 small">Contact</a></li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 mb-4">
-                    <h6 class="text-neon mb-3">Contact</h6>
-                    <ul class="list-unstyled text-white-50 small">
-                        <li class="mb-2"><i class="fas fa-envelope me-2"></i> support@xybershield.com</li>
-                        <li class="mb-2"><i class="fab fa-whatsapp me-2"></i> +237 654 269 488</li>
-                        <li><i class="fas fa-map-marker-alt me-2"></i> Yaoundé, Cameroun</li>
-                    </ul>
-                </div>
-
-                <div class="col-lg-3 col-md-4 mb-4">
-                    <h6 class="text-neon mb-3">Newsletter</h6>
-                    <p class="small text-white-50">Abonnez-vous pour recevoir nos conseils de sécurité</p>
-                    <div class="input-group mb-3">
-                        <input type="email" class="form-control form-control-sm bg-dark text-white border-secondary" placeholder="Votre email">
-                        <button class="btn btn-neon" type="button"><i class="fas fa-paper-plane"></i></button>
-                    </div>
-                </div>
-            </div>
-
-            <hr class="bg-secondary my-4">
-
-            <div class="row align-items-center">
-                <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                    <p class="small text-white-50 mb-0">&copy; <span id="year"></span> XyberShield. Tous droits réservés.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <a href="privacy-policy.html" class="text-white-50 small me-3">Politique de confidentialité</a>
-                    <span class="text-white-50">•</span>
-                    <a href="#" class="text-white-50 small ms-3">Conditions d'utilisation</a>
-                </div>
-            </div>
-
-            <div class="text-center mt-3">
-                <p class="small text-white-50 mb-0">Développé avec <i class="fas fa-heart text-danger"></i> par
-                    <a href="https://xyber-clan.vercel.app/" target="_blank" class="text-neon">XyberClan</a>
-                </p>
-            </div>
-        </div>
-    </footer>
-
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="animation/lightbox.js" defer></script>
-    <script src="animation/xyber-chat.js" defer></script>
+
+    <script src="animation/xyber-chat.js"></script>
     <script src="animation/guide-system.js" defer></script>
     <script src="animation/cybersecurity-quiz.js"></script>
     <script src="animation/search-functionality.js"></script>
     <script defer src="animation/search-animations.js"></script>
-    <script defer src="animation/education-guide.js"></script>
+
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
-        
-        // Fonction de diagnostic YouTube
-        window.testYouTube = function() {
-            console.log('🎥 Test YouTube diagnostic...');
-            
-            // Test direct avec une vidéo GARANTIE sans erreur 153
-            if (window.lightbox) {
-                const testUrl = 'https://www.youtube.com/embed/Z7Wl2FW2TcA?autoplay=1';
-                console.log('🎬 Lancement test vidéo GARANTIE:', testUrl);
-                window.lightbox.showVideo(testUrl, 'Test YouTube - Phishing Awareness (GARANTI)');
-            } else {
-                console.error('❌ Lightbox non disponible');
-                alert('❌ Système lightbox non chargé');
-            }
-        };
-        
-        // Test automatique au chargement
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                console.log('🔍 Diagnostic automatique YouTube...');
-                console.log('📺 Video container:', document.getElementById('videoContainer'));
-                console.log('🪟 Lightbox modal:', document.getElementById('lightboxModal'));
-                console.log('⚡ Lightbox system:', window.lightbox);
-                
-                // Test de connectivité YouTube
-                const testImg = new Image();
-                testImg.onload = () => console.log('✅ YouTube accessible');
-                testImg.onerror = () => console.log('❌ YouTube non accessible');
-                testImg.src = 'https://www.youtube.com/favicon.ico?' + Date.now();
-            }, 2000);
-        });
     </script>
-    <script src="animation/user-menu.js"></script>
 </body>
 </html>

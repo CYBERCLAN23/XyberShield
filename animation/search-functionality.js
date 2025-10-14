@@ -3,54 +3,39 @@ class SearchManager {
     constructor() {
         this.allCards = [];
         this.currentFilter = 'all';
+        this.suggestionKeywords = [];
+        this.initialItemsToShow = 3;
         this.init();
     }
 
     init() {
-        // Get all searchable elements on the page
         this.initSearchableElements();
-        
-        // Initialize filter buttons
         this.initFilterButtons();
-        
-        // Initialize search input
         this.initSearchInput();
+        this.generateKeywords();
+        this.setupInitialView();
     }
 
     initSearchableElements() {
-        // Get all resource cards
-        this.allCards = document.querySelectorAll('.resource-card');
-        
-        // Get all searchable page elements
+        this.allCards = document.querySelectorAll('.edu-card');
         this.searchableElements = [
-            // Page sections
             { element: document.querySelector('.search-section'), keywords: ['recherche', 'search', 'barre', 'trouver', 'chercher'], type: 'section', name: 'Barre de recherche' },
             { element: document.querySelector('#filter-buttons'), keywords: ['filtre', 'filter', 'catégorie', 'type', 'bouton'], type: 'section', name: 'Filtres par type' },
             { element: document.querySelector('#quizSection'), keywords: ['quiz', 'test', 'questions', 'évaluation', 'certificat', 'cybersécurité', 'connaissances'], type: 'section', name: 'Quiz de cybersécurité' },
             { element: document.querySelector('#chatToggle'), keywords: ['chat', 'assistant', 'aide', 'ia', 'intelligence artificielle', 'support'], type: 'section', name: 'Assistant IA' },
-            
-            // Quiz elements
             { element: document.querySelector('.quiz-start-card'), keywords: ['commencer', 'démarrer', 'start', 'quiz', 'test'], type: 'quiz', name: 'Démarrer le quiz' },
             { element: document.querySelector('.quiz-timer'), keywords: ['temps', 'timer', 'chrono', 'minuteur', 'countdown'], type: 'quiz', name: 'Minuteur du quiz' },
-            
-            // Education content
             { element: document.querySelector('.education-section'), keywords: ['éducation', 'formation', 'apprentissage', 'ressources', 'contenu'], type: 'section', name: 'Section éducation' }
-        ].filter(item => item.element); // Remove null elements
+        ].filter(item => item.element);
     }
 
     initFilterButtons() {
         const filterButtons = document.querySelectorAll('.filter-btn');
         filterButtons.forEach(btn => {
             btn.addEventListener('click', (e) => {
-                // Remove active class from all buttons
                 filterButtons.forEach(b => b.classList.remove('active'));
-                // Add active class to clicked button
                 e.target.classList.add('active');
-                
-                // Update current filter
                 this.currentFilter = e.target.dataset.filter;
-                
-                // Apply filter
                 this.applyFilters();
             });
         });
@@ -59,14 +44,10 @@ class SearchManager {
     initSearchInput() {
         const searchInput = document.getElementById('searchInput');
         if (searchInput) {
-            // Clear search on page load
             searchInput.value = '';
-            
-            // Add event listeners
             searchInput.addEventListener('input', () => {
-                this.applyFilters();
+                this.handleSearchInput();
             });
-            
             searchInput.addEventListener('keypress', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -76,147 +57,169 @@ class SearchManager {
         }
     }
 
+    handleSearchInput() {
+        this.applyFilters();
+        this.showSuggestions();
+    }
+
+    performSearch() {
+        const searchBtn = document.querySelector('.youtube-search-btn');
+        if (searchBtn) {
+            searchBtn.classList.add('searching');
+            setTimeout(() => {
+                searchBtn.classList.remove('searching');
+            }, 1000);
+        }
+        this.applyFilters();
+        const resultsSection = document.querySelector('.education-section') || document.getElementById('eduGrid');
+        if (resultsSection) {
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    generateKeywords() {
+        const keywords = new Set();
+        this.allCards.forEach(card => {
+            const title = card.dataset.title;
+            if (title) {
+                keywords.add(title.trim());
+            }
+            const text = card.querySelector('.card-text').textContent;
+            if (text) {
+                text.split(/[\s,]+/).forEach(word => {
+                    if (word.length > 3) {
+                        keywords.add(word.toLowerCase());
+                    }
+                });
+            }
+            const tags = card.querySelectorAll('.tag');
+            tags.forEach(tag => {
+                keywords.add(tag.textContent.replace('#', '').trim());
+            });
+        });
+        this.suggestionKeywords = [...keywords];
+    }
+
+    setupInitialView() {
+        this.setupLoadMore('video');
+        this.setupLoadMore('image');
+        this.setupLoadMore('pdf');
+    }
+
+    setupLoadMore(category) {
+        const cards = document.querySelectorAll(`.edu-card[data-type='${category}']`);
+        const loadMoreBtn = document.querySelector(`.load-more-btn[data-category='${category}']`);
+
+        if (cards.length <= this.initialItemsToShow) {
+            if (loadMoreBtn) {
+                loadMoreBtn.style.display = 'none';
+            }
+            return;
+        }
+
+        for (let i = this.initialItemsToShow; i < cards.length; i++) {
+            cards[i].classList.add('hidden');
+        }
+
+        if (loadMoreBtn) {
+            loadMoreBtn.style.display = 'block';
+            loadMoreBtn.addEventListener('click', function() {
+                for (let i = this.initialItemsToShow; i < cards.length; i++) {
+                    cards[i].classList.remove('hidden');
+                }
+                loadMoreBtn.style.display = 'none';
+            });
+        }
+    }
+
     applyFilters() {
         const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-        let visibleCount = 0;
-        let foundPageElement = null;
+        const loadMoreButtons = document.querySelectorAll('.load-more-btn');
+        console.log(`Search Term: ${searchTerm}`);
+        console.log(`Current Filter: ${this.currentFilter}`);
 
-        // First, search in page elements if there's a search term
-        if (searchTerm !== '') {
-            foundPageElement = this.searchPageElements(searchTerm);
-        }
-
-        // Then filter resource cards
-        this.allCards.forEach(card => {
-            const cardType = card.dataset.type || 'all';
-            const cardTitle = card.querySelector('h5')?.textContent.toLowerCase() || '';
-            const cardDescription = card.querySelector('p')?.textContent.toLowerCase() || '';
-            const cardContent = cardTitle + ' ' + cardDescription;
-
-            // Check filter match
-            const filterMatch = this.currentFilter === 'all' || cardType === this.currentFilter;
-            
-            // Check search match
-            const searchMatch = searchTerm === '' || cardContent.includes(searchTerm);
-
-            if (filterMatch && searchMatch) {
-                card.style.display = 'block';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-                visibleCount++;
-            } else {
-                card.style.display = 'none';
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-            }
-        });
-
-        // Show page element result or no results message
-        if (foundPageElement) {
-            this.showPageElementResult(foundPageElement);
-        } else {
-            this.showNoResultsMessage(visibleCount === 0 && (searchTerm !== '' || this.currentFilter !== 'all'));
-        }
-    }
-
-    searchPageElements(searchTerm) {
-        // Search through page elements
-        for (let item of this.searchableElements) {
-            const keywordMatch = item.keywords.some(keyword => 
-                keyword.toLowerCase().includes(searchTerm) || 
-                searchTerm.includes(keyword.toLowerCase())
-            );
-            
-            if (keywordMatch) {
-                return item;
-            }
-        }
-        return null;
-    }
-
-    showPageElementResult(pageElement) {
-        // Remove existing messages
-        this.removeExistingMessages();
-        
-        // Create page element result
-        const resultDiv = document.createElement('div');
-        resultDiv.id = 'pageElementResult';
-        resultDiv.className = 'page-element-result text-center py-4 mb-4';
-        resultDiv.innerHTML = `
-            <div class="page-element-container">
-                <i class="fas fa-bullseye fa-2x text-primary mb-3"></i>
-                <h5 class="text-primary mb-2">Élément trouvé sur la page</h5>
-                <p class="text-muted mb-3">${pageElement.name}</p>
-                <button class="btn btn-primary btn-sm" onclick="searchManager.scrollToElement('${pageElement.element.id || pageElement.element.className}')">
-                    <i class="fas fa-eye me-2"></i>Voir l'élément
-                </button>
-                <button class="btn btn-outline-secondary btn-sm ms-2" onclick="searchManager.clearSearch()">
-                    <i class="fas fa-times me-2"></i>Effacer
-                </button>
-            </div>
-        `;
-        
-        // Insert after filter buttons
-        const filterSection = document.getElementById('filter-buttons');
-        if (filterSection) {
-            filterSection.parentNode.insertBefore(resultDiv, filterSection.nextSibling);
-        }
-        
-        // Highlight the element
-        this.highlightElement(pageElement.element);
-    }
-
-    scrollToElement(selector) {
-        let element;
-        if (selector.startsWith('.')) {
-            element = document.querySelector(selector);
-        } else {
-            element = document.getElementById(selector) || document.querySelector(`.${selector}`);
-        }
-        
-        if (element) {
-            element.scrollIntoView({ 
-                behavior: 'smooth', 
-                block: 'center',
-                inline: 'center'
+        if (searchTerm === '') {
+            // Restore initial view
+            this.allCards.forEach(card => {
+                card.style.display = ''; // Reset display
+                card.classList.remove('hidden');
             });
-            
-            // Add pulse animation
-            element.style.animation = 'elementPulse 2s ease-in-out';
-            setTimeout(() => {
-                element.style.animation = '';
-            }, 2000);
+            this.setupInitialView();
+        } else {
+            // Apply search filters
+            let visibleCount = 0;
+            this.allCards.forEach(card => {
+                const cardType = card.dataset.type || 'all';
+                const cardTitle = card.getAttribute('data-title')?.toLowerCase() || card.querySelector('h5')?.textContent.toLowerCase() || '';
+                const cardDescription = card.querySelector('.card-text')?.textContent.toLowerCase() || '';
+                const cardTags = card.querySelector('.card-tags')?.textContent.toLowerCase() || '';
+                const cardContent = [cardTitle, cardDescription, cardTags].join(' ');
+
+                const filterMatch = this.currentFilter === 'all' || cardType === this.currentFilter;
+                const searchMatch = cardContent.includes(searchTerm);
+
+                console.log(`Card: ${cardTitle}, Filter Match: ${filterMatch}, Search Match: ${searchMatch}`);
+
+                if (filterMatch && searchMatch) {
+                    card.style.display = 'block';
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            loadMoreButtons.forEach(btn => btn.style.display = 'none');
+            this.showNoResultsMessage(visibleCount === 0);
         }
     }
 
-    highlightElement(element) {
-        // Remove previous highlights
-        document.querySelectorAll('.search-highlighted').forEach(el => {
-            el.classList.remove('search-highlighted');
+    showSuggestions() {
+        const searchInput = document.getElementById('searchInput');
+        const suggestionsContainer = document.getElementById('suggestionsContainer');
+        const query = searchInput.value.toLowerCase().trim();
+
+        suggestionsContainer.innerHTML = '';
+        if (query.length < 2) {
+            suggestionsContainer.style.display = 'none';
+            return;
+        }
+
+        const filteredSuggestions = this.suggestionKeywords.filter(kw => kw.toLowerCase().includes(query));
+
+        if (filteredSuggestions.length > 0) {
+            suggestionsContainer.style.display = 'block';
+            filteredSuggestions.slice(0, 5).forEach(suggestion => {
+                const suggestionItem = document.createElement('a');
+                suggestionItem.className = 'list-group-item list-group-item-action';
+                suggestionItem.href = '#';
+                suggestionItem.textContent = suggestion;
+                suggestionItem.onclick = (e) => {
+                    e.preventDefault();
+                    searchInput.value = suggestion;
+                    this.applyFilters();
+                    suggestionsContainer.innerHTML = '';
+                    suggestionsContainer.style.display = 'none';
+                    searchInput.focus();
+                };
+                suggestionsContainer.appendChild(suggestionItem);
+            });
+        } else {
+            suggestionsContainer.style.display = 'none';
+        }
+
+        document.addEventListener('click', (e) => {
+            if (!suggestionsContainer.contains(e.target) && e.target !== searchInput) {
+                suggestionsContainer.innerHTML = '';
+                suggestionsContainer.style.display = 'none';
+            }
         });
-        
-        // Add highlight to found element
-        if (element) {
-            element.classList.add('search-highlighted');
-            setTimeout(() => {
-                element.classList.remove('search-highlighted');
-            }, 3000);
-        }
-    }
-
-    removeExistingMessages() {
-        const existingResult = document.getElementById('pageElementResult');
-        const existingNoResults = document.getElementById('noResultsMessage');
-        
-        if (existingResult) existingResult.remove();
-        if (existingNoResults) existingNoResults.remove();
     }
 
     showNoResultsMessage(show) {
         let noResultsMsg = document.getElementById('noResultsMessage');
         
         if (show && !noResultsMsg) {
-            // Create no results message
             noResultsMsg = document.createElement('div');
             noResultsMsg.id = 'noResultsMessage';
             noResultsMsg.className = 'text-center py-5';
@@ -230,11 +233,9 @@ class SearchManager {
                     </button>
                 </div>
             `;
-            
-            // Insert after filter buttons
-            const filterSection = document.getElementById('filter-buttons');
-            if (filterSection) {
-                filterSection.parentNode.insertBefore(noResultsMsg, filterSection.nextSibling);
+            const eduGrid = document.getElementById('eduGrid');
+            if (eduGrid) {
+                eduGrid.parentNode.insertBefore(noResultsMsg, eduGrid.nextSibling);
             }
         } else if (!show && noResultsMsg) {
             noResultsMsg.remove();
@@ -246,20 +247,16 @@ class SearchManager {
         if (searchInput) {
             searchInput.value = '';
         }
-        
-        // Reset to "Tous" filter
         const allButton = document.querySelector('.filter-btn[data-filter="all"]');
         if (allButton) {
             document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
             allButton.classList.add('active');
             this.currentFilter = 'all';
         }
-        
         this.applyFilters();
     }
 
     performSearch() {
-        // Trigger search animation
         const searchBtn = document.querySelector('.youtube-search-btn');
         if (searchBtn) {
             searchBtn.classList.add('searching');
@@ -267,35 +264,25 @@ class SearchManager {
                 searchBtn.classList.remove('searching');
             }, 1000);
         }
-        
-        // Apply current filters
         this.applyFilters();
-        
-        // Scroll to results
-        const resultsSection = document.querySelector('.resources-grid');
+        const resultsSection = document.querySelector('.education-section') || document.getElementById('eduGrid');
         if (resultsSection) {
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     }
 }
 
-// Global functions for HTML event handlers
-function performSearch(event) {
-    if (event) {
-        event.preventDefault();
-    }
-    if (window.searchManager) {
-        window.searchManager.performSearch();
-    }
-}
 
-function handleSearchInput() {
-    if (window.searchManager) {
-        window.searchManager.applyFilters();
-    }
-}
-
-// Initialize search manager when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     window.searchManager = new SearchManager();
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const filterButtons = document.getElementById('filter-buttons');
+
+    if (menuToggle && filterButtons) {
+        menuToggle.addEventListener('click', () => {
+            console.log('Menu button clicked');
+            filterButtons.classList.toggle('show-filters');
+        });
+    }
 });
