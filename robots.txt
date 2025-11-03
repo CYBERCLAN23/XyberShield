@@ -1,0 +1,3 @@
+User‑agent: *
+Allow: /
+Sitemap: https://xyber-shield.vercel.app/sitemap.xml
