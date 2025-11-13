@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* Professional Chatbot Styles */
 :root {
     --chat-bg-dark: #0f172a;
@@ -45,11 +46,43 @@
     height: 70px;
     border-radius: 50%;
     background: var(--chat-bubble-user-bg);
+=======
+/* Claude-Style Chatbot - Mobile First Design */
+:root {
+    --chat-primary: #2563eb;
+    --chat-secondary: #3b82f6;
+    --chat-accent: #3ddc84;
+    --chat-bg: #ffffff;
+    --chat-surface: #f9fafb;
+    --chat-user-bubble: #2563eb;
+    --chat-ai-bubble: #f3f4f6;
+    --chat-text: #1f2937;
+    --chat-text-light: #6b7280;
+    --chat-border: #e5e7eb;
+    --chat-shadow: rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile First - Floating Widget */
+.floating-chat-widget {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+}
+
+/* Chat Toggle Button - Claude Style with Logo */
+.chat-toggle {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    background: #000000;
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
     color: white;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+<<<<<<< HEAD
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
 }
@@ -73,10 +106,75 @@
     transform: translateY(50px) scale(0.9);
     transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
+=======
+    border: 1px solid #3ddc84;
+    box-shadow: 0 4px 12px rgba(61, 220, 132, 0.3);
+    transition: all 0.3s ease;
+    overflow: hidden;
+    position: relative;
+}
+
+.chat-toggle::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('../images/logos/logo.png') center/80% no-repeat;
+    opacity: 1;
+}
+
+.chat-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(61, 220, 132, 0.4);
+}
+
+.chat-toggle:active {
+    transform: translateY(0);
+}
+
+.chat-toggle i {
+    font-size: 1.5rem;
+    position: relative;
+    z-index: 1;
+    display: none;
+}
+
+/* Desktop - Larger button */
+@media (min-width: 768px) {
+    .floating-chat-widget {
+        bottom: 24px;
+        right: 24px;
+    }
+    
+    .chat-toggle {
+        width: 64px;
+        height: 64px;
+        border-radius: 18px;
+    }
+}
+
+/* Chat Window - Mobile First Full Screen */
+.chat-window {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--chat-bg);
+    display: flex;
+    flex-direction: column;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    pointer-events: none;
+    z-index: 10000;
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
 }
 
 .chat-window.visible {
     opacity: 1;
+<<<<<<< HEAD
     transform: translateY(0) scale(1);
     pointer-events: all;
 }
@@ -88,10 +186,47 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+=======
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+/* Desktop - Elegant Floating Card */
+@media (min-width: 768px) {
+    .chat-window {
+        bottom: 96px;
+        right: 24px;
+        left: auto;
+        top: auto;
+        width: 380px;
+        height: 580px;
+        max-height: calc(100vh - 120px);
+        border-radius: 20px;
+        box-shadow: 0 24px 48px var(--chat-shadow),
+                    0 0 0 1px var(--chat-border);
+        transform: translateY(30px) scale(0.9);
+    }
+    
+    .chat-window.visible {
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Chat Header - Modern Gradient */
+.chat-header {
+    padding: 1.25rem 1.25rem;
+    background: var(--chat-surface);
+    border-bottom: 1px solid var(--chat-border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
 }
 
 .chat-header-title {
     color: var(--chat-text);
+<<<<<<< HEAD
     font-weight: bold;
     font-size: 1.2rem;
 }
@@ -134,6 +269,80 @@
 
 .chat-messages-floating::-webkit-scrollbar {
     width: 8px;
+=======
+    font-weight: 700;
+    font-size: 1.125rem;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+}
+
+.chat-header-title i {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--chat-user-bubble);
+    color: white;
+    border-radius: 50%;
+    font-size: 1rem;
+}
+
+.chat-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--chat-text-light);
+    font-size: 1.25rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.chat-close-btn:hover {
+    background: var(--chat-ai-bubble);
+    color: var(--chat-text);
+    transform: rotate(90deg);
+}
+
+@media (min-width: 768px) {
+    .chat-header {
+        padding: 1.5rem;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --chat-bg: #1a202c;
+        --chat-surface: #2d3748;
+        --chat-ai-bubble: #2d3748;
+        --chat-text: #e2e8f0;
+        --chat-text-light: #a0aec0;
+        --chat-border: #4a5568;
+        --chat-shadow: rgba(0, 0, 0, 0.3);
+    }
+}
+
+/* Messages Area - Clean scrolling */
+.chat-messages-floating {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--chat-primary) transparent;
+}
+
+.chat-messages-floating::-webkit-scrollbar {
+    width: 6px;
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
 }
 
 .chat-messages-floating::-webkit-scrollbar-track {
@@ -141,6 +350,7 @@
 }
 
 .chat-messages-floating::-webkit-scrollbar-thumb {
+<<<<<<< HEAD
     background-color: var(--chat-bubble-user-bg);
     border-radius: 4px;
 }
@@ -155,6 +365,32 @@
     from {
         opacity: 0;
         transform: translateY(20px);
+=======
+    background: var(--chat-primary);
+    border-radius: 3px;
+}
+
+/* Desktop - More padding */
+@media (min-width: 768px) {
+    .chat-messages-floating {
+        padding: 1.5rem;
+    }
+}
+
+/* Message Bubbles - Claude Style */
+.message {
+    margin-bottom: 1.5rem;
+    display: flex;
+    gap: 0.75rem;
+    opacity: 0;
+    animation: messageSlideIn 0.3s ease forwards;
+}
+
+@keyframes messageSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
     }
     to {
         opacity: 1;
@@ -166,6 +402,7 @@
     justify-content: flex-end;
 }
 
+<<<<<<< HEAD
 .message-content-small {
     padding: 1rem 1.5rem;
     border-radius: 15px;
@@ -189,11 +426,99 @@
     padding: 1.5rem;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
     box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+=======
+.message.ai-message {
+    justify-content: flex-start;
+}
+
+/* Message Avatar - Claude Style */
+.message-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    background: var(--chat-surface);
+    border: 1px solid var(--chat-border);
+    position: relative;
+}
+
+.message.user-message .message-avatar {
+    background: var(--chat-user-bg);
+    color: white;
+    border: none;
+    order: 2;
+}
+
+.message.ai-message .message-avatar {
+    background: #000000;
+    color: white;
+    border: 1px solid #3ddc84;
+}
+
+.message.ai-message .message-avatar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url('../images/logos/logo.png') center/80% no-repeat;
+}
+
+.message-content-small {
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    max-width: 80%;
+    line-height: 1.6;
+    font-size: 0.9375rem;
+    word-wrap: break-word;
+    position: relative;
+}
+
+.message.user-message .message-content-small {
+    background: var(--chat-user-bg);
+    color: white;
+}
+
+.message.ai-message .message-content-small {
+    background: var(--chat-ai-bg);
+    color: var(--chat-text);
+    border: 1px solid var(--chat-border);
+}
+
+/* Desktop - Larger bubbles */
+@media (min-width: 768px) {
+    .message {
+        gap: 1rem;
+    }
+    
+    .message-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+    }
+    
+    .message-content-small {
+        max-width: 70%;
+        padding: 0.875rem 1.125rem;
+        font-size: 1rem;
+    }
+}
+
+/* Input Area - Modern & Friendly */
+.chat-input-floating {
+    padding: 1rem 1.25rem;
+    background: var(--chat-surface);
+    border-top: 1px solid var(--chat-border);
+    flex-shrink: 0;
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
 }
 
 .chat-input-group {
     display: flex;
     align-items: center;
+<<<<<<< HEAD
 }
 
 .chat-input {
@@ -240,5 +565,117 @@
     .chat-toggle {
         bottom: 20px;
         right: 20px;
+=======
+    gap: 0.75rem;
+}
+
+.chat-input {
+    flex: 1;
+    border: 2px solid var(--chat-border);
+    border-radius: 24px;
+    padding: 0.875rem 1.25rem;
+    background: var(--chat-bg);
+    color: var(--chat-text);
+    font-size: 0.95rem;
+    outline: none;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.chat-input::placeholder {
+    color: var(--chat-text-light);
+}
+
+.chat-input:focus {
+    border-color: var(--chat-primary);
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+.btn-send-floating {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--chat-user-bubble);
+    color: white;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    flex-shrink: 0;
+}
+
+.btn-send-floating:hover {
+    transform: scale(1.1) rotate(15deg);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-send-floating:active {
+    transform: scale(0.9);
+}
+
+.btn-send-floating i {
+    font-size: 1rem;
+}
+
+/* Desktop - Larger input */
+@media (min-width: 768px) {
+    .chat-input-floating {
+        padding: 1.25rem 1.5rem;
+    }
+    
+    .chat-input {
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+    }
+    
+    .btn-send-floating {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+/* Claude-Style Typing Indicator */
+.typing-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    padding: 0.75rem 1rem;
+    background: var(--chat-ai-bg);
+    border: 1px solid var(--chat-border);
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.typing-indicator span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--chat-text-light);
+    animation: claudeTyping 1.4s ease-in-out infinite;
+}
+
+.typing-indicator span:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.typing-indicator span:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.typing-indicator span:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes claudeTyping {
+    0%, 60%, 100% {
+        opacity: 0.25;
+        transform: scale(0.8);
+    }
+    30% {
+        opacity: 1;
+        transform: scale(1.2);
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
     }
 }

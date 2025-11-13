@@ -1,0 +1,557 @@
+/* Welcome Guide - Game Style Tutorial - Mobile First */
+
+:root {
+    --guide-primary: #667eea;
+    --guide-accent: #f093fb;
+    --guide-dark: rgba(0, 0, 0, 0.95);
+    --guide-overlay: rgba(0, 0, 0, 0.7);
+}
+
+/* Overlay - Full screen dark background */
+.welcome-guide-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--guide-overlay);
+    backdrop-filter: blur(8px);
+    z-index: 10000;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.welcome-guide-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+/* Spotlight effect - highlights the target element */
+.guide-spotlight {
+    position: fixed;
+    border: 3px solid var(--guide-primary);
+    border-radius: 12px;
+    box-shadow: 0 0 0 9999px var(--guide-overlay),
+                0 0 40px var(--guide-primary),
+                inset 0 0 40px rgba(102, 126, 234, 0.2);
+    pointer-events: none;
+    z-index: 10001;
+    transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    animation: spotlightPulse 2s ease-in-out infinite;
+}
+
+@keyframes spotlightPulse {
+    0%, 100% {
+        box-shadow: 0 0 0 9999px var(--guide-overlay),
+                    0 0 40px var(--guide-primary),
+                    inset 0 0 40px rgba(102, 126, 234, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 0 9999px var(--guide-overlay),
+                    0 0 60px var(--guide-primary),
+                    inset 0 0 60px rgba(102, 126, 234, 0.3);
+    }
+}
+
+/* Tooltip - Game style info box - Mobile First */
+.guide-tooltip {
+    position: fixed;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid var(--guide-primary);
+    border-radius: 12px;
+    padding: 1rem;
+    max-width: calc(100% - 2rem);
+    width: 100%;
+    left: 1rem !important;
+    right: 1rem;
+    bottom: 1rem !important;
+    top: auto !important;
+    z-index: 10002;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(102, 126, 234, 0.3);
+    transform: translateY(100%);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.guide-tooltip.active {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Desktop - Floating tooltip */
+@media (min-width: 768px) {
+    .guide-tooltip {
+        max-width: 400px;
+        width: 400px;
+        padding: 1.5rem;
+        left: auto !important;
+        right: auto !important;
+        bottom: auto !important;
+        border-radius: 16px;
+        transform: scale(0.8) translateY(20px);
+    }
+    
+    .guide-tooltip.active {
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Tooltip arrow - Hidden on mobile */
+.guide-tooltip::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 12px solid transparent;
+    display: none;
+}
+
+/* Desktop - Show arrows */
+@media (min-width: 768px) {
+    .guide-tooltip::before {
+        display: block;
+    }
+    
+    .guide-tooltip.arrow-top::before {
+        top: -24px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-bottom-color: var(--guide-primary);
+    }
+
+    .guide-tooltip.arrow-bottom::before {
+        bottom: -24px;
+        left: 50%;
+        transform: translateX(-50%);
+        border-top-color: var(--guide-primary);
+    }
+
+    .guide-tooltip.arrow-left::before {
+        left: -24px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-right-color: var(--guide-primary);
+    }
+
+    .guide-tooltip.arrow-right::before {
+        right: -24px;
+        top: 50%;
+        transform: translateY(-50%);
+        border-left-color: var(--guide-primary);
+    }
+}
+
+/* Tooltip header - Mobile First */
+.guide-tooltip-header {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    margin-bottom: 0.875rem;
+}
+
+.guide-tooltip-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--guide-primary);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.25rem;
+    flex-shrink: 0;
+    animation: iconBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Desktop - Larger icon */
+@media (min-width: 768px) {
+    .guide-tooltip-header {
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+    }
+    
+    .guide-tooltip-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        font-size: 1.5rem;
+    }
+}
+
+@keyframes iconBounce {
+    0% {
+        transform: scale(0) rotate(-180deg);
+    }
+    60% {
+        transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.guide-tooltip-title {
+    flex: 1;
+}
+
+.guide-tooltip-step {
+    font-size: 0.6875rem;
+    color: var(--guide-accent);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.25rem;
+}
+
+.guide-tooltip-heading {
+    font-size: 1rem;
+    font-weight: 700;
+    color: white;
+    margin: 0;
+    line-height: 1.3;
+}
+
+@media (min-width: 768px) {
+    .guide-tooltip-step {
+        font-size: 0.75rem;
+        letter-spacing: 1px;
+    }
+    
+    .guide-tooltip-heading {
+        font-size: 1.25rem;
+    }
+}
+
+/* Tooltip content - Mobile First */
+.guide-tooltip-content {
+    color: #e2e8f0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+    .guide-tooltip-content {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1.25rem;
+    }
+}
+
+/* Tooltip actions - Mobile First */
+.guide-tooltip-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.guide-btn {
+    flex: 1;
+    min-width: 100px;
+    padding: 0.625rem 1rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.375rem;
+}
+
+@media (min-width: 768px) {
+    .guide-tooltip-actions {
+        gap: 0.75rem;
+        flex-wrap: nowrap;
+    }
+    
+    .guide-btn {
+        padding: 0.75rem 1.25rem;
+        border-radius: 12px;
+        font-size: 0.9375rem;
+        gap: 0.5rem;
+    }
+}
+
+.guide-btn-primary {
+    background: linear-gradient(135deg, var(--guide-primary), var(--guide-accent));
+    color: white;
+    box-shadow: 0 4px 16px rgba(102, 126, 234, 0.4);
+}
+
+.guide-btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(102, 126, 234, 0.6);
+}
+
+.guide-btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.guide-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+.guide-btn-skip {
+    background: transparent;
+    color: #94a3b8;
+    padding: 0.5rem;
+    flex: none;
+    width: auto;
+}
+
+.guide-btn-skip:hover {
+    color: white;
+}
+
+/* Progress indicator */
+.guide-progress {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.guide-progress-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.guide-progress-dot.active {
+    background: var(--guide-primary);
+    width: 24px;
+    border-radius: 4px;
+}
+
+/* Keyboard hint */
+.guide-keyboard-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 0.75rem;
+    font-size: 0.8125rem;
+    color: #94a3b8;
+}
+
+.guide-key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    padding: 0 0.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+}
+
+/* Welcome screen - Mobile First */
+.guide-welcome {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+    border: 2px solid var(--guide-primary);
+    border-radius: 16px;
+    padding: 1.5rem 1.25rem;
+    max-width: calc(100% - 2rem);
+    width: 100%;
+    z-index: 10003;
+    text-align: center;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+    animation: welcomePopIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes welcomePopIn {
+    0% {
+        transform: translate(-50%, -50%) scale(0.5) rotate(-10deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+@media (min-width: 768px) {
+    .guide-welcome {
+        width: 480px;
+        max-width: 480px;
+        padding: 2.5rem 2rem;
+        border-radius: 20px;
+    }
+}
+
+.guide-welcome-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.25rem;
+    background: linear-gradient(135deg, var(--guide-primary), var(--guide-accent));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    animation: welcomeIconSpin 1s ease;
+}
+
+@media (min-width: 768px) {
+    .guide-welcome-icon {
+        width: 80px;
+        height: 80px;
+        margin: 0 auto 1.5rem;
+        font-size: 2.5rem;
+    }
+}
+
+@keyframes welcomeIconSpin {
+    0% {
+        transform: scale(0) rotate(-360deg);
+    }
+    60% {
+        transform: scale(1.1) rotate(20deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+    }
+}
+
+.guide-welcome-title {
+    font-size: 1.375rem;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 0.625rem;
+    background: linear-gradient(135deg, var(--guide-primary), var(--guide-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .guide-welcome-title {
+        font-size: 2rem;
+        margin-bottom: 0.75rem;
+    }
+}
+
+.guide-welcome-text {
+    color: #e2e8f0;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .guide-welcome-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+    }
+}
+
+.guide-welcome-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+@media (min-width: 768px) {
+    .guide-welcome-actions {
+        flex-direction: row;
+    }
+}
+
+/* Completion screen */
+.guide-complete {
+    text-align: center;
+}
+
+.guide-complete-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    animation: completeCheckmark 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes completeCheckmark {
+    0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.2) rotate(10deg);
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* Guide Button in Filter Bar */
+.yt-filter-btn[onclick*="resetGuide"] {
+    background: linear-gradient(135deg, var(--guide-primary), var(--guide-accent));
+    color: white !important;
+    position: relative;
+    overflow: hidden;
+}
+
+.yt-filter-btn[onclick*="resetGuide"]::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.yt-filter-btn[onclick*="resetGuide"]:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.yt-filter-btn[onclick*="resetGuide"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        transform: translateY(30px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

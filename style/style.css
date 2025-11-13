@@ -290,7 +290,8 @@ button {
     background-color: rgba(10, 25, 47, 0.9) !important;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(76, 148, 190, 0.2);
+    border-bottom: none;
+    z-index: 1050;
 }
 
 .navbar-nav .nav-link {
@@ -311,13 +312,50 @@ button {
     font-weight: 600;
 }
 
-/* Hero Section */
+/* Hero Section - Adaptive Viewport Height */
 .hero {
-    min-height: 100vh;
+    min-height: 70vh;
+    min-height: 70dvh; /* Dynamic viewport for mobile browsers */
     display: flex;
     align-items: center;
     position: relative;
-    padding: 6rem 0;
+    padding: 4rem 0;
+}
+
+/* Tablet - Increase height */
+@media (min-width: 768px) {
+    .hero {
+        min-height: 85vh;
+        min-height: 85dvh;
+        padding: 6rem 0;
+    }
+}
+
+/* Desktop - Full 100vh */
+@media (min-width: 1024px) {
+    .hero {
+        min-height: 100vh;
+        padding: 6rem 0;
+    }
+}
+
+/* Support for older browsers without dvh */
+@supports not (height: 1dvh) {
+    .hero {
+        min-height: calc(var(--vh, 1vh) * 70);
+    }
+    
+    @media (min-width: 768px) {
+        .hero {
+            min-height: calc(var(--vh, 1vh) * 85);
+        }
+    }
+    
+    @media (min-width: 1024px) {
+        .hero {
+            min-height: 100vh;
+        }
+    }
 }
 
 /* ===========================================
@@ -1616,10 +1654,10 @@ button {
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
             padding: 15px 0;
-            border-bottom: 1px solid var(--border-color);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.25);
+            border-bottom: none;
+            box-shadow: none;
             transition: var(--transition);
-            z-index: 1000;
+            z-index: 1050;
         }
 
         .nav-link {
@@ -1774,7 +1812,7 @@ button {
         -webkit-backdrop-filter: blur(20px);
         overflow-y: auto;
         transition: right 0.3s ease-in-out;
-        z-index: 1040;
+        z-index: 1060;
         box-shadow: -5px 0 30px rgba(0, 0, 0, 0.3);
     }
 
@@ -2747,12 +2785,22 @@ button {
            ========================= */
         .banner {
             position: relative;
-            height: 100vh;
+            height: 70vh;
+            height: 70dvh; /* Dynamic viewport for mobile */
+            min-height: 500px;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+        }
+        
+        /* Desktop - Full viewport height */
+        @media (min-width: 1024px) {
+            .banner {
+                height: 95vh;
+                min-height: 700px;
+            }
         }
         
         /* Banner CTA Button Styling */

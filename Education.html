@@ -4,6 +4,7 @@
     <base href="./">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; frame-src 'self' https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://generativelanguage.googleapis.com; media-src 'self' https: data: blob: https://*.googlevideo.com;">
     <meta http-equiv="Permissions-Policy" content="autoplay=(self https://www.youtube.com), encrypted-media=(self https://www.youtube.com), accelerometer=(self https://www.youtube.com), gyroscope=(self https://www.youtube.com), picture-in-picture=(self https://www.youtube.com), clipboard-write=(self https://www.youtube.com), web-share=(self https://www.youtube.com)">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
@@ -30,35 +31,33 @@
 <meta name="apple-mobile-web-app-title" content="Xyber Shield" />
 <link rel="manifest" href="/site.webmanifest" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+=======
+    <title>XyberShield – Éducation Cybersécurité</title>
+    
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
     
     <!-- Bootstrap -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    
-    <noscript>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    </noscript>
-
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/animations.css">
-    <link rel="stylesheet" href="style/Education.css">
-    <link rel="stylesheet" href="style/custom-video-player.css">
-
-    <!-- Fonts with preloading and font-display: swap -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
-    </noscript>
-
-    <!-- Favicon -->
+    <link rel="stylesheet" href="style/education-modern.css">
+    <link rel="stylesheet" href="style/youtube-filter-bar.css">
+    <link rel="stylesheet" href="style/video-player.css">
+    <link rel="stylesheet" href="style/chatbot.css">
+    <link rel="stylesheet" href="style/welcome-guide.css">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <link rel="icon" href="./images/logos/logo.png" type="image/png">
 </head>
 <body>
+<<<<<<< HEAD
 
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark neon-nav">
@@ -699,56 +698,1405 @@
             </div>
             <button class="chat-toggle-btn">
                 <i class="fas fa-comment-dots"></i>
+=======
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="index.html">
+                <img src="./images/logos/logo.png" alt="XyberShield Logo" class="logo" style="height: 32px; margin-right: 10px;">
+                XyberShield
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
             </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="report.html">Signaler</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="Education.html">Éducation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn btn-outline-success btn-sm" href="login.html">
+                            <i class="fas fa-sign-in-alt me-1"></i> Connexion
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
+    </nav>
 
-        <div id="chatWindow" class="chat-window" style="display: none;">
-            <div class="chat-header">
-                <div class="d-flex align-items-center gap-2">
-                    <div class="ai-avatar-small">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <div>
-                        <div class="chat-header-title">XyberShield AI</div>
-                        <div class="chat-header-status">
-                            <span class="status-dot"></span>
-                            En ligne
+    <!-- YouTube Style Filter Bar -->
+    <div class="youtube-filter-bar">
+        <div class="container-fluid">
+            <div class="filter-bar-content">
+                <!-- Filter Buttons -->
+                <div class="filter-buttons-scroll">
+                    <button class="yt-filter-btn active" data-filter="all">
+                        <i class="fas fa-th"></i>
+                        <span>Tout</span>
+                    </button>
+                    <button class="yt-filter-btn" data-filter="video">
+                        <i class="fas fa-video"></i>
+                        <span>Vidéos</span>
+                    </button>
+                    <button class="yt-filter-btn" data-filter="pdf">
+                        <i class="fas fa-file-pdf"></i>
+                        <span>PDF</span>
+                    </button>
+                    <button class="yt-filter-btn" data-filter="image">
+                        <i class="fas fa-image"></i>
+                        <span>Infographies</span>
+                    </button>
+                    <a href="quiz.html" class="yt-filter-btn yt-quiz-btn">
+                        <i class="fas fa-brain"></i>
+                        <span>Quiz</span>
+                        <span class="quiz-badge">Nouveau</span>
+                    </a>
+                    <button class="yt-filter-btn" onclick="window.resetGuide()" title="Relancer le guide de bienvenue">
+                        <i class="fas fa-question-circle"></i>
+                        <span>Guide</span>
+                    </button>
+                </div>
+                
+                <!-- Search Bar -->
+                <div class="yt-search-bar">
+                    <input type="text" id="searchInput" class="yt-search-input" placeholder="Rechercher...">
+                    <button class="yt-search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Courses Section -->
+    <section class="courses-section">
+        <div class="container">
+            <!-- All Content Grid -->
+            <div class="courses-grid" id="coursesGrid">
+                <!-- Video Card 1 -->
+ <div class="course-card" data-type="video" data-video-url="./media/videos/comprendre_le_phishing.mp4">
+      <div class="course-thumbnail">
+          <img src="comprendre_le_phishing.mp4/maxresdefault.jpg" alt="P    hishing">
+          <div class="play-overlay">
+              <i class="fas fa-play"></i>
+          </div>
+          <span class="course-badge">Débutant</span>
+          <span class="course-duration">8:45</span>
+      </div>
+      <div class="course-content">
+          <h3 class="course-title">Comprendre le Phishing</h3>
+          <p class="course-description">
+              Apprenez à identifier et éviter les attaques de phishing par email
+        </p>
+                        <div class="course-tags">
+                            <span class="tag">#phishing</span>
+                            <span class="tag">#email</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-stats">
+                                <span><i class="fas fa-eye"></i> 2.1k</span>
+                                <span><i class="fas fa-clock"></i> 8 min</span>
+                            </div>
+                        </div>
+                        <!-- Like and Comment Actions -->
+                        <div class="course-actions">
+                            <button class="action-btn like-btn" data-video-id="1">
+                                <i class="far fa-heart"></i>
+                                <span class="like-count">245</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-video-id="1">
+                                <i class="far fa-comment"></i>
+                                <span class="comment-count">32</span>
+                            </button>
+                        </div>
+                        <!-- Comments Section -->
+                        <div class="comments-section" data-video-id="1">
+                            <div class="comment-input-container">
+                                <div class="comment-avatar">U</div>
+                                <div class="comment-input-wrapper">
+                                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+                                    <button class="comment-submit-btn" disabled>Publier</button>
+                                </div>
+                            </div>
+                            <div class="comments-list">
+                                <div class="comment-item">
+                                    <div class="comment-avatar">M</div>
+                                    <div class="comment-content">
+                                        <div class="comment-author">Marie K.</div>
+                                        <div class="comment-text">Très instructif ! J'ai appris beaucoup sur le phishing.</div>
+                                        <div class="comment-time">Il y a 2 heures</div>
+                                    </div>
+                                </div>
+                                <div class="comment-item">
+                                    <div class="comment-avatar">J</div>
+                                    <div class="comment-content">
+                                        <div class="comment-author">Jean D.</div>
+                                        <div class="comment-text">Excellente vidéo, merci pour les conseils pratiques !</div>
+                                        <div class="comment-time">Il y a 5 heures</div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <button id="closeChatBtn" class="chat-close-btn">
+
+                <!-- Video Card 2 -->
+                <div class="course-card" data-type="video">
+                    <div class="course-thumbnail">
+                        <img src="video.mp4/maxresdefault.jpg" alt="Mots de passe">
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <span class="course-badge">Débutant</span>
+                        <span class="course-duration">15:20</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Sécuriser ses Mots de Passe</h3>
+                        <p class="course-description">
+                            Guide complet pour créer et gérer des mots de passe sécurisés
+                        </p>
+                        <div class="course-tags">
+                            <span class="tag">#password</span>
+                            <span class="tag">#sécurité</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-stats">
+                                <span><i class="fas fa-eye"></i> 3.2k</span>
+                                <span><i class="fas fa-clock"></i> 15 min</span>
+                            </div>
+                        </div>
+                        <!-- Like and Comment Actions -->
+                        <div class="course-actions">
+                            <button class="action-btn like-btn" data-video-id="2">
+                                <i class="far fa-heart"></i>
+                                <span class="like-count">389</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-video-id="2">
+                                <i class="far fa-comment"></i>
+                                <span class="comment-count">45</span>
+                            </button>
+                        </div>
+                        <!-- Comments Section -->
+                        <div class="comments-section" data-video-id="2">
+                            <div class="comment-input-container">
+                                <div class="comment-avatar">U</div>
+                                <div class="comment-input-wrapper">
+                                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+                                    <button class="comment-submit-btn" disabled>Publier</button>
+                                </div>
+                            </div>
+                            <div class="comments-list">
+                                <div class="comment-item">
+                                    <div class="comment-avatar">P</div>
+                                    <div class="comment-content">
+                                        <div class="comment-author">Paul M.</div>
+                                        <div class="comment-text">Super guide ! J'utilise maintenant un gestionnaire de mots de passe.</div>
+                                        <div class="comment-time">Il y a 1 heure</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Video Card 3 -->
+                <div class="course-card" data-type="video">
+                    <div class="course-thumbnail">
+                        <img src="https://img.youtube.com/vi/BX3y_an89PQ/maxresdefault.jpg" alt="Protection">
+                        <div class="play-overlay">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <span class="course-badge">Avancé</span>
+                        <span class="course-duration">12:30</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Protection Avancée</h3>
+                        <p class="course-description">
+                            Techniques avancées pour identifier les attaques sophistiquées
+                        </p>
+                        <div class="course-tags">
+                            <span class="tag">#avancé</span>
+                            <span class="tag">#protection</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-stats">
+                                <span><i class="fas fa-eye"></i> 1.8k</span>
+                                <span><i class="fas fa-clock"></i> 12 min</span>
+                            </div>
+                        </div>
+                        <!-- Like and Comment Actions -->
+                        <div class="course-actions">
+                            <button class="action-btn like-btn" data-video-id="3">
+                                <i class="far fa-heart"></i>
+                                <span class="like-count">156</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-video-id="3">
+                                <i class="far fa-comment"></i>
+                                <span class="comment-count">18</span>
+                            </button>
+                        </div>
+                        <!-- Comments Section -->
+                        <div class="comments-section" data-video-id="3">
+                            <div class="comment-input-container">
+                                <div class="comment-avatar">U</div>
+                                <div class="comment-input-wrapper">
+                                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+                                    <button class="comment-submit-btn" disabled>Publier</button>
+                                </div>
+                            </div>
+                            <div class="comments-list">
+                                <div class="no-comments">Soyez le premier à commenter !</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF Card 1 -->
+                <div class="course-card" data-type="pdf">
+                    <div class="course-thumbnail" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="play-overlay">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <span class="course-badge">Guide</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Guide Complet de Cybersécurité</h3>
+                        <p class="course-description">
+                            Manuel complet pour débutants - Toutes les bases de la sécurité en ligne
+                        </p>
+                        <div class="course-tags">
+                            <span class="tag">#guide</span>
+                            <span class="tag">#débutant</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-stats">
+                                <span><i class="fas fa-download"></i> 1.2k</span>
+                                <span><i class="fas fa-file"></i> 24 pages</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="action-btn like-btn" data-video-id="pdf1">
+                                <i class="far fa-heart"></i>
+                                <span class="like-count">234</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-video-id="pdf1">
+                                <i class="far fa-comment"></i>
+                                <span class="comment-count">28</span>
+                            </button>
+                            <button class="action-btn download-btn" onclick="downloadFile('Guide_Cybersecurite.pdf', 'pdf')" title="Télécharger">
+                                <i class="fas fa-download"></i>
+                                <span>Télécharger</span>
+                            </button>
+                        </div>
+                        <div class="comments-section" data-video-id="pdf1">
+                            <div class="comment-input-container">
+                                <div class="comment-avatar">U</div>
+                                <div class="comment-input-wrapper">
+                                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+                                    <button class="comment-submit-btn" disabled>Publier</button>
+                                </div>
+                            </div>
+                            <div class="comments-list">
+                                <div class="comment-item">
+                                    <div class="comment-avatar">S</div>
+                                    <div class="comment-content">
+                                        <div class="comment-author">Sophie L.</div>
+                                        <div class="comment-text">Guide très complet et facile à comprendre !</div>
+                                        <div class="comment-time">Il y a 3 heures</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF Card 2 -->
+                <div class="course-card" data-type="pdf">
+                    <div class="course-thumbnail" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="play-overlay">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <span class="course-badge">Guide</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Protection des Données Personnelles</h3>
+                        <p class="course-description">
+                            Comment protéger vos informations personnelles sur internet
+                        </p>
+                        <div class="course-tags">
+                            <span class="tag">#données</span>
+                            <span class="tag">#vie privée</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-stats">
+                                <span><i class="fas fa-download"></i> 890</span>
+                                <span><i class="fas fa-file"></i> 18 pages</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="action-btn like-btn" data-video-id="pdf2">
+                                <i class="far fa-heart"></i>
+                                <span class="like-count">178</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-video-id="pdf2">
+                                <i class="far fa-comment"></i>
+                                <span class="comment-count">15</span>
+                            </button>
+                            <button class="action-btn download-btn" onclick="downloadFile('Protection_Donnees_Personnelles.pdf', 'pdf')" title="Télécharger">
+                                <i class="fas fa-download"></i>
+                                <span>Télécharger</span>
+                            </button>
+                        </div>
+                        <div class="comments-section" data-video-id="pdf2">
+                            <div class="comment-input-container">
+                                <div class="comment-avatar">U</div>
+                                <div class="comment-input-wrapper">
+                                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+                                    <button class="comment-submit-btn" disabled>Publier</button>
+                                </div>
+                            </div>
+                            <div class="comments-list">
+                                <div class="no-comments">Soyez le premier à commenter !</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PDF Card 3 -->
+                <div class="course-card" data-type="pdf">
+                    <div class="course-thumbnail" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="play-overlay">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <span class="course-badge">Avancé</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Sécurité des Réseaux</h3>
+                        <p class="course-description">
+                            Guide avancé sur la sécurisation des réseaux Wi-Fi et VPN
+                        </p>
+                        <div class="course-tags">
+                            <span class="tag">#réseau</span>
+                            <span class="tag">#VPN</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-stats">
+                                <span><i class="fas fa-download"></i> 654</span>
+                                <span><i class="fas fa-file"></i> 32 pages</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="action-btn like-btn" data-video-id="pdf3">
+                                <i class="far fa-heart"></i>
+                                <span class="like-count">145</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-video-id="pdf3">
+                                <i class="far fa-comment"></i>
+                                <span class="comment-count">12</span>
+                            </button>
+                            <button class="action-btn download-btn" onclick="downloadFile('Securite_Reseaux.pdf', 'pdf')" title="Télécharger">
+                                <i class="fas fa-download"></i>
+                                <span>Télécharger</span>
+                            </button>
+                        </div>
+                        <div class="comments-section" data-video-id="pdf3">
+                            <div class="comment-input-container">
+                                <div class="comment-avatar">U</div>
+                                <div class="comment-input-wrapper">
+                                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+                                    <button class="comment-submit-btn" disabled>Publier</button>
+                                </div>
+                            </div>
+                            <div class="comments-list">
+                                <div class="no-comments">Soyez le premier à commenter !</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Card 1 -->
+                <div class="course-card" data-type="image">
+                    <div class="course-thumbnail" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div class="play-overlay">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <span class="course-badge">Infographie</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">10 Règles d'Or de la Cybersécurité</h3>
+                        <p class="course-description">
+                            Infographie résumant les 10 règles essentielles à suivre
+                        </p>
+                        <div class="course-tags">
+                            <span class="tag">#infographie</span>
+                            <span class="tag">#règles</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-stats">
+                                <span><i class="fas fa-eye"></i> 2.5k</span>
+                                <span><i class="fas fa-download"></i> 890</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="action-btn like-btn" data-video-id="img1">
+                                <i class="far fa-heart"></i>
+                                <span class="like-count">456</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-video-id="img1">
+                                <i class="far fa-comment"></i>
+                                <span class="comment-count">34</span>
+                            </button>
+                            <button class="action-btn download-btn" onclick="downloadFile('10_Regles_Cybersecurite.png', 'image')" title="Télécharger">
+                                <i class="fas fa-download"></i>
+                                <span>Télécharger</span>
+                            </button>
+                        </div>
+                        <div class="comments-section" data-video-id="img1">
+                            <div class="comment-input-container">
+                                <div class="comment-avatar">U</div>
+                                <div class="comment-input-wrapper">
+                                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+                                    <button class="comment-submit-btn" disabled>Publier</button>
+                                </div>
+                            </div>
+                            <div class="comments-list">
+                                <div class="comment-item">
+                                    <div class="comment-avatar">A</div>
+                                    <div class="comment-content">
+                                        <div class="comment-author">Alex R.</div>
+                                        <div class="comment-text">Parfait pour partager avec ma famille !</div>
+                                        <div class="comment-time">Il y a 4 heures</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Card 2 -->
+                <div class="course-card" data-type="image">
+                    <div class="course-thumbnail" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        <div class="play-overlay">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <span class="course-badge">Infographie</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Anatomie d'une Attaque Phishing</h3>
+                        <p class="course-description">
+                            Schéma détaillé expliquant comment fonctionne le phishing
+                        </p>
+                        <div class="course-tags">
+                            <span class="tag">#phishing</span>
+                            <span class="tag">#schéma</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-stats">
+                                <span><i class="fas fa-eye"></i> 1.9k</span>
+                                <span><i class="fas fa-download"></i> 723</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="action-btn like-btn" data-video-id="img2">
+                                <i class="far fa-heart"></i>
+                                <span class="like-count">312</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-video-id="img2">
+                                <i class="far fa-comment"></i>
+                                <span class="comment-count">22</span>
+                            </button>
+                            <button class="action-btn download-btn" onclick="downloadFile('Anatomie_Phishing.png', 'image')" title="Télécharger">
+                                <i class="fas fa-download"></i>
+                                <span>Télécharger</span>
+                            </button>
+                        </div>
+                        <div class="comments-section" data-video-id="img2">
+                            <div class="comment-input-container">
+                                <div class="comment-avatar">U</div>
+                                <div class="comment-input-wrapper">
+                                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+                                    <button class="comment-submit-btn" disabled>Publier</button>
+                                </div>
+                            </div>
+                            <div class="comments-list">
+                                <div class="no-comments">Soyez le premier à commenter !</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Card 3 -->
+                <div class="course-card" data-type="image">
+                    <div class="course-thumbnail" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <div class="play-overlay">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <span class="course-badge">Infographie</span>
+                    </div>
+                    <div class="course-content">
+                        <h3 class="course-title">Créer un Mot de Passe Fort</h3>
+                        <p class="course-description">
+                            Guide visuel pour créer des mots de passe sécurisés
+                        </p>
+                        <div class="course-tags">
+                            <span class="tag">#password</span>
+                            <span class="tag">#guide</span>
+                        </div>
+                        <div class="course-meta">
+                            <div class="course-stats">
+                                <span><i class="fas fa-eye"></i> 3.1k</span>
+                                <span><i class="fas fa-download"></i> 1.1k</span>
+                            </div>
+                        </div>
+                        <div class="course-actions">
+                            <button class="action-btn like-btn" data-video-id="img3">
+                                <i class="far fa-heart"></i>
+                                <span class="like-count">567</span>
+                            </button>
+                            <button class="action-btn comment-btn" data-video-id="img3">
+                                <i class="far fa-comment"></i>
+                                <span class="comment-count">41</span>
+                            </button>
+                            <button class="action-btn download-btn" onclick="downloadFile('Mot_Passe_Fort.png', 'image')" title="Télécharger">
+                                <i class="fas fa-download"></i>
+                                <span>Télécharger</span>
+                            </button>
+                        </div>
+                        <div class="comments-section" data-video-id="img3">
+                            <div class="comment-input-container">
+                                <div class="comment-avatar">U</div>
+                                <div class="comment-input-wrapper">
+                                    <input type="text" class="comment-input" placeholder="Ajouter un commentaire...">
+                                    <button class="comment-submit-btn" disabled>Publier</button>
+                                </div>
+                            </div>
+                            <div class="comments-list">
+                                <div class="comment-item">
+                                    <div class="comment-avatar">L</div>
+                                    <div class="comment-content">
+                                        <div class="comment-author">Laura B.</div>
+                                        <div class="comment-text">Très utile, j'ai changé tous mes mots de passe !</div>
+                                        <div class="comment-time">Il y a 6 heures</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Player Modal -->
+    <div class="video-player-modal" id="videoPlayerModal">
+        <div class="video-player-overlay" onclick="closeVideoPlayer()"></div>
+        <div class="video-player-container">
+            <div class="video-player-header">
+                <h3 class="video-player-title" id="videoPlayerTitle">Titre de la vidéo</h3>
+                <button class="video-player-close" onclick="closeVideoPlayer()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="video-player-wrapper">
+                <video id="videoPlayer" class="video-player" style="display: none;">
+                    <source src="" type="video/mp4">
+                    Votre navigateur ne supporte pas la lecture de vidéos.
+                </video>
+                <iframe id="videoIframe" class="video-iframe" frameborder="0" allowfullscreen allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" style="display: none;"></iframe>
+                <div class="video-error-message" id="videoErrorMessage" style="display: none;">
+                    <div class="error-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>Vidéo non disponible en intégration</h3>
+                    <p>Cette vidéo ne peut pas être lue directement ici en raison des restrictions du propriétaire.</p>
+                    <button class="watch-on-youtube-btn" id="watchOnYoutubeBtn">
+                        <i class="fab fa-youtube"></i>
+                        Regarder sur YouTube
+                    </button>
+                </div>
+                <div class="rotate-phone-message" id="rotatePhoneMessage" style="display: none;">
+                    <div class="rotate-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Tournez votre téléphone</h3>
+                    <p>Pour une meilleure expérience, veuillez passer en mode paysage</p>
+                    <div class="rotate-animation">
+                        <div class="phone-icon">📱</div>
+                    </div>
+                </div>
+                <button class="video-exit-btn" onclick="closeVideoPlayer()" title="Fermer (Échap)">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="video-player-controls">
+                    <div class="video-progress-bar" id="videoProgressBar">
+                        <div class="video-progress-filled" id="videoProgressFilled"></div>
+                        <div class="video-progress-handle" id="videoProgressHandle"></div>
+                    </div>
+                    <div class="video-controls-bottom">
+                        <div class="video-controls-left">
+                            <button class="video-control-btn" id="playPauseBtn" onclick="togglePlayPause()">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="video-control-btn" onclick="skipBackward()">
+                                <i class="fas fa-backward"></i>
+                            </button>
+                            <button class="video-control-btn" onclick="skipForward()">
+                                <i class="fas fa-forward"></i>
+                            </button>
+                            <div class="video-time">
+                                <span id="currentTime">0:00</span> / <span id="duration">0:00</span>
+                            </div>
+                        </div>
+                        <div class="video-controls-right">
+                            <button class="video-control-btn" onclick="toggleMute()">
+                                <i class="fas fa-volume-up" id="volumeIcon"></i>
+                            </button>
+                            <div class="video-volume-slider">
+                                <input type="range" id="volumeSlider" min="0" max="100" value="100" onchange="changeVolume(this.value)">
+                            </div>
+                            <button class="video-control-btn" onclick="changeSpeed()">
+                                <span id="speedText">1x</span>
+                            </button>
+                            <button class="video-control-btn" onclick="toggleFullscreen()">
+                                <i class="fas fa-expand"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-loading" id="videoLoading">
+                    <div class="video-spinner"></div>
+                </div>
+            </div>
+            <div class="video-player-info">
+                <p class="video-description" id="videoDescription">Description de la vidéo</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-4">
+        <div class="container text-center">
+            <p class="mb-0">&copy; 2025 XyberShield. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Lazy Loading with Intersection Observer
+        const observerOptions = {
+            root: null,
+            rootMargin: '50px',
+            threshold: 0.1
+        };
+
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => {
+                        entry.target.classList.add('loaded');
+                        cardObserver.unobserve(entry.target);
+                    }, index * 100); // Stagger animation
+                }
+            });
+        }, observerOptions);
+
+        // Add category badges to all cards automatically
+        document.querySelectorAll('.course-card').forEach(card => {
+            const type = card.dataset.type;
+            const thumbnail = card.querySelector('.course-thumbnail');
+            
+            // Check if category badge already exists
+            if (!thumbnail.querySelector('.course-category')) {
+                const categoryBadge = document.createElement('span');
+                categoryBadge.className = 'course-category';
+                
+                // Set category text based on type
+                switch(type) {
+                    case 'video':
+                        categoryBadge.textContent = 'Vidéo';
+                        categoryBadge.innerHTML = '<i class="fas fa-video"></i> Vidéo';
+                        break;
+                    case 'pdf':
+                        categoryBadge.textContent = 'PDF';
+                        categoryBadge.innerHTML = '<i class="fas fa-file-pdf"></i> PDF';
+                        break;
+                    case 'image':
+                        categoryBadge.textContent = 'Infographie';
+                        categoryBadge.innerHTML = '<i class="fas fa-image"></i> Infographie';
+                        break;
+                }
+                
+                thumbnail.appendChild(categoryBadge);
+            }
+            
+            // Observe card for lazy loading
+            cardObserver.observe(card);
+        });
+
+        // Filter functionality - YouTube Style
+        const filterBtns = document.querySelectorAll('.yt-filter-btn');
+        const courseCards = document.querySelectorAll('.course-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                btn.classList.add('active');
+
+                const filter = btn.dataset.filter;
+
+                // Filter courses
+                courseCards.forEach((card, index) => {
+                    if (filter === 'all' || card.dataset.type === filter) {
+                        card.style.display = 'block';
+                        // Re-trigger animation for filtered cards
+                        card.classList.remove('loaded');
+                        setTimeout(() => {
+                            card.classList.add('loaded');
+                        }, index * 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Typing Animation for Search Placeholder
+        const searchInput = document.getElementById('searchInput');
+        const placeholders = [
+            'Rechercher une vidéo...',
+            'Trouver un guide PDF...',
+            'Chercher une infographie...',
+            'Découvrir un cours...',
+            'Apprendre la cybersécurité...'
+        ];
+        let placeholderIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function typePlaceholder() {
+            const currentPlaceholder = placeholders[placeholderIndex];
+            
+            if (isDeleting) {
+                searchInput.placeholder = currentPlaceholder.substring(0, charIndex - 1);
+                charIndex--;
+                typingSpeed = 50;
+            } else {
+                searchInput.placeholder = currentPlaceholder.substring(0, charIndex + 1);
+                charIndex++;
+                typingSpeed = 100;
+            }
+
+            if (!isDeleting && charIndex === currentPlaceholder.length) {
+                isDeleting = true;
+                typingSpeed = 2000; // Pause at end
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                placeholderIndex = (placeholderIndex + 1) % placeholders.length;
+                typingSpeed = 500; // Pause before next word
+            }
+
+            setTimeout(typePlaceholder, typingSpeed);
+        }
+
+        // Start typing animation
+        typePlaceholder();
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+
+            courseCards.forEach((card, index) => {
+                const title = card.querySelector('.course-title').textContent.toLowerCase();
+                const description = card.querySelector('.course-description').textContent.toLowerCase();
+
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    card.style.display = 'block';
+                    // Re-trigger animation for search results
+                    card.classList.remove('loaded');
+                    setTimeout(() => {
+                        card.classList.add('loaded');
+                    }, index * 50);
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Like functionality
+        const likeButtons = document.querySelectorAll('.like-btn');
+        likeButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                const countSpan = this.querySelector('.like-count');
+                let count = parseInt(countSpan.textContent);
+
+                if (this.classList.contains('liked')) {
+                    // Unlike
+                    this.classList.remove('liked');
+                    icon.classList.remove('fas');
+                    icon.classList.add('far');
+                    count--;
+                } else {
+                    // Like
+                    this.classList.add('liked');
+                    icon.classList.remove('far');
+                    icon.classList.add('fas');
+                    count++;
+                }
+
+                countSpan.textContent = count;
+            });
+        });
+
+        // Comment toggle functionality
+        const commentButtons = document.querySelectorAll('.comment-btn');
+        commentButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const videoId = this.dataset.videoId;
+                const commentsSection = document.querySelector(`.comments-section[data-video-id="${videoId}"]`);
+                commentsSection.classList.toggle('active');
+            });
+        });
+
+        // Comment input functionality
+        const commentInputs = document.querySelectorAll('.comment-input');
+        commentInputs.forEach(input => {
+            const submitBtn = input.nextElementSibling;
+
+            input.addEventListener('input', function() {
+                if (this.value.trim().length > 0) {
+                    submitBtn.disabled = false;
+                } else {
+                    submitBtn.disabled = true;
+                }
+            });
+
+            input.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter' && this.value.trim().length > 0) {
+                    submitBtn.click();
+                }
+            });
+        });
+
+        // Submit comment functionality
+        const submitButtons = document.querySelectorAll('.comment-submit-btn');
+        submitButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                const commentText = input.value.trim();
+
+                if (commentText.length === 0) return;
+
+                // Get the comments list
+                const commentsSection = this.closest('.comments-section');
+                const commentsList = commentsSection.querySelector('.comments-list');
+                
+                // Remove "no comments" message if exists
+                const noComments = commentsList.querySelector('.no-comments');
+                if (noComments) {
+                    noComments.remove();
+                }
+
+                // Create new comment
+                const newComment = document.createElement('div');
+                newComment.className = 'comment-item';
+                newComment.innerHTML = `
+                    <div class="comment-avatar">U</div>
+                    <div class="comment-content">
+                        <div class="comment-author">Utilisateur</div>
+                        <div class="comment-text">${commentText}</div>
+                        <div class="comment-time">À l'instant</div>
+                    </div>
+                `;
+
+                // Add to top of comments list
+                commentsList.insertBefore(newComment, commentsList.firstChild);
+
+                // Update comment count
+                const videoId = commentsSection.dataset.videoId;
+                const commentBtn = document.querySelector(`.comment-btn[data-video-id="${videoId}"]`);
+                const countSpan = commentBtn.querySelector('.comment-count');
+                let count = parseInt(countSpan.textContent);
+                countSpan.textContent = count + 1;
+
+                // Clear input
+                input.value = '';
+                this.disabled = true;
+
+                // Scroll to new comment
+                newComment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            });
+        });
+
+        // Download functionality
+        function downloadFile(filename, type) {
+            // Show notification
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 100px;
+                right: 20px;
+                background: linear-gradient(135deg, var(--primary-blue), var(--accent-green));
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(76, 148, 190, 0.4);
+                z-index: 10000;
+                animation: slideInRight 0.3s ease;
+                font-weight: 600;
+            `;
+            notification.innerHTML = `
+                <i class="fas fa-download me-2"></i>
+                Téléchargement de ${filename}...
+            `;
+            document.body.appendChild(notification);
+
+            // Simulate download (in production, this would trigger actual file download)
+            setTimeout(() => {
+                notification.innerHTML = `
+                    <i class="fas fa-check-circle me-2"></i>
+                    ${filename} téléchargé !
+                `;
+                notification.style.background = 'linear-gradient(135deg, #3ddc84, #4facfe)';
+            }, 1500);
+
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'slideOutRight 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 4000);
+
+            // In production, trigger actual download
+            // const link = document.createElement('a');
+            // link.href = `/downloads/${type}/${filename}`;
+            // link.download = filename;
+            // link.click();
+        }
+
+        // Add animation styles
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Video Player Functionality
+        const videoPlayerModal = document.getElementById('videoPlayerModal');
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoIframe = document.getElementById('videoIframe');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const videoProgressBar = document.getElementById('videoProgressBar');
+        const videoProgressFilled = document.getElementById('videoProgressFilled');
+        const videoProgressHandle = document.getElementById('videoProgressHandle');
+        const currentTimeEl = document.getElementById('currentTime');
+        const durationEl = document.getElementById('duration');
+        const volumeSlider = document.getElementById('volumeSlider');
+        const volumeIcon = document.getElementById('volumeIcon');
+        const speedText = document.getElementById('speedText');
+        const videoLoading = document.getElementById('videoLoading');
+        const videoControls = document.querySelector('.video-player-controls');
+
+        let currentSpeed = 1;
+        const speeds = [0.5, 0.75, 1, 1.25, 1.5, 2];
+        let isEmbedded = false;
+        let waitingForRotation = false;
+
+        // Detect if device is mobile
+        function isMobileDevice() {
+            return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) || 
+                   (window.innerWidth <= 768);
+        }
+
+        // Check if device is in landscape mode
+        function isLandscape() {
+            return window.innerWidth > window.innerHeight;
+        }
+
+        // Generate video banner automatically
+        function generateVideoBanner(title) {
+            const canvas = document.createElement('canvas');
+            canvas.width = 1280;
+            canvas.height = 720;
+            const ctx = canvas.getContext('2d');
+            
+            // Gradient background
+            const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+            gradient.addColorStop(0, '#020c1b');
+            gradient.addColorStop(0.5, '#0a192f');
+            gradient.addColorStop(1, '#1a2332');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            // Logo/Icon
+            ctx.fillStyle = '#4c94be';
+            ctx.font = 'bold 120px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('🛡️', canvas.width / 2, 250);
+            
+            // Title
+            ctx.fillStyle = '#e6f1ff';
+            ctx.font = 'bold 48px Arial';
+            ctx.textAlign = 'center';
+            const words = title.split(' ');
+            let line = '';
+            let y = 400;
+            
+            words.forEach((word, index) => {
+                const testLine = line + word + ' ';
+                const metrics = ctx.measureText(testLine);
+                if (metrics.width > canvas.width - 100 && index > 0) {
+                    ctx.fillText(line, canvas.width / 2, y);
+                    line = word + ' ';
+                    y += 60;
+                } else {
+                    line = testLine;
+                }
+            });
+            ctx.fillText(line, canvas.width / 2, y);
+            
+            // XyberShield branding
+            ctx.fillStyle = '#3ddc84';
+            ctx.font = 'bold 32px Arial';
+            ctx.fillText('XyberShield', canvas.width / 2, y + 100);
+            
+            return canvas.toDataURL();
+        }
+
+        // Open video player
+        function openVideoPlayer(title, description, videoUrl) {
+            document.getElementById('videoPlayerTitle').textContent = title;
+            document.getElementById('videoDescription').textContent = description;
+            document.getElementById('videoErrorMessage').style.display = 'none';
+            document.getElementById('rotatePhoneMessage').style.display = 'none';
+            
+            // Check if mobile and portrait mode
+            if (isMobileDevice() && !isLandscape()) {
+                // Show rotate message
+                document.getElementById('rotatePhoneMessage').style.display = 'block';
+                waitingForRotation = true;
+                videoPlayerModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                
+                // Store video info for later
+                videoPlayerModal.dataset.pendingTitle = title;
+                videoPlayerModal.dataset.pendingDescription = description;
+                videoPlayerModal.dataset.pendingUrl = videoUrl;
+                return;
+            }
+            
+            // Show loading
+            videoLoading.classList.add('active');
+            
+            // Local video file
+            isEmbedded = false;
+            
+            // Generate and set poster (banner)
+            const posterUrl = generateVideoBanner(title);
+            videoPlayer.poster = posterUrl;
+            
+            // Set video source
+            videoPlayer.src = videoUrl;
+            videoPlayer.style.display = 'block';
+            videoIframe.style.display = 'none';
+            videoControls.style.display = 'block';
+            
+            // Preload video
+            videoPlayer.preload = 'metadata';
+            
+            videoPlayerModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+
+
+        // Close video player
+        function closeVideoPlayer() {
+            videoPlayerModal.classList.remove('active');
+            
+            // Stop video player
+            videoPlayer.pause();
+            videoPlayer.currentTime = 0;
+            videoPlayer.src = '';
+            
+            // Hide loading
+            videoLoading.classList.remove('active');
+            
+            document.body.style.overflow = '';
+        }
+
+        // Play/Pause toggle
+        function togglePlayPause() {
+            if (videoPlayer.paused) {
+                videoPlayer.play();
+                playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+            } else {
+                videoPlayer.pause();
+                playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+
+        // Skip backward
+        function skipBackward() {
+            videoPlayer.currentTime = Math.max(0, videoPlayer.currentTime - 10);
+        }
+
+        // Skip forward
+        function skipForward() {
+            videoPlayer.currentTime = Math.min(videoPlayer.duration, videoPlayer.currentTime + 10);
+        }
+
+        // Toggle mute
+        function toggleMute() {
+            videoPlayer.muted = !videoPlayer.muted;
+            if (videoPlayer.muted) {
+                volumeIcon.className = 'fas fa-volume-mute';
+                volumeSlider.value = 0;
+            } else {
+                volumeIcon.className = 'fas fa-volume-up';
+                volumeSlider.value = videoPlayer.volume * 100;
+            }
+        }
+
+        // Change volume
+        function changeVolume(value) {
+            videoPlayer.volume = value / 100;
+            if (value == 0) {
+                volumeIcon.className = 'fas fa-volume-mute';
+            } else if (value < 50) {
+                volumeIcon.className = 'fas fa-volume-down';
+            } else {
+                volumeIcon.className = 'fas fa-volume-up';
+            }
+        }
+
+        // Change speed
+        function changeSpeed() {
+            const currentIndex = speeds.indexOf(currentSpeed);
+            currentSpeed = speeds[(currentIndex + 1) % speeds.length];
+            videoPlayer.playbackRate = currentSpeed;
+            speedText.textContent = currentSpeed + 'x';
+        }
+
+        // Toggle fullscreen
+        function toggleFullscreen() {
+            const container = document.querySelector('.video-player-container');
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => {
+                    console.log('Fullscreen error:', err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Format time
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Update progress
+        videoPlayer.addEventListener('timeupdate', () => {
+            const percent = (videoPlayer.currentTime / videoPlayer.duration) * 100;
+            videoProgressFilled.style.width = percent + '%';
+            videoProgressHandle.style.left = percent + '%';
+            currentTimeEl.textContent = formatTime(videoPlayer.currentTime);
+        });
+
+        // Update duration
+        videoPlayer.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(videoPlayer.duration);
+        });
+
+        // Click on progress bar
+        videoProgressBar.addEventListener('click', (e) => {
+            const rect = videoProgressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            videoPlayer.currentTime = percent * videoPlayer.duration;
+        });
+
+        // Show loading
+        videoPlayer.addEventListener('waiting', () => {
+            videoLoading.classList.add('active');
+        });
+
+        videoPlayer.addEventListener('canplay', () => {
+            videoLoading.classList.remove('active');
+        });
+
+        // Keyboard controls
+        document.addEventListener('keydown', (e) => {
+            if (!videoPlayerModal.classList.contains('active')) return;
+            
+            switch(e.key) {
+                case ' ':
+                    e.preventDefault();
+                    togglePlayPause();
+                    break;
+                case 'ArrowLeft':
+                    skipBackward();
+                    break;
+                case 'ArrowRight':
+                    skipForward();
+                    break;
+                case 'f':
+                    toggleFullscreen();
+                    break;
+                case 'm':
+                    toggleMute();
+                    break;
+                case 'Escape':
+                    closeVideoPlayer();
+                    break;
+            }
+        });
+
+        // Add click event to video cards
+        document.querySelectorAll('.course-card[data-type="video"] .play-overlay').forEach((overlay, index) => {
+            overlay.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const card = this.closest('.course-card');
+                const title = card.querySelector('.course-title').textContent;
+                const description = card.querySelector('.course-description').textContent;
+                
+                // Get video URL from data attribute or construct from title
+                let videoUrl = card.dataset.videoUrl;
+                
+                if (!videoUrl) {
+                    // Generate video path from title (example)
+                    const videoFileName = title.toLowerCase()
+                        .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // Remove accents
+                        .replace(/[^a-z0-9]+/g, '_') // Replace spaces and special chars
+                        .replace(/^_+|_+$/g, ''); // Remove leading/trailing underscores
+                    
+                    videoUrl = `./media/videos/${videoFileName}.mp4`;
+                }
+                
+                openVideoPlayer(title, description, videoUrl);
+            });
+        });
+
+        // Listen for orientation change
+        window.addEventListener('orientationchange', handleOrientationChange);
+        window.addEventListener('resize', handleOrientationChange);
+
+        function handleOrientationChange() {
+            if (waitingForRotation && isLandscape()) {
+                // User rotated to landscape
+                waitingForRotation = false;
+                document.getElementById('rotatePhoneMessage').style.display = 'none';
+                
+                // Get pending video info
+                const title = videoPlayerModal.dataset.pendingTitle;
+                const description = videoPlayerModal.dataset.pendingDescription;
+                const videoUrl = videoPlayerModal.dataset.pendingUrl;
+                
+                // Clear pending data
+                delete videoPlayerModal.dataset.pendingTitle;
+                delete videoPlayerModal.dataset.pendingDescription;
+                delete videoPlayerModal.dataset.pendingUrl;
+                
+                // Load video
+                document.getElementById('videoPlayerTitle').textContent = title;
+                document.getElementById('videoDescription').textContent = description;
+                
+                // Show loading
+                videoLoading.classList.add('active');
+                
+                // Generate and set poster (banner)
+                const posterUrl = generateVideoBanner(title);
+                videoPlayer.poster = posterUrl;
+                
+                // Set video source
+                videoPlayer.src = videoUrl;
+                videoPlayer.style.display = 'block';
+                videoIframe.style.display = 'none';
+                videoControls.style.display = 'block';
+                videoPlayer.preload = 'metadata';
+                
+                // Request fullscreen after a short delay
+                setTimeout(() => {
+                    const container = document.querySelector('.video-player-container');
+                    if (container.requestFullscreen) {
+                        container.requestFullscreen().catch(err => {
+                            console.log('Fullscreen error:', err);
+                        });
+                    } else if (container.webkitRequestFullscreen) {
+                        container.webkitRequestFullscreen();
+                    } else if (container.mozRequestFullScreen) {
+                        container.mozRequestFullScreen();
+                    } else if (container.msRequestFullscreen) {
+                        container.msRequestFullscreen();
+                    }
+                }, 500);
+            }
+        }
+    </script>
+
+    <!-- AI Chatbot Widget -->
+    <div class="floating-chat-widget">
+        <div class="chat-toggle" id="chatToggle">
+            <i class="fas fa-robot fa-2x"></i>
+        </div>
+        
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <div class="chat-header-title">
+                    <i class="fas fa-robot"></i>
+                    <span>Assistant XyberShield</span>
+                </div>
+                <button class="chat-close-btn" id="closeChatBtn">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             
-            <div id="chatMessages" class="chat-messages-floating">
+            <div class="chat-messages-floating" id="chatMessages">
                 <div class="message ai-message">
-                    <div class="message-avatar-small">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
+                    <div class="message-avatar"></div>
                     <div class="message-content-small">
-                        <p>🛡️ Salut ! Je suis votre expert cybersécurité ⚡</p>
-                        <p>🔒 Comptes piratés • 🚨 Menaces • 💡 Conseils sécurité</p>
-                        <p>Comment puis-je vous aider ? 🚀</p>
+                        👋 Bonjour! Je suis votre assistant XyberShield. Comment puis-je vous aider avec vos questions sur la cybersécurité?
                     </div>
                 </div>
             </div>
             
             <div class="chat-input-floating">
                 <div class="chat-input-group">
-                    <input type="text" id="chatInput" class="chat-input" placeholder="Votre question cybersécurité..." maxlength="500" autocomplete="off">
-                    <button id="sendMessage" class="btn-send-floating">
+                    <input type="text" class="chat-input" id="chatInput" placeholder="Posez votre question...">
+                    <button class="btn-send-floating" id="sendMessage">
                         <i class="fas fa-paper-plane"></i>
                     </button>
-                </div>
-                <div class="chat-footer-text">
-                    <i class="fas fa-lock"></i>
-                    <span>Développé par le XyberClan</span>
                 </div>
             </div>
         </div>
     </div>
 
+<<<<<<< HEAD
         <!-- Interactive Quiz Section -->
         <section class="quiz-section py-5">
             <div class="container">
@@ -918,5 +2266,12 @@
     <script>
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
+=======
+    <!-- Chatbot Script -->
+    <script src="animation/xyber-chat.js"></script>
+    
+    <!-- Welcome Guide Script -->
+    <script src="animation/welcome-guide.js"></script>
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
 </body>
 </html>

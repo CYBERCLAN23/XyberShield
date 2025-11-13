@@ -1,5 +1,6 @@
 {
   "version": 2,
+<<<<<<< HEAD
   "builds": [
     {
       "src": "index.html",
@@ -40,4 +41,15 @@
       "dest": "/index.html"
     }
   ]
+=======
+  "functions": {
+    "api/**/*.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "GEMINI_API_KEY": "@gemini-api-key"
+  }
+>>>>>>> e0d86ad (Update vercel.json and clean up project files)
 }

@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <base href="./">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://www.youtube.com https://s.ytimg.com; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: https:; frame-src 'self' https://www.youtube.com https://youtube.com https://www.youtube-nocookie.com; connect-src 'self' https://generativelanguage.googleapis.com; media-src 'self' https: data: blob: https://*.googlevideo.com;">
+    <meta http-equiv="Permissions-Policy" content="autoplay=(self https://www.youtube.com), encrypted-media=(self https://www.youtube.com), accelerometer=(self https://www.youtube.com), gyroscope=(self https://www.youtube.com), picture-in-picture=(self https://www.youtube.com), clipboard-write=(self https://www.youtube.com), web-share=(self https://www.youtube.com)">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>XyberShield – Éducation</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="XyberShield - Vidéos, visuels et guides PDF pour reconnaître, prévenir et réagir face aux cyberattaques.">
+    <meta name="keywords" content="cybersécurité, protection, phishing, piratage, sécurité en ligne, éducation">
+    <meta name="author" content="XyberShield Team">
+
+    <!-- CSS -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Font Awesome Icons - Direct CSS Load -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <!-- Bootstrap -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    </noscript>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/animations.css">
+    <link rel="stylesheet" href="style/Education.css">
+    <link rel="stylesheet" href="style/custom-video-player.css">
+
+    <!-- Fonts with preloading and font-display: swap -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Exo+2:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    </noscript>
+
+    <!-- Favicon -->
+    <link rel="icon" href="./images/logos/logo.png" type="image/png">
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark neon-nav">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+        <img src="images/logos/logo.png" alt="XyberShield" class="logo">
+        <span class="brand">XyberShield</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Accueil</a></li>
+          <li class="nav-item"><a class="nav-link" href="report.html">Signaler</a></li>
+          <li class="nav-item"><a class="nav-link active" href="#">Éducation</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item"><a class="btn btn-neon ms-lg-3" href="login.html">Se connecter</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Animated Search Section -->
+  <section class="search-section py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12 col-lg-10">
+          <div class="text-center mb-4">
+            <h2 class="text-gradient typing-text" data-text="Ressources de Cybersécurité"></h2>
+            <p class="text-muted mb-0">Tapez votre recherche ou sélectionnez une catégorie ci-dessous</p>
+          </div>
+          
+          <form class="youtube-search search-tech">
+            <div class="search-container">
+              <div class="search-tech-bg"></div>
+              <div class="search-tech-grid"></div>
+              <div class="input-group search-tech-input">
+                <span class="search-icon">
+                  <i class="fas fa-search"></i>
+                </span>
+                <input id="searchInput" type="text" 
+                      class="form-control youtube-search-input tech-input" 
+                      placeholder="" 
+                      aria-label="Search"
+                      autocomplete="off">
+                <div class="search-placeholder">
+                  <span class="typing-text" 
+                        data-text="Rechercher : phishing, mots de passe, WhatsApp, sécurité..."
+                        data-cursor="|"></span>
+                </div>
+                <button class="btn youtube-search-btn tech-btn" type="submit">
+                  <i class="fas fa-arrow-right"></i>
+                </button>
+              </div>
+              <div class="search-underline"></div>
+            </div>
+          </form>
+          <div id="suggestionsContainer" class="list-group position-absolute w-100" style="z-index: 1050;"></div>
+
+          
+          <div class="d-flex justify-content-center mb-4 flex-wrap" id="filter-buttons">
+              <button class="btn btn-outline-primary me-2 mb-2 filter-btn active" data-filter="all">Tous</button>
+              <button class="btn btn-outline-primary me-2 mb-2 filter-btn" data-filter="image">Images</button>
+              <button class="btn btn-outline-primary me-2 mb-2 filter-btn" data-filter="video">Vidéos</button>
+              <button class="btn btn-outline-primary me-2 mb-2 filter-btn" data-filter="pdf">PDFs</button>
+              <button class="btn btn-guide-restart ms-3 mb-2" onclick="restartGuide()" title="Relancer le guide de visite">
+                  <i class="fas fa-route me-2"></i>Guide de visite
+              </button>
+          </div>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-primary d-sm-none" id="menu-toggle">Menu</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Professional First Visit Guide Overlay -->
+  <div id="guideOverlay" class="guide-overlay">
+    <!-- Progress Indicator -->
+    <div class="guide-progress">
+      <div class="guide-progress-text">Étape <span id="currentStep">1</span> sur 5</div>
+      <div class="guide-progress-bar">
+        <div class="guide-progress-fill" id="progressFill" style="width: 20%;"></div>
+      </div>
+    </div>
+    
+    <!-- Skip Button -->
+    <button class="guide-skip" onclick="closeGuide()">Ignorer le guide</button>
+    
+    <!-- Spotlight Effect -->
+    <div class="guide-spotlight" id="guideSpotlight"></div>
+    
+    <div class="guide-content">
+      <!-- Step 1: Welcome -->
+      <div class="guide-step active" data-step="1" data-target="search-section">
+        <div class="guide-bubble">
+          <h4>🎯 Bienvenue sur XyberShield Education !</h4>
+          <p>Découvrez nos ressources de cybersécurité pour vous protéger efficacement contre les menaces numériques.</p>
+          <button class="btn btn-neon btn-sm" onclick="nextGuideStep()">
+            <i class="fas fa-arrow-right me-1"></i>Commencer la visite
+          </button>
+        </div>
+        <div class="guide-arrow"></div>
+      </div>
+      
+      <!-- Step 2: Search Function -->
+      <div class="guide-step" data-step="2" data-target="searchInput" style="display: none;">
+        <div class="guide-bubble">
+          <h4>🔍 Recherche Intelligente</h4>
+          <p>Utilisez la barre de recherche pour trouver rapidement des ressources spécifiques. Tapez "phishing", "mots de passe" ou tout autre sujet de sécurité.</p>
+          <button class="btn btn-neon btn-sm" onclick="nextGuideStep()">
+            <i class="fas fa-arrow-right me-1"></i>Suivant
+          </button>
+        </div>
+        <div class="guide-arrow"></div>
+      </div>
+      
+      <!-- Step 3: Filter Buttons -->
+      <div class="guide-step" data-step="3" data-target="filter-buttons" style="display: none;">
+        <div class="guide-bubble">
+          <h4>📚 Filtres par Type</h4>
+          <p>Filtrez le contenu selon vos préférences : vidéos éducatives, infographies visuelles ou guides PDF détaillés.</p>
+          <button class="btn btn-neon btn-sm" onclick="nextGuideStep()">
+            <i class="fas fa-arrow-right me-1"></i>Suivant
+          </button>
+        </div>
+        <div class="guide-arrow"></div>
+      </div>
+      
+      <!-- Step 4: Quiz Section -->
+      <div class="guide-step" data-step="4" data-target="quizSection" style="display: none;">
+        <div class="guide-bubble">
+          <h4>🎯 Quiz Interactif de Cybersécurité</h4>
+          <p>Testez vos connaissances avec notre quiz intelligent ! 10 questions générées par IA, 5 minutes chrono, et obtenez votre certificat XyberShield.</p>
+          <button class="btn btn-neon btn-sm" onclick="nextGuideStep()">
+            <i class="fas fa-arrow-right me-1"></i>Suivant
+          </button>
+        </div>
+        <div class="guide-arrow"></div>
+      </div>
+      
+      <!-- Step 5: AI Assistant -->
+      <div class="guide-step" data-step="5" data-target="chatToggle" style="display: none;">
+        <div class="guide-bubble">
+          <h4>🤖 Assistant IA XyberShield</h4>
+          <p>Notre assistant IA spécialisé en cybersécurité est là pour répondre à vos questions et vous aider en temps réel !</p>
+          <button class="btn btn-neon btn-sm" onclick="closeGuide()">
+            <i class="fas fa-check me-1"></i>Terminer la visite
+          </button>
+        </div>
+        <div class="guide-arrow"></div>
+      </div>
+    </div>
+  </div>
+
+        <!-- Education Grid Section -->
+        <section class="education-section py-5">
+            <div class="container">
+                <div class="row mb-4">
+                    <div class="col-12 text-center">
+                        <h2 class="section-title text-gradient mb-3">Ressources Éducatives</h2>
+                        <p class="text-muted">Découvrez nos contenus pour renforcer votre sécurité numérique</p>
+                    </div>
+                </div>
+                
+                <div id="eduGrid" class="row g-4 justify-content-center">
+
+                    <!-- === SECTION VIDÉOS === -->
+                    <div class="col-12">
+                        <h3 class="category-title"><i class="fas fa-play-circle me-2"></i>Vidéos Éducatives</h3>
+                    </div>
+                    
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="video" data-title="Comprendre le phishing">
+                        <div class="card cyber-card h-100">
+                            <div class="card-media">
+                                <div class="thumb video-thumb" style="background-image:url('https://img.youtube.com/vi/PRSyNoUUXKk/maxresdefault.jpg');">
+                                    <button class="play-btn" data-video="https://www.youtube.com/embed/PRSyNoUUXKk?autoplay=1">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <div class="video-duration">8:45</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-header-info">
+                                    <span class="badge badge-video"><i class="fas fa-video me-1"></i>Vidéo</span>
+                                    <span class="card-views"><i class="fas fa-eye me-1"></i>2.1k vues</span>
+                                </div>
+                                <h5 class="card-title">Comprendre le phishing</h5>
+                                <p class="card-text">Apprenez à repérer les emails piégés et les techniques de phishing les plus courantes utilisées par les cybercriminels.</p>
+                                <div class="card-tags">
+                                    <span class="tag">#phishing</span>
+                                    <span class="tag">#email</span>
+                                    <span class="tag">#sécurité</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="video" data-title="Protection contre le phishing">
+                        <div class="card cyber-card h-100">
+                            <div class="card-media">
+                                <div class="thumb video-thumb" style="background-image:url('https://img.youtube.com/vi/BX3y_an89PQ/maxresdefault.jpg');">
+                                    <button class="play-btn" data-video="https://www.youtube.com/embed/BX3y_an89PQ?autoplay=1">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <div class="video-duration">12:30</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-header-info">
+                                    <span class="badge badge-video"><i class="fas fa-video me-1"></i>Vidéo</span>
+                                    <span class="card-views"><i class="fas fa-eye me-1"></i>1.8k vues</span>
+                                </div>
+                                <h5 class="card-title">Protection contre le phishing</h5>
+                                <p class="card-text">Techniques avancées pour identifier et éviter les attaques de phishing sophistiquées.</p>
+                                <div class="card-tags">
+                                    <span class="tag">#protection</span>
+                                    <span class="tag">#prévention</span>
+                                    <span class="tag">#cybersécurité</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="video" data-title="Sécuriser ses mots de passe">
+                        <div class="card cyber-card h-100">
+                            <div class="card-media">
+                                <div class="thumb video-thumb" style="background-image:url('https://img.youtube.com/vi/3NjQ9b3pgIg/maxresdefault.jpg');">
+                                    <button class="play-btn" data-video="https://www.youtube.com/embed/3NjQ9b3pgIg?autoplay=1">
+                                        <i class="fas fa-play"></i>
+                                    </button>
+                                    <div class="video-duration">15:20</div>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-header-info">
+                                    <span class="badge badge-video"><i class="fas fa-video me-1"></i>Vidéo</span>
+                                    <span class="card-views"><i class="fas fa-eye me-1"></i>3.2k vues</span>
+                                </div>
+                                <h5 class="card-title">Sécuriser ses mots de passe</h5>
+                                <p class="card-text">Guide complet pour créer et gérer des mots de passe sécurisés avec les gestionnaires.</p>
+                                <div class="card-tags">
+                                    <span class="tag">#motsdepasse</span>
+                                    <span class="tag">#gestionnaire</span>
+                                    <span class="tag">#2FA</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- === SECTION IMAGES === -->
+                    <div class="col-12 mt-5">
+                        <h3 class="category-title"><i class="fas fa-images me-2"></i>Infographies & Guides Visuels</h3>
+                    </div>
+                    
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="image" data-title="Bonnes pratiques mots de passe">
+                        <div class="card cyber-card h-100">
+                            <div class="card-media">
+                                <a href="images/password-security.png" class="lightbox-trigger" data-lightbox="image" data-caption="Bonnes pratiques — Mots de passe">
+                                    <div class="thumb image-thumb" style="background-image:url('images/password-security.png');">
+                                        <div class="image-overlay">
+                                            <i class="fas fa-search-plus"></i>
+                                            <span>Voir en grand</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-header-info">
+                                    <span class="badge badge-image"><i class="fas fa-image me-1"></i>Image</span>
+                                    <span class="card-resolution">1920x1080</span>
+                                </div>
+                                <h5 class="card-title">Bonnes pratiques — Mots de passe</h5>
+                                <p class="card-text">Infographie complète sur la création et gestion sécurisée des mots de passe.</p>
+                                <div class="card-tags">
+                                    <span class="tag">#infographie</span>
+                                    <span class="tag">#bonnes-pratiques</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="image" data-title="Reconnaître un faux site">
+                        <div class="card cyber-card h-100">
+                            <div class="card-media">
+                                <a href="images/fake-website-detection.png" class="lightbox-trigger" data-lightbox="image" data-caption="Reconnaître un faux site">
+                                    <div class="thumb image-thumb" style="background-image:url('images/fake-website-detection.png');">
+                                        <div class="image-overlay">
+                                            <i class="fas fa-search-plus"></i>
+                                            <span>Voir en grand</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-header-info">
+                                    <span class="badge badge-image"><i class="fas fa-image me-1"></i>Image</span>
+                                    <span class="card-resolution">1920x1080</span>
+                                </div>
+                                <h5 class="card-title">Reconnaître un faux site</h5>
+                                <p class="card-text">Checklist visuelle pour identifier les sites web frauduleux et les signaux d'alarme.</p>
+                                <div class="card-tags">
+                                    <span class="tag">#sites-frauduleux</span>
+                                    <span class="tag">#détection</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="image" data-title="Sécurité réseaux sociaux">
+                        <div class="card cyber-card h-100">
+                            <div class="card-media">
+                                <a href="images/social-media-security.png" class="lightbox-trigger" data-lightbox="image" data-caption="Sécurité réseaux sociaux">
+                                    <div class="thumb image-thumb" style="background-image:url('images/social-media-security.png');">
+                                        <div class="image-overlay">
+                                            <i class="fas fa-search-plus"></i>
+                                            <span>Voir en grand</span>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-body">
+                                <div class="card-header-info">
+                                    <span class="badge badge-image"><i class="fas fa-image me-1"></i>Image</span>
+                                    <span class="card-resolution">1920x1080</span>
+                                </div>
+                                <h5 class="card-title">Sécurité réseaux sociaux</h5>
+                                <p class="card-text">Guide visuel pour protéger vos comptes sur les plateformes sociales.</p>
+                                <div class="card-tags">
+                                    <span class="tag">#réseaux-sociaux</span>
+                                    <span class="tag">#confidentialité</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- === SECTION PDF === -->
+                    <div class="col-12 mt-5">
+                        <h3 class="category-title"><i class="fas fa-file-pdf me-2"></i>Guides PDF Détaillés</h3>
+                    </div>
+                    
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="pdf" data-title="Guide anti-phishing">
+                        <div class="card cyber-card h-100">
+                            <div class="card-media">
+                                <div class="thumb pdf-thumb d-flex align-items-center justify-content-center position-relative">
+                                    <div class="pdf-icon">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </div>
+                                    <div class="pdf-overlay">
+                                        <button class="btn btn-sm btn-outline-light pdf-preview-trigger" 
+                                                data-pdf="assets/pdfs/guide-anti-phishing.pdf" 
+                                                data-caption="Guide anti-phishing">
+                                            <i class="fas fa-eye me-1"></i>Aperçu
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div class="card-header-info">
+                                    <span class="badge badge-pdf"><i class="fas fa-file-pdf me-1"></i>PDF</span>
+                                    <span class="card-pages">24 pages</span>
+                                </div>
+                                <h5 class="card-title">Guide anti-phishing</h5>
+                                <p class="card-text">Manuel complet avec étapes pratiques et exemples réels pour se protéger du phishing.</p>
+                                <div class="card-tags mb-3">
+                                    <span class="tag">#guide-complet</span>
+                                    <span class="tag">#exemples-réels</span>
+                                </div>
+                                <div class="mt-auto">
+                                    <div class="d-grid gap-2">
+                                        <a class="btn btn-neon" href="assets/pdfs/guide-anti-phishing.pdf" download>
+                                            <i class="fas fa-download me-2"></i>Télécharger PDF
+                                        </a>
+                                        <button class="btn btn-outline-primary pdf-preview-trigger" 
+                                                data-pdf="assets/pdfs/guide-anti-phishing.pdf" 
+                                                data-caption="Guide anti-phishing">
+                                            <i class="fas fa-eye me-2"></i>Aperçu en ligne
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="pdf" data-title="Sécuriser WhatsApp">
+                        <div class="card cyber-card h-100">
+                            <div class="card-media">
+                                <div class="thumb pdf-thumb d-flex align-items-center justify-content-center position-relative">
+                                    <div class="pdf-icon">
+                                        <i class="fab fa-whatsapp"></i>
+                                    </div>
+                                    <div class="pdf-overlay">
+                                        <button class="btn btn-sm btn-outline-light pdf-preview-trigger" 
+                                                data-pdf="assets/pdfs/securiser-whatsapp.pdf" 
+                                                data-caption="Sécuriser WhatsApp">
+                                            <i class="fas fa-eye me-1"></i>Aperçu
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div class="card-header-info">
+                                    <span class="badge badge-pdf"><i class="fas fa-file-pdf me-1"></i>PDF</span>
+                                    <span class="card-pages">16 pages</span>
+                                </div>
+                                <h5 class="card-title">Sécuriser WhatsApp</h5>
+                                <p class="card-text">Guide pratique pour configurer la sécurité WhatsApp : verrouillage, codes PIN, récupération.</p>
+                                <div class="card-tags mb-3">
+                                    <span class="tag">#whatsapp</span>
+                                    <span class="tag">#configuration</span>
+                                </div>
+                                <div class="mt-auto">
+                                    <div class="d-grid gap-2">
+                                        <a class="btn btn-neon" href="assets/pdfs/securiser-whatsapp.pdf" download>
+                                            <i class="fas fa-download me-2"></i>Télécharger PDF
+                                        </a>
+                                        <button class="btn btn-outline-primary pdf-preview-trigger" 
+                                                data-pdf="assets/pdfs/securiser-whatsapp.pdf" 
+                                                data-caption="Sécuriser WhatsApp">
+                                            <i class="fas fa-eye me-2"></i>Aperçu en ligne
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-md-6 col-xl-4 edu-card" data-type="pdf" data-title="Récupération de comptes">
+                        <div class="card cyber-card h-100">
+                            <div class="card-media">
+                                <div class="thumb pdf-thumb d-flex align-items-center justify-content-center position-relative">
+                                    <div class="pdf-icon">
+                                        <i class="fas fa-user-shield"></i>
+                                    </div>
+                                    <div class="pdf-overlay">
+                                        <button class="btn btn-sm btn-outline-light pdf-preview-trigger" 
+                                                data-pdf="assets/pdfs/recuperation-comptes.pdf" 
+                                                data-caption="Récupération de comptes">
+                                            <i class="fas fa-eye me-1"></i>Aperçu
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body d-flex flex-column">
+                                <div class="card-header-info">
+                                    <span class="badge badge-pdf"><i class="fas fa-file-pdf me-1"></i>PDF</span>
+                                    <span class="card-pages">32 pages</span>
+                                </div>
+                                <h5 class="card-title">Récupération de comptes</h5>
+                                <p class="card-text">Procédures détaillées pour récupérer vos comptes piratés (Facebook, Instagram, Gmail, etc.).</p>
+                                <div class="card-tags mb-3">
+                                    <span class="tag">#récupération</span>
+                                    <span class="tag">#comptes-piratés</span>
+                                </div>
+                                <div class="mt-auto">
+                                    <div class="d-grid gap-2">
+                                        <a class="btn btn-neon" href="assets/pdfs/recuperation-comptes.pdf" download>
+                                            <i class="fas fa-download me-2"></i>Télécharger PDF
+                                        </a>
+                                        <button class="btn btn-outline-primary pdf-preview-trigger" 
+                                                data-pdf="assets/pdfs/recuperation-comptes.pdf" 
+                                                data-caption="Récupération de comptes">
+                                            <i class="fas fa-eye me-2"></i>Aperçu en ligne
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+                </div>
+            </div>
+        </section>
+
+
+    <!-- Footer -->
+    <footer class="footer py-4">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+            <p class="mb-0 small text-muted">© <span id="year"></span> XyberShield — Éduquer, Protéger, Agir.</p>
+            <div class="d-flex gap-3 social">
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-telegram"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL Video -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content modal-cyber">
+                <button type="button" class="btn-close btn-close-white ms-auto me-2 mt-2" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                <div class="ratio ratio-16x9">
+                    <iframe id="videoFrame" src="" title="Lecture vidéo" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                </div>
+                
+                <!-- Video Container -->
+                <div id="videoContainer" class="ratio ratio-16x9 d-none">
+                    <video id="lightboxVideo" controls class="rounded-3" style="background: #000;">
+                        <source src="" type="video/mp4">
+                        Votre navigateur ne supporte pas la lecture de vidéos.
+                    </video>
+                </div>
+                
+                <!-- Caption -->
+                <div id="lightboxCaption" class="text-center text-white mt-2 fw-light"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- YouTube IFrame API -->
+    <script>
+    // Function to load YouTube API
+    function loadYouTubeAPI() {
+      return new Promise((resolve) => {
+        if (window.YT && window.YT.Player) {
+          console.log('YouTube API already loaded');
+          resolve();
+          return;
+        }
+        
+        // Create script tag for YouTube IFrame API
+        const tag = document.createElement('script');
+        tag.src = 'https://www.youtube.com/iframe_api';
+        
+        // Set up callback for when API is ready
+        window.onYouTubeIframeAPIReady = () => {
+          console.log('YouTube API is ready');
+          resolve();
+        };
+        
+        // Insert the script tag
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      });
+    }
+    
+    // Preload YouTube API
+    document.addEventListener('DOMContentLoaded', () => {
+      loadYouTubeAPI().catch(error => {
+        console.error('Error loading YouTube API:', error);
+      });
+    });
+    </script>
+
+    <!-- Lightbox Modal -->
+    <div class="modal fade" id="lightboxModal" tabindex="-1" aria-hidden="true" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered modal-xl" style="max-width: 95vw; width: 100%; margin: 0 auto;">
+            <div class="modal-content border-0" style="background: transparent; box-shadow: none;">
+                <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3 close-lightbox" style="z-index: 1060; filter: drop-shadow(0 0 8px #000);" aria-label="Fermer">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                
+                <!-- Image Container -->
+                <div id="imageContainer" class="text-center d-none">
+                    <img id="lightboxImg" src="" alt="Aperçu" class="img-fluid" style="max-height: 85vh; width: auto; margin: 0 auto;">
+                </div>
+                
+                <!-- Video Container -->
+                <div id="videoContainer" class="d-none">
+                    <!-- Video content will be inserted here -->
+                </div>
+                
+                <!-- PDF Container -->
+                <div id="pdfContainer" class="d-none">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <div>
+                            <button id="prevPage" class="btn btn-sm btn-outline-light me-2">
+                                <i class="bi bi-chevron-left"></i> Précédent
+                            </button>
+                            <span id="pageNum" class="text-white me-2">Page: 1</span>
+                            <span id="pageCount" class="text-muted">sur 1</span>
+                            <button id="nextPage" class="btn btn-sm btn-outline-light ms-2">
+                                Suivant <i class="bi bi-chevron-right"></i>
+                            </button>
+                        </div>
+                        <div>
+                            <span id="zoomLevel" class="badge bg-dark me-2">100%</span>
+                            <button id="zoomIn" class="btn btn-sm btn-outline-light me-1" title="Zoom avant">
+                                <i class="bi bi-zoom-in"></i>
+                            </button>
+                            <button id="zoomOut" class="btn btn-sm btn-outline-light me-2" title="Zoom arrière">
+                                <i class="bi bi-zoom-out"></i>
+                            </button>
+                            <a id="downloadPdf" href="#" class="btn btn-sm btn-outline-light" download>
+                                <i class="bi bi-download"></i> Télécharger
+                            </a>
+                        </div>
+                    </div>
+                    <div class="border rounded bg-white p-2" style="max-height: 80vh; overflow-y: auto;">
+                        <canvas id="pdfCanvas" class="w-100"></canvas>
+                    </div>
+                </div>
+                
+                <!-- Loading Indicator -->
+                <div id="loadingIndicator" class="text-center d-none">
+                    <div class="spinner-border text-light" role="status">
+                        <span class="visually-hidden">Chargement...</span>
+                    </div>
+                    <p class="text-light mt-2">Chargement du document...</p>
+                </div>
+                
+                <!-- Caption -->
+                <div id="lightboxCaption" class="text-center text-white mt-3 fw-light"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" integrity="sha512-q+4liFwdPC/bNdhUpZx6aXDx/h77yEQtn4I1slHydcbZK34nLaR3cAeYSJshoxIOq3mjEf7xJE8YWIUHMn+oCQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // Set worker path for PDF.js
+        document.addEventListener('DOMContentLoaded', function() {
+            window.pdfjsLib = pdfjsLib || {};
+            pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+            window.pdfjsInitialized = true;
+            console.log('PDF.js initialized successfully');
+        });
+    </script>
+    
+    <!-- Chat Widget -->
+    <div class="floating-chat-widget">
+        <div id="chatToggle" class="chat-toggle">
+            <div class="chat-toggle-content">
+                <div class="ai-avatar-small">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chat-toggle-text">
+                    <div class="chat-title">XyberShield AI</div>
+                    <div class="chat-subtitle">Posez-moi vos questions</div>
+                </div>
+            </div>
+            <button class="chat-toggle-btn">
+                <i class="fas fa-comment-dots"></i>
+            </button>
+        </div>
+
+        <div id="chatWindow" class="chat-window" style="display: none;">
+            <div class="chat-header">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="ai-avatar-small">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div>
+                        <div class="chat-header-title">XyberShield AI</div>
+                        <div class="chat-header-status">
+                            <span class="status-dot"></span>
+                            En ligne
+                        </div>
+                    </div>
+                </div>
+                <button id="closeChatBtn" class="chat-close-btn">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="chatMessages" class="chat-messages-floating">
+                <div class="message ai-message">
+                    <div class="message-avatar-small">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="message-content-small">
+                        <p>🛡️ Salut ! Je suis votre expert cybersécurité ⚡</p>
+                        <p>🔒 Comptes piratés • 🚨 Menaces • 💡 Conseils sécurité</p>
+                        <p>Comment puis-je vous aider ? 🚀</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="chat-input-floating">
+                <div class="chat-input-group">
+                    <input type="text" id="chatInput" class="chat-input" placeholder="Votre question cybersécurité..." maxlength="500" autocomplete="off">
+                    <button id="sendMessage" class="btn-send-floating">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="chat-footer-text">
+                    <i class="fas fa-lock"></i>
+                    <span>Développé par le XyberClan</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Interactive Quiz Section -->
+        <section class="quiz-section py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-10">
+                        <div class="quiz-container">
+                            <div class="quiz-header text-center mb-4">
+                                <h2 class="section-title text-gradient mb-3">
+                                    <i class="fas fa-brain me-3"></i>Quiz Interactif de Cybersécurité
+                                </h2>
+                                <p class="quiz-subtitle">Testez vos connaissances et obtenez votre certificat XyberShield</p>
+                                <div class="quiz-stats">
+                                    <div class="stat-item">
+                                        <i class="fas fa-question-circle"></i>
+                                        <span>10 Questions</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-clock"></i>
+                                        <span>~5 Minutes</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <i class="fas fa-certificate"></i>
+                                        <span>Certificat PDF</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quiz Start Screen -->
+                            <div id="quizStart" class="quiz-screen active" style="display: block;">
+                                <div class="quiz-card">
+                                    <div class="quiz-card-header">
+                                        <h3>Prêt à tester vos connaissances ?</h3>
+                                        <p>Ce quiz couvre les aspects essentiels de la cybersécurité pour vous aider à mieux vous protéger en ligne.</p>
+                                    </div>
+                                    <div class="quiz-card-body">
+                                        <div class="quiz-topics">
+                                            <div class="topic-item">
+                                                <i class="fas fa-shield-alt"></i>
+                                                <span>Protection des mots de passe</span>
+                                            </div>
+                                            <div class="topic-item">
+                                                <i class="fas fa-fish"></i>
+                                                <span>Détection du phishing</span>
+                                            </div>
+                                            <div class="topic-item">
+                                                <i class="fas fa-wifi"></i>
+                                                <span>Sécurité des réseaux</span>
+                                            </div>
+                                            <div class="topic-item">
+                                                <i class="fas fa-mobile-alt"></i>
+                                                <span>Sécurité mobile</span>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-quiz-start" onclick="startQuiz()">
+                                            <i class="fas fa-play me-2"></i>Commencer le Quiz
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quiz Progress -->
+                            <div id="quizProgress" class="quiz-screen" style="display: none;">
+                                <div class="quiz-header-info">
+                                    <div class="quiz-counter">
+                                        <i class="fas fa-list-ol"></i>
+                                        <span>Question <span id="currentQuestionNum">1</span> sur 10</span>
+                                    </div>
+                                    <div class="quiz-timer">
+                                        <i class="fas fa-clock"></i>
+                                        <span id="timerDisplay">05:00</span>
+                                    </div>
+                                </div>
+                                <div class="quiz-progress-bar">
+                                    <div class="progress-fill" id="progressFill"></div>
+                                    <div class="progress-text">
+                                        <span id="currentQuestion">1</span> / 10
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quiz Question Screen -->
+                            <div id="quizQuestion" class="quiz-screen" style="display: none;">
+                                <div class="quiz-header-info">
+                                    <div class="quiz-counter">
+                                        <i class="fas fa-list-ol"></i>
+                                        <span>Question <span id="questionCounter">1</span> sur 10</span>
+                                    </div>
+                                    <div class="quiz-timer">
+                                        <i class="fas fa-clock"></i>
+                                        <span id="questionTimerDisplay">05:00</span>
+                                    </div>
+                                </div>
+                                <div class="quiz-card">
+                                    <div class="quiz-card-header">
+                                        <div class="question-category" id="questionCategory"></div>
+                                        <h3 id="questionText">Question sera chargée...</h3>
+                                    </div>
+                                    <div class="quiz-card-body">
+                                        <div class="quiz-options" id="quizOptions">
+                                            <!-- Options will be generated dynamically -->
+                                        </div>
+                                        <div class="quiz-controls">
+                                            <button class="btn btn-quiz-next" id="nextButton" onclick="nextQuestion()" disabled>
+                                                <i class="fas fa-arrow-right me-2"></i>Suivant
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quiz Results Screen -->
+                            <div id="quizResults" class="quiz-screen" style="display: none;">
+                                <div class="quiz-card">
+                                    <div class="quiz-card-header text-center">
+                                        <div class="result-icon" id="resultIcon">
+                                            <i class="fas fa-trophy"></i>
+                                        </div>
+                                        <h3 id="resultTitle">Félicitations !</h3>
+                                        <div class="result-score">
+                                            <span id="finalScore">0</span> / 10
+                                        </div>
+                                    </div>
+                                    <div class="quiz-card-body">
+                                        <div class="result-message" id="resultMessage"></div>
+                                        <div class="result-breakdown" id="resultBreakdown"></div>
+                                        <div class="quiz-controls">
+                                            <button class="btn btn-certificate" id="certificateButton" onclick="generateCertificate()">
+                                                <i class="fas fa-download me-2"></i>Télécharger le Certificat
+                                            </button>
+                                            <button class="btn btn-quiz-restart" onclick="restartQuiz()">
+                                                <i class="fas fa-redo me-2"></i>Refaire le Quiz
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Loading Screen -->
+                            <div id="quizLoading" class="quiz-screen" style="display: none;">
+                                <div class="quiz-card">
+                                    <div class="quiz-card-body text-center">
+                                        <div class="loading-spinner">
+                                            <div class="spinner"></div>
+                                        </div>
+                                        <h4>Génération des questions...</h4>
+                                        <p>Notre IA prépare un quiz personnalisé pour vous</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="animation/lightbox.js" defer></script>
+
+    <script src="animation/xyber-chat.js"></script>
+    <script src="animation/guide-system.js" defer></script>
+    <script src="animation/cybersecurity-quiz.js"></script>
+    <script src="animation/search-functionality.js"></script>
+    <script defer src="animation/search-animations.js"></script>
+
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
