@@ -1,5 +1,7 @@
 {
   "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
   "builds": [
     {
       "src": "package.json",
@@ -14,6 +16,10 @@
         "cache-control": "public, max-age=31536000, immutable"
       },
       "dest": "/$1"
+    },
+    {
+      "src": "^/(login|reset-password|report|education|index)(?:\\.html)?/?$",
+      "dest": "/$1.html"
     },
     {
       "src": "/(.*)",
