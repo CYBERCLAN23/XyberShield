@@ -1,7 +1,8 @@
 # 🛡️ XyberBot - Secure AI Chatbot
 
 **Part of XyberShield platform by XyberClan**  
-**Developer:** Almight ([Portfolio](https://almightportfolio.vercel.app/))
+**Developer:** Almight ([Portfolio](https://almightportfolio.vercel.app/))  
+**Last Deployment:** 2025-03-13 12:15 PM UTC+1
 
 Secure, production-ready AI chatbot for cybersecurity education using Firebase Genkit and Gemini 1.5-flash.
 
