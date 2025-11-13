@@ -1,29 +1,118 @@
 {
   "version": 2,
-  "cleanUrls": true,
-  "trailingSlash": false,
+  "name": "xybershield",
   "builds": [
     {
-      "src": "package.json",
-      "use": "@vercel/static",
-      "config": { "distDir": "." }
+      "src": "server.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|webp|json))$",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      },
+      "src": "/api/(.*)",
+      "dest": "/server.js"
+    },
+    {
+      "src": "/login",
+      "dest": "/login.html"
+    },
+    {
+      "src": "/register",
+      "dest": "/register.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/dashboard.html"
+    },
+    {
+      "src": "/user-dashboard",
+      "dest": "/user-dashboard.html"
+    },
+    {
+      "src": "/admin-dashboard",
+      "dest": "/admin-dashboard.html"
+    },
+    {
+      "src": "/education",
+      "dest": "/education.html"
+    },
+    {
+      "src": "/quiz",
+      "dest": "/quiz.html"
+    },
+    {
+      "src": "/report",
+      "dest": "/report.html"
+    },
+    {
+      "src": "/incident-report",
+      "dest": "/incident-report.html"
+    },
+    {
+      "src": "/threat-map",
+      "dest": "/threat-map.html"
+    },
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
       "dest": "/$1"
     },
     {
-      "src": "^/(login|reset-password|report|education|index)(?:\\.html)?/?$",
-      "dest": "/$1.html"
+      "src": "/",
+      "dest": "/index.html"
     },
     {
       "src": "/(.*)",
       "dest": "/index.html"
     }
-  ]
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(css|js))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*\\.(png|jpg|jpeg|gif|svg|ico|woff|woff2))",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "/server.js"
+    }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
