@@ -2,7 +2,19 @@
   "version": 2,
   "builds": [
     {
-      "src": "**",
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "style/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "animation/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "image/**",
       "use": "@vercel/static"
     }
   ],
@@ -16,16 +28,8 @@
       "dest": "/animation/$1"
     },
     {
-      "src": "/js/(.*)",
-      "dest": "/js/$1"
-    },
-    {
-      "src": "/images/(.*)",
-      "dest": "/images/$1"
-    },
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
+      "src": "/image/(.*)",
+      "dest": "/image/$1"
     },
     {
       "src": "/(.*\\.(html|css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
