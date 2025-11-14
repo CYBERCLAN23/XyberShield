@@ -1,5 +1,5 @@
 {
-  "name": "xybershield-chatbot",
+  "name": "xybershield",
   "version": "2.0.0",
   "description": "XyberBot - Secure AI chatbot for XyberShield by XyberClan",
   "author": "Almight (XyberClan)",
@@ -16,7 +16,7 @@
   "devDependencies": {
     "vercel": "^33.0.0"
   },
-  "engines": {
-  "node": "18.x"  
+ "engines": {
+    "node": "22.x"
   }
 }
