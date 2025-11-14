@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 /* ===========================================
    1. BASE STYLES & THEME
    =========================================== */
@@ -6284,83 +6284,3 @@ button {
                 display: block;
             }
         }
-=======
-*{
-    margin: 0;
-    padding: 0;
-      box-sizing: border-box;
-      font-family:Verdana, Tahoma, sans-serif;
-}
-body{
-     min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-      color: #454C4F;
-      background-color: #FEFEFD;
-}
-.container{
-  background-color: #FEFEFE;
-    display: flex;
-    flex-direction: row;
-    padding:  90px;
-    border: solid rgba(220, 214, 214, 0.938) 1px;
-    border-radius: 100px  100px  100px  100px;
-    box-shadow: 1px 1px  3px 1px #454D4F , -1px -3px #fff;
-    gap: 100px;
-}
-label{
-       color: #EF7B28;
-       font-weight: bolder;
-}
-h1{
-    color: #EF7B28;
-}
-.left{
-align-items: center;
-text-align: center;
-   background:url('../image/Logo/logo.png');
-   background-position: center;
-background-repeat: no-repeat;
-margin-top: -60px;
-background-size: cover;
-
-}
-.right{
-align-items: center;
-text-align: center;
-font-size: medium;
-}
-
-input{
-    padding: 9px;
-    width: 100%;
-    border-radius: 10px 0 2px;
-    border: #606669 solid 0.2px;
-    outline: none;
-
-}
-h4{
-    color: #0697D7;
-}
-button{
-    margin-top: 20px;
-    padding: 10px;
-    width: 40%;
-    background-color: #EF7B28;
-    border: none;
-color: #ffffff;
-font-weight: bolder;
-    border-radius: 10px 10px 10px 10px;
-}
-button:hover{
-
-    background-color: #EF7B28;
-    border: none;
-
-    border-radius: 10px 10px 10px 10px;
-
-}
->>>>>>> 64a318e (Initial commit)
