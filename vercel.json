@@ -1,10 +1,5 @@
 {
-  "version": 2,
   "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/api/index.js"
-    },
     {
       "src": "/login",
       "dest": "/login.html"
@@ -46,10 +41,6 @@
       "dest": "/threat-map.html"
     },
     {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|webp))",
-      "dest": "/$1"
-    },
-    {
       "src": "/",
       "dest": "/index.html"
     }
@@ -69,14 +60,6 @@
         {
           "key": "X-XSS-Protection",
           "value": "1; mode=block"
-        },
-        {
-          "key": "Referrer-Policy",
-          "value": "strict-origin-when-cross-origin"
-        },
-        {
-          "key": "Permissions-Policy",
-          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     },
@@ -90,7 +73,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|webp)",
+      "source": "/(.*)\\.(png|jpg|jpeg|gif|svg|ico|woff|woff2)",
       "headers": [
         {
           "key": "Cache-Control",
