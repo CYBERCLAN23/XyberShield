@@ -1,0 +1,53 @@
+{
+  "rewrites": [
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/register", "destination": "/register.html" },
+    { "source": "/dashboard", "destination": "/dashboard.html" },
+    { "source": "/user-dashboard", "destination": "/user-dashboard.html" },
+    { "source": "/admin-dashboard", "destination": "/admin-dashboard.html" },
+    { "source": "/education", "destination": "/education.html" },
+    { "source": "/quiz", "destination": "/quiz.html" },
+    { "source": "/report", "destination": "/report.html" },
+    { "source": "/incident-report", "destination": "/incident-report.html" },
+    { "source": "/threat-map", "destination": "/threat-map.html" }
+  ],
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(css|js)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(png|jpg|jpeg|gif|svg|ico|woff|woff2)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}
