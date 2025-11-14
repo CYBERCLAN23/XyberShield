@@ -1,16 +1,9 @@
 {
   "version": 2,
-  "name": "xybershield",
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    }
-  ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server.js"
+      "dest": "/api/index.js"
     },
     {
       "src": "/login",
@@ -53,15 +46,11 @@
       "dest": "/threat-map.html"
     },
     {
-      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot))",
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|webp))",
       "dest": "/$1"
     },
     {
       "src": "/",
-      "dest": "/index.html"
-    },
-    {
-      "src": "/(.*)",
       "dest": "/index.html"
     }
   ],
@@ -84,11 +73,15 @@
         {
           "key": "Referrer-Policy",
           "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
         }
       ]
     },
     {
-      "source": "/(.*\\.(css|js))",
+      "source": "/(.*)\\.(css|js)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -97,7 +90,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(png|jpg|jpeg|gif|svg|ico|woff|woff2))",
+      "source": "/(.*)\\.(png|jpg|jpeg|gif|svg|ico|woff|woff2|webp)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -105,14 +98,5 @@
         }
       ]
     }
-  ],
-  "rewrites": [
-    {
-      "source": "/api/:path*",
-      "destination": "/server.js"
-    }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+  ]
 }
