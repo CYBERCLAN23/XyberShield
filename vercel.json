@@ -1,53 +1,45 @@
 {
-  "rewrites": [
-    { "source": "/login", "destination": "/login.html" },
-    { "source": "/register", "destination": "/register.html" },
-    { "source": "/dashboard", "destination": "/dashboard.html" },
-    { "source": "/user-dashboard", "destination": "/user-dashboard.html" },
-    { "source": "/admin-dashboard", "destination": "/admin-dashboard.html" },
-    { "source": "/education", "destination": "/education.html" },
-    { "source": "/quiz", "destination": "/quiz.html" },
-    { "source": "/report", "destination": "/report.html" },
-    { "source": "/incident-report", "destination": "/incident-report.html" },
-    { "source": "/threat-map", "destination": "/threat-map.html" }
-  ],
+  "version": 2,
   "cleanUrls": true,
   "trailingSlash": false,
-  "headers": [
+  "builds": [
     {
-      "source": "/(.*)",
-      "headers": [
-        {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
-        },
-        {
-          "key": "X-Frame-Options",
-          "value": "DENY"
-        },
-        {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
-        }
-      ]
+      "src": "*.{html,json}",
+      "use": "@vercel/static"
     },
     {
-      "source": "/(.*)\\.(css|js)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "src": "style/*.css",
+      "use": "@vercel/static"
     },
     {
-      "source": "/(.*)\\.(png|jpg|jpeg|gif|svg|ico|woff|woff2)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
+      "src": "animation/*.js",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "images/**/*",
+      "use": "@vercel/static"
     }
+  ],
+  "routes": [
+    {
+      "src": "/(.*\\.(css|js|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|eot|webp|json))$",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      },
+      "dest": "/$1"
+    },
+    {
+      "src": "^/(login|reset-password|report|education|index)(?:\\.html)?/?$",
+      "dest": "/$1.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
+  "ignore": [
+    "package.json",
+    "package-lock.json",
+    "node_modules/**"
   ]
 }
