@@ -2,104 +2,109 @@
 
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 
-export type AgeGroup = "kid" | "teen" | "adult" | null
-
-export interface UserProfile {
+export interface User {
   name: string
-  ageGroup: AgeGroup
-  age: number | null
-  avatar: string
-  xp: number
   level: number
+  xp: number
   streak: number
-  completedLessons: string[]
+  credits: number
   badges: string[]
-  selectedPath: string | null
-  visitedPages: string[]
+  completedLessons: string[]
 }
 
 interface UserContextType {
-  user: UserProfile | null
-  setUser: (user: UserProfile | null) => void
-  isOnboarded: boolean
-  updateXP: (amount: number) => void
+  user: User
+  setUser: (user: User) => void
+  addXp: (amount: number) => void
+  addCredits: (amount: number) => void
   addBadge: (badge: string) => void
   completeLesson: (lessonId: string) => void
-  markPageVisited: (page: string) => void
-}
-
-const defaultUser: UserProfile = {
-  name: "",
-  ageGroup: null,
-  age: null,
-  avatar: "default",
-  xp: 0,
-  level: 1,
-  streak: 0,
-  completedLessons: [],
-  badges: [],
-  selectedPath: null,
-  visitedPages: [],
+  resetProgress: () => void
 }
 
 const UserContext = createContext<UserContextType | undefined>(undefined)
 
 export function UserProvider({ children }: { children: ReactNode }) {
-  const [user, setUser] = useState<UserProfile | null>(null)
-  const [isOnboarded, setIsOnboarded] = useState(false)
+  const [user, setUser] = useState<User>({
+    name: "Cadet Xyber",
+    level: 1,
+    xp: 0,
+    streak: 1,
+    credits: 0,
+    badges: [],
+    completedLessons: []
+  })
 
+  // Load from local storage on mount
   useEffect(() => {
-    const stored = localStorage.getItem("xyber-user")
-    if (stored) {
-      const parsed = JSON.parse(stored)
-      // Ensure visitedPages exists for old data
-      if (!parsed.visitedPages) parsed.visitedPages = []
-      setUser(parsed)
-      setIsOnboarded(!!parsed.ageGroup)
+    const saved = localStorage.getItem("xyber_user")
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved)
+        // Ensure fields exist for backward compatibility
+        if (parsed.credits === undefined) parsed.credits = 0
+        if (!parsed.badges) parsed.badges = []
+        if (!parsed.completedLessons) parsed.completedLessons = []
+        setUser(parsed)
+      } catch (e) {
+        console.error("Failed to parse user data", e)
+      }
     }
   }, [])
 
+  // Save to local storage whenever user changes
   useEffect(() => {
-    if (user) {
-      localStorage.setItem("xyber-user", JSON.stringify(user))
-      setIsOnboarded(!!user.ageGroup)
-    }
+    localStorage.setItem("xyber_user", JSON.stringify(user))
   }, [user])
 
-  const updateXP = (amount: number) => {
-    if (!user) return
-    const newXP = user.xp + amount
-    const xpPerLevel = 500
-    const newLevel = Math.floor(newXP / xpPerLevel) + 1
-    setUser({ ...user, xp: newXP, level: newLevel })
+  const addXp = (amount: number) => {
+    setUser((prev) => {
+      const newXp = prev.xp + amount
+      const newLevel = Math.floor(newXp / 1000) + 1
+      return { ...prev, xp: newXp, level: newLevel }
+    })
+  }
+
+  const addCredits = (amount: number) => {
+    setUser((prev) => ({ ...prev, credits: prev.credits + amount }))
   }
 
   const addBadge = (badge: string) => {
-    if (!user || user.badges.includes(badge)) return
-    setUser({ ...user, badges: [...user.badges, badge] })
+    setUser((prev) => {
+      if (prev.badges.includes(badge)) return prev
+      return { ...prev, badges: [...prev.badges, badge] }
+    })
   }
 
   const completeLesson = (lessonId: string) => {
-    if (!user || user.completedLessons.includes(lessonId)) return
-    setUser({ ...user, completedLessons: [...user.completedLessons, lessonId] })
-    updateXP(50)
+    setUser((prev) => {
+      if (prev.completedLessons.includes(lessonId)) return prev
+      return { ...prev, completedLessons: [...prev.completedLessons, lessonId] }
+    })
   }
 
-  const markPageVisited = (page: string) => {
-    if (!user) return
-    const currentVisited = user.visitedPages || []
-    if (currentVisited.includes(page)) return
-    setUser({ ...user, visitedPages: [...currentVisited, page] })
+  const resetProgress = () => {
+    const newUser = {
+      name: "Cadet Xyber",
+      level: 1,
+      xp: 0,
+      streak: 1,
+      credits: 0,
+      badges: [],
+      completedLessons: []
+    }
+    setUser(newUser)
+    localStorage.setItem("xyber_user", JSON.stringify(newUser))
+    localStorage.removeItem("xyber_completed_lessons")
+    window.location.reload()
   }
 
   return (
-    <UserContext.Provider value={{ user, setUser, isOnboarded, updateXP, addBadge, completeLesson, markPageVisited }}>
+    <UserContext.Provider value={{ user, setUser, addXp, addCredits, addBadge, completeLesson, resetProgress }}>
       {children}
     </UserContext.Provider>
   )
 }
-
-
 
 export function useUser() {
   const context = useContext(UserContext)
