@@ -66,7 +66,7 @@ console.log("2 + 3 =", add(2, 3));
     }
 
     return (
-        <div className={`w-full bg-[#1e1e1e] rounded-xl border border-[#333] shadow-2xl overflow-hidden flex flex-col ${fullScreen ? "h-full" : "h-[500px]"}`}>
+        <div className={`w-full bg-[#1e1e1e] overflow-hidden flex flex-col ${fullScreen ? "h-full rounded-none border-0 shadow-none" : "h-[500px] rounded-xl border border-[#333] shadow-2xl"}`}>
             {/* Header (VS Code Style) */}
             <div className="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-[#1e1e1e]">
                 <div className="flex items-center gap-2">
