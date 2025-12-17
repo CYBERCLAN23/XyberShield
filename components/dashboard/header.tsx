@@ -1,6 +1,7 @@
 "use client"
 
 import Image from "next/image"
+import Link from "next/link"
 import { useUser } from "@/lib/user-context"
 import { Bell, Flame, Code, Shield, Brain, Rocket } from "lucide-react"
 import { motion } from "framer-motion"
@@ -68,12 +69,20 @@ export function Header() {
           </button>
 
           {/* Avatar */}
-          <div
-            className="w-10 h-10 rounded-full flex items-center justify-center border-2"
-            style={{ borderColor: avatarColor, backgroundColor: `${avatarColor}20` }}
-          >
-            <AvatarIcon className="w-5 h-5" style={{ color: avatarColor }} />
-          </div>
+          <Link href="/chat">
+            <motion.div
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              className="w-10 h-10 rounded-full flex items-center justify-center border-2 cursor-pointer relative group"
+              style={{ borderColor: avatarColor, backgroundColor: `${avatarColor}20` }}
+            >
+              <AvatarIcon className="w-5 h-5" style={{ color: avatarColor }} />
+              <span className="absolute -bottom-1 -right-1 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+              </span>
+            </motion.div>
+          </Link>
         </div>
       </div>
     </header>

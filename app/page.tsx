@@ -15,6 +15,8 @@ import { BottomNav } from "@/components/dashboard/bottom-nav"
 import { XPToast } from "@/components/dashboard/xp-toast"
 import { LevelUpModal } from "@/components/dashboard/level-up-modal"
 import PageGuide from "@/components/dashboard/page-guide"
+import { SmartHint } from "@/components/dashboard/smart-hint"
+import Link from "next/link" // Ensure Link is imported if not already, though not used in this snippet directly, good practice if needed later or verifying imports.
 
 function AppContent() {
   const { isOnboarded, user } = useUser()
@@ -67,6 +69,7 @@ function AppContent() {
     <main className="min-h-screen bg-background pb-24">
       <Header />
       <PageGuide activeTab={activeTab} />
+      <SmartHint />
       {renderContent()}
       <BottomNav activeTab={activeTab} onTabChange={setActiveTab} />
       <XPToast amount={xpToast.amount} show={xpToast.show} onHide={hideXPToast} />
