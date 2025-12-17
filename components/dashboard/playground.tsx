@@ -5,7 +5,7 @@ import Editor from "@monaco-editor/react"
 import { Play, Terminal, RefreshCw, Maximize2 } from "lucide-react" // Ensure these icons are available or use alternatives
 import { Button } from "@/components/ui/button"
 
-export function Playground() {
+export function Playground({ fullScreen = false }: { fullScreen?: boolean }) {
     const [code, setCode] = useState(`// Welcome to your JS Playground!
 // Try running this:
 
@@ -66,7 +66,7 @@ console.log("2 + 3 =", add(2, 3));
     }
 
     return (
-        <div className="w-full bg-[#1e1e1e] rounded-xl border border-[#333] shadow-2xl overflow-hidden flex flex-col h-[500px]">
+        <div className={`w-full bg-[#1e1e1e] rounded-xl border border-[#333] shadow-2xl overflow-hidden flex flex-col ${fullScreen ? "h-full" : "h-[500px]"}`}>
             {/* Header (VS Code Style) */}
             <div className="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-[#1e1e1e]">
                 <div className="flex items-center gap-2">

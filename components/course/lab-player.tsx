@@ -4,6 +4,7 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { CheckCircle, ArrowRight, Terminal, RefreshCw, Trophy, Zap, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import Link from "next/link"
 
 interface LabStep {
     id: string
@@ -143,45 +144,26 @@ export function LabPlayer({ title, steps, xpReward, onComplete }: LabPlayerProps
                 </div>
 
                 {/* Code/Action Panel */}
-                <div className="flex-1 flex flex-col bg-[#1e1e1e] text-white">
-                    <div className="flex-1 p-6 font-mono text-sm overflow-auto">
-                        <div className="mb-4 text-gray-400"># Code Editor</div>
-                        {currentStep.codeSnippet && (
-                            <pre className="text-blue-300 mb-4">{currentStep.codeSnippet}</pre>
-                        )}
-                        <textarea
-                            value={userCode}
-                            onChange={(e) => setUserCode(e.target.value)}
-                            placeholder="// Type your solution here..."
-                            className="w-full h-40 bg-transparent border-none focus:ring-0 p-0 text-white resize-none font-mono"
-                            disabled={isStepComplete}
-                        />
+                <div className="flex-1 flex flex-col bg-[#1e1e1e] items-center justify-center text-center p-8">
+                    <div className="mb-6 p-6 rounded-full bg-white/5 border border-white/10">
+                        <Terminal className="w-12 h-12 text-gray-400" />
                     </div>
+                    <h3 className="text-xl font-bold text-white mb-2">Ready to Code?</h3>
+                    <p className="text-gray-400 max-w-md mb-8">
+                        Technically, this challenge requires a full environment. Open our dedicated playground to write and test your solution freely!
+                    </p>
 
-                    <div className="p-4 border-t border-white/10 bg-[#252526] flex justify-between items-center">
-                        <div className="text-xs text-gray-400">
-                            {isVerifying ? "Running tests..." : "Ready"}
-                        </div>
-
-                        {!isStepComplete ? (
-                            <Button
-                                onClick={handleVerify}
-                                disabled={isVerifying || userCode.length === 0}
-                                className="bg-emerald-600 hover:bg-emerald-700 text-white"
-                            >
-                                {isVerifying ? (
-                                    <RefreshCw className="w-4 h-4 animate-spin mr-2" />
-                                ) : (
-                                    <Terminal className="w-4 h-4 mr-2" />
-                                )}
-                                Verify Solution
+                    <div className="flex gap-4">
+                        <Link href="/playground" target="_blank">
+                            <Button className="bg-indigo-600 hover:bg-indigo-700 text-white gap-2">
+                                <Zap className="w-4 h-4" />
+                                Launch Free Playground
                             </Button>
-                        ) : (
-                            <Button onClick={handleNext} className="bg-primary text-primary-foreground">
-                                Next Step
-                                <ArrowRight className="w-4 h-4 ml-2" />
-                            </Button>
-                        )}
+                        </Link>
+                        <Button onClick={handleNext} variant="secondary" className="gap-2">
+                            Mark as Done
+                            <ArrowRight className="w-4 h-4" />
+                        </Button>
                     </div>
                 </div>
             </div>
