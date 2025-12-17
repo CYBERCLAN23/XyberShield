@@ -22,10 +22,8 @@ export default function PlaygroundPage() {
             </header>
 
             {/* Fullscreen Editor */}
-            <main className="flex-1 p-4 overflow-hidden flex flex-col">
-                <div className="flex-1">
-                    <Playground fullScreen={true} />
-                </div>
+            <main className="flex-1 overflow-hidden flex flex-col">
+                <Playground fullScreen={true} />
             </main>
         </div>
     )
