@@ -88,7 +88,12 @@ export function SkillTree() {
                                     )}
 
                                     {/* Icon Circle */}
-                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center border ${isCompleted ? "bg-emerald-500/10 border-emerald-500" : isCurrent ? "bg-indigo-500/20 border-indigo-400" : "bg-gray-800/50 border-gray-700"}`}>
+                                    <div className={`w-12 h-12 rounded-full flex items-center justify-center border ${isCompleted ? "bg-emerald-500/10 border-emerald-500" : isCurrent ? "bg-indigo-500/20 border-indigo-400" : "bg-gray-800/50 border-gray-700"}`} onClick={(e) => {
+                                        if (isCompleted) {
+                                            e.stopPropagation()
+                                            window.open(`/certificate/${course.id}`, '_blank')
+                                        }
+                                    }}>
                                         {icon}
                                     </div>
 
@@ -97,6 +102,14 @@ export function SkillTree() {
                                         <p className={`text-xs mt-1 ${isUnlocked ? "text-gray-400" : "text-gray-600 blur-[2px] select-none"}`}>
                                             {(course.labSteps?.length || 0)} Steps • {course.xpReward} XP
                                         </p>
+                                        {isCompleted && (
+                                            <p className="text-[10px] text-emerald-400 mt-1 font-bold uppercase tracking-wider hover:underline" onClick={(e) => {
+                                                e.stopPropagation()
+                                                window.open(`/certificate/${course.id}`, '_blank')
+                                            }}>
+                                                View Certificate
+                                            </p>
+                                        )}
                                     </div>
 
                                     {isCurrent && (
@@ -117,14 +130,22 @@ export function SkillTree() {
                 })}
 
                 {/* Final Trophy Node */}
-                <div className="relative z-10 flex flex-col items-center">
-                    <div className="w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center shadow-[0_0_30px_rgba(234,179,8,0.5)] border-4 border-yellow-200">
+                <div
+                    className={`relative z-10 flex flex-col items-center transition-transform duration-300 ${completedLessons.length >= orderedCourses.length ? "cursor-pointer hover:scale-110" : "opacity-50 grayscale"}`}
+                    onClick={() => {
+                        if (completedLessons.length >= orderedCourses.length) {
+                            window.open("/certificate/mastery", "_blank")
+                        }
+                    }}
+                >
+                    <div className={`w-16 h-16 rounded-full bg-gradient-to-br from-yellow-400 to-orange-500 flex items-center justify-center border-4 border-yellow-200 ${completedLessons.length >= orderedCourses.length ? "shadow-[0_0_30px_rgba(234,179,8,0.5)] animate-pulse" : ""}`}>
                         <Trophy className="w-8 h-8 text-white" />
                     </div>
                     <span className="mt-2 text-yellow-500 font-bold text-sm tracking-widest uppercase">Mastery</span>
-                </div>
-
-            </div>
+                    {completedLessons.length >= orderedCourses.length && (
+                        <span className="text-[10px] text-yellow-300 font-bold bg-yellow-900/50 px-2 py-0.5 rounded-full mt-1">Claim Reward</span>
+                    )}
+                </div>        </div>
 
             {/* Logic to open course modal */}
             {selectedCourseId && (
