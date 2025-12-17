@@ -2,10 +2,12 @@
 
 import { motion } from "framer-motion"
 import { useUser } from "@/lib/user-context"
+import { type User } from "@/lib/user-context"
 import { Code, Shield, Brain, Rocket, Edit2, Settings, LogOut } from "lucide-react"
 import BlinkingAvatar from "./animated-avatar"
 import { DailyGoal } from "./daily-goal"
 import { StreakCalendar } from "./streak-calendar"
+import { DailyLootBox } from "./daily-loot-box"
 
 const levelTitles = [
   "Novice",
@@ -92,6 +94,9 @@ export function ProfileSection() {
 
         {/* Stats Widgets */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          {/* Daily Loot */}
+          <DailyLootBox />
+
           <DailyGoal />
           <StreakCalendar />
         </div>

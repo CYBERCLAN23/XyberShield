@@ -1,8 +1,6 @@
-"use client"
-
 import { useState, useEffect } from "react"
 import Editor from "@monaco-editor/react"
-import { Play, Terminal, RefreshCw, Maximize2, Files, Search, Box, Settings, X, ChevronDown, Rocket, Check, Download } from "lucide-react"
+import { Play, Terminal, RefreshCw, Maximize2, Files, Search, Box, Settings, X, ChevronDown, Rocket, Check, Download, Brain } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 type Language = "javascript" | "typescript" | "python" | "html" | "css" | "json" | "sql"
@@ -76,6 +74,7 @@ export function Playground({ fullScreen = false, initialLanguage = "javascript" 
     const [activeSidebar, setActiveSidebar] = useState<"explorer" | "search" | "extensions" | null>(null)
     const [output, setOutput] = useState<string[]>([])
     const [key, setKey] = useState(0)
+    const [isAiThinking, setIsAiThinking] = useState(false)
 
     // Mock Extensions
     const [extensions, setExtensions] = useState<Extension[]>([
@@ -84,6 +83,23 @@ export function Playground({ fullScreen = false, initialLanguage = "javascript" 
         { id: "python-pack", name: "Python", description: "IntelliSense for Python", icon: Files, version: "2023.4.0", installed: false },
         { id: "live-server", name: "Live Server", description: "Launch local server", icon: RefreshCw, version: "5.7.9", installed: false },
     ])
+
+    const handleAskAI = () => {
+        setIsAiThinking(true)
+        // Simulate AI Delay
+        setTimeout(() => {
+            const hints = [
+                "💡 Tip: Check your semicolon usage.",
+                "🤖 Xyber: That loop looks infinite. Make sure to increment your counter.",
+                "✨ Hint: You can use `const` instead of `var` for better scoping.",
+                "🔍 Analyze: Your function `add` is defined but never called.",
+                "🚀 Optimize: Try using map() instead of a for loop here."
+            ]
+            const randomHint = hints[Math.floor(Math.random() * hints.length)]
+            setOutput(prev => [...prev, " ", "--- AI Analysis ---", randomHint, " "])
+            setIsAiThinking(false)
+        }, 1500)
+    }
 
     // Update code when language changes manually
     const handleLanguageChange = (lang: Language) => {
@@ -211,6 +227,17 @@ export function Playground({ fullScreen = false, initialLanguage = "javascript" 
                     </div>
 
                     <div className="flex items-center gap-4">
+                        <Button
+                            variant="default"
+                            size="sm"
+                            onClick={handleAskAI}
+                            disabled={isAiThinking}
+                            className="bg-indigo-600 hover:bg-indigo-700 text-white border-none gap-2 hidden md:flex"
+                        >
+                            <Brain className="w-4 h-4" />
+                            {isAiThinking ? "Thinking..." : "Ask Xyber"}
+                        </Button>
+
                         <select
                             value={language}
                             onChange={(e) => handleLanguageChange(e.target.value as Language)}

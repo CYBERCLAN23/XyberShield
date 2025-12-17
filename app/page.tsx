@@ -6,7 +6,7 @@ import { WelcomeScreen } from "@/components/onboarding/welcome-screen"
 import { Header } from "@/components/dashboard/header"
 import { Code } from "lucide-react"
 import { LearningPathsSection } from "@/components/dashboard/learning-paths-section"
-import { CourseSection } from "@/components/dashboard/course-section"
+import { SkillTree } from "@/components/dashboard/skill-tree"
 import { BadgesSection } from "@/components/dashboard/badges-section"
 import { Leaderboard } from "@/components/dashboard/leaderboard"
 import { ProfileSection } from "@/components/dashboard/profile-section"
@@ -59,7 +59,7 @@ function AppContent() {
             </div>
 
             <LearningPathsSection />
-            <CourseSection />
+            <SkillTree />
           </div>
         )
       case "explore":
