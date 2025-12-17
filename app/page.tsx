@@ -4,8 +4,7 @@ import { useState, useCallback } from "react"
 import { UserProvider, useUser } from "@/lib/user-context"
 import { WelcomeScreen } from "@/components/onboarding/welcome-screen"
 import { Header } from "@/components/dashboard/header"
-import { DailyGoal } from "@/components/dashboard/daily-goal"
-import { StreakCalendar } from "@/components/dashboard/streak-calendar"
+import { Playground } from "@/components/dashboard/playground"
 import { LearningPathsSection } from "@/components/dashboard/learning-paths-section"
 import { CourseSection } from "@/components/dashboard/course-section"
 import { BadgesSection } from "@/components/dashboard/badges-section"
@@ -40,12 +39,11 @@ function AppContent() {
     switch (activeTab) {
       case "home":
         return (
-          <>
-            <DailyGoal />
-            <StreakCalendar />
+          <div className="space-y-6">
+            <Playground />
             <LearningPathsSection />
             <CourseSection />
-          </>
+          </div>
         )
       case "explore":
         return (

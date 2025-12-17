@@ -28,6 +28,7 @@ export function WelcomeScreen() {
   const [step, setStep] = useState(0)
   const [name, setName] = useState("")
   const [selectedAge, setSelectedAge] = useState<AgeGroup>(null)
+  const [selectedPath, setSelectedPath] = useState<string | null>(null)
   const [selectedAvatar, setSelectedAvatar] = useState("coder")
 
   const handleComplete = () => {
@@ -40,8 +41,9 @@ export function WelcomeScreen() {
       level: 1,
       streak: 1,
       completedLessons: [],
+      completedLessons: [],
       badges: ["welcome"],
-      selectedPath: null,
+      selectedPath: selectedPath,
     })
   }
 
@@ -50,7 +52,8 @@ export function WelcomeScreen() {
       case 0: return "Hi! I'm Xyber. I'll be your guide!"
       case 1: return "First things first, what's your name?"
       case 2: return `Nice to meet you, ${name}! How old are you?`
-      case 3: return "Pick a persona that fits you best!"
+      case 3: return "What do you want to learn first?"
+      case 4: return "Pick a persona that fits you best!"
       default: return "Let's go!"
     }
   }
@@ -158,8 +161,8 @@ export function WelcomeScreen() {
                   whileTap={{ scale: 0.98 }}
                   onClick={() => setSelectedAge(group.id)}
                   className={`p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${selectedAge === group.id
-                      ? "border-primary bg-primary/10"
-                      : "border-border bg-card hover:border-primary/50"
+                    ? "border-primary bg-primary/10"
+                    : "border-border bg-card hover:border-primary/50"
                     }`}
                 >
                   <span className="text-2xl">{group.emoji}</span>
@@ -185,6 +188,55 @@ export function WelcomeScreen() {
 
         {step === 3 && (
           <motion.div
+            key="path"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="flex flex-col items-center text-center max-w-md z-10 w-full px-4"
+          >
+            <h2 className="text-2xl font-bold text-foreground mb-2">What interests you?</h2>
+            <p className="text-muted-foreground mb-6">Choose your main focus</p>
+
+            <div className="grid grid-cols-1 gap-3 w-full max-w-xs mb-6">
+              {[
+                { id: "web-dev", label: "Web Development", icon: Code, color: "#38bdf8" },
+                { id: "cyber-security", label: "Cyber Security", icon: Shield, color: "#14b8a6" },
+                { id: "data-science", label: "Data Science", icon: Brain, color: "#a855f7" },
+              ].map((path) => (
+                <motion.button
+                  key={path.id}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => setSelectedPath(path.id)}
+                  className={`p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${selectedPath === path.id
+                      ? "border-primary bg-primary/10"
+                      : "border-border bg-card hover:border-primary/50"
+                    }`}
+                >
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center bg-background"
+                  >
+                    <path.icon className="w-6 h-6" style={{ color: path.color }} />
+                  </div>
+                  <span className="font-semibold text-foreground">{path.label}</span>
+                </motion.button>
+              ))}
+            </div>
+
+            <Button
+              size="lg"
+              onClick={() => setStep(4)}
+              disabled={!selectedPath}
+              className="w-full max-w-xs bg-primary hover:bg-primary/90 text-primary-foreground font-semibold disabled:opacity-50"
+            >
+              Continue
+              <ChevronRight className="w-5 h-5 ml-2" />
+            </Button>
+          </motion.div>
+        )}
+
+        {step === 4 && (
+          <motion.div
             key="avatar"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -204,8 +256,8 @@ export function WelcomeScreen() {
                     whileTap={{ scale: 0.95 }}
                     onClick={() => setSelectedAvatar(avatar.id)}
                     className={`p-6 rounded-2xl border-2 transition-all flex flex-col items-center gap-2 ${selectedAvatar === avatar.id
-                        ? "border-primary bg-primary/10"
-                        : "border-border bg-card hover:border-primary/50"
+                      ? "border-primary bg-primary/10"
+                      : "border-border bg-card hover:border-primary/50"
                       }`}
                   >
                     <div
@@ -234,7 +286,7 @@ export function WelcomeScreen() {
 
       {/* Progress dots */}
       <div className="absolute bottom-8 flex gap-2">
-        {[0, 1, 2, 3].map((i) => (
+        {[0, 1, 2, 3, 4].map((i) => (
           <div
             key={i}
             className={`w-2 h-2 rounded-full transition-all ${i === step ? "bg-primary w-6" : i < step ? "bg-primary/50" : "bg-border"

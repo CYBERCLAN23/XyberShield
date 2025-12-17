@@ -4,6 +4,8 @@ import { motion } from "framer-motion"
 import { useUser } from "@/lib/user-context"
 import { Code, Shield, Brain, Rocket, Edit2, Settings, LogOut } from "lucide-react"
 import BlinkingAvatar from "./animated-avatar"
+import { DailyGoal } from "./daily-goal"
+import { StreakCalendar } from "./streak-calendar"
 
 const levelTitles = [
   "Novice",
@@ -86,6 +88,12 @@ export function ProfileSection() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Stats Widgets */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+          <DailyGoal />
+          <StreakCalendar />
         </div>
 
         {/* Settings */}
