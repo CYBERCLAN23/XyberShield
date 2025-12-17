@@ -4,8 +4,13 @@ import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Playground } from "@/components/dashboard/playground"
+import { useSearchParams } from "next/navigation"
+import { Suspense } from "react"
 
-export default function PlaygroundPage() {
+function PlaygroundContent() {
+    const searchParams = useSearchParams()
+    const lang = searchParams.get("lang") || "javascript"
+
     return (
         <div className="h-screen w-screen bg-[#0f172a] flex flex-col overflow-hidden">
             {/* Header */}
@@ -23,8 +28,16 @@ export default function PlaygroundPage() {
 
             {/* Fullscreen Editor */}
             <main className="flex-1 flex flex-col min-h-0">
-                <Playground fullScreen={true} />
+                <Playground fullScreen={true} initialLanguage={lang} />
             </main>
         </div>
+    )
+}
+
+export default function PlaygroundPage() {
+    return (
+        <Suspense fallback={<div className="bg-[#0f172a] h-screen w-screen" />}>
+            <PlaygroundContent />
+        </Suspense>
     )
 }

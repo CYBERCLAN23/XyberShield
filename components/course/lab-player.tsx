@@ -154,7 +154,7 @@ export function LabPlayer({ title, steps, xpReward, onComplete }: LabPlayerProps
                     </p>
 
                     <div className="flex gap-4">
-                        <Link href="/playground" target="_blank">
+                        <Link href={`/playground?lang=javascript`} target="_blank">
                             <Button className="bg-indigo-600 hover:bg-indigo-700 text-white gap-2">
                                 <Zap className="w-4 h-4" />
                                 Launch Free Playground
